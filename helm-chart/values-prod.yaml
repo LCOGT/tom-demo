@@ -13,8 +13,8 @@ resources:
 ingress:
   enabled: true
   annotations:
-    kubernetes.io/ingress.class: nginx-ingress-private
+    kubernetes.io/ingress.class: nginx-ingress-public
   hosts:
-    - host: tom-demo.lco.gtn
+    - host: tom-demo.lco.global
       paths:
         - "/"
