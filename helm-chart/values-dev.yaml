@@ -4,11 +4,11 @@ replicaCount: 1
 
 resources:
   requests:
-    cpu: 10m
-    memory: 64Mi
+    cpu: 500m
+    memory: 256Mi
   limits:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 1000m
+    memory: 1024Mi
 
 ingress:
   enabled: true
