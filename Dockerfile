@@ -2,7 +2,7 @@ FROM python:3.7
 LABEL maintainer="llindstrom@lco.global"
 
 EXPOSE 80
-ENTRYPOINT [ "/usr/local/bin/gunicorn", "tom_demo.wsgi", "-b", "0.0.0.0:80", "--access-logfile", "-", "--error-logfile", "-", "-k", "gevent", "--timeout", "300", "--workers", "4"]
+ENTRYPOINT [ "/usr/local/bin/gunicorn", "tom_demo.wsgi", "-b", "0.0.0.0:80", "--access-logfile", "-", "--error-logfile", "-", "-k", "gevent", "--timeout", "300", "--workers", "4", "--log-level", "debug"]
 WORKDIR /tom-demo
 
 COPY requirements.txt /tom-demo
