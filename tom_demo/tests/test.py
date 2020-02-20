@@ -11,8 +11,3 @@ class TestTrivialTest(TestCase):
     def test_index_status_code(self):
         response = self.client.get('/')
         self.assertEqual(200, response.status_code)
-
-    def test_failing_test(self):
-        response = self.client.get('/')
-        self.assertEqual(200, response.status_code)
-        self.assertTrue(False)
