@@ -42,7 +42,7 @@ def create_simbad_targets(targets):
     for target in targets:
         simbad.query(target)
         try:
-            simbad.to_target().update_or_create()
+            simbad.to_target().save()
         except Exception:
             pass
 
