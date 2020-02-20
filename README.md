@@ -1,4 +1,4 @@
-# TOM Toolkit Demo TOM
+# TOM Toolkit Demonstration TOM
 To see the demonstration TOM, visit http://tom-demo.lco.global
 
 _(If you are interested in exploring a vanilla, unadorned, out-of-the-box TOM, visit
@@ -9,21 +9,20 @@ examples of how to use the features provided by the [TOM Toolkit](https://tom-to
 
 
 ## Features Demonstrated
-### Latest Features (TOM Toolkit release X.Y.Z)
+_(This section of the README is a work-in-progress. There are both new and old features
+to be demonstrated. Features of new releases of the TOM Toolkit will be listed here with links
+both to pages in the demonstration TOM and the implementing source code)._ 
 
-In TOM Toolkit release (X.Y.Z) the following features were released.
+### Latest Features (TOM Toolkit release _<insert-release-here>_)
 
-### TOM Toolkit release X.Y.W
-### Targets
-The [Targets](http://tom-demo.lco.global/targets/) page shows how a list of targets can be displayed.
-### Feature X
-The [Feature X](http://tom-demo.lco.global/) page shows <something about feature x>.
+In TOM Toolkit release (_<insert-release-here>_) the following features were released:
+* The [Feature X](http://tom-demo.lco.global/) page shows _<something-about-feature-x>_.
+ 
 
+### TOM Toolkit release 1.2.6
+* How to write a simple test. ([_source_](https://github.com/LCOGT/tom-demo/blob/e7594737c068ce7b01f875aeaddbe7f575b4e755/tom_demo/tests/test.py#L5)). 
+* The [Targets](http://tom-demo.lco.global/targets/) page shows how a list of targets can be displayed.
 
 #
-## Deployment Options
-
-### Local Deployment
-### Local Container-based Deployment
-
- 
+#### LCO Deployment
+This repo is deployed using the `helmPipeline()` ([LCO link](https://github.com/LCOGT/jenkins-shared-libraries/blob/master/vars/helmPipeline.md)).
