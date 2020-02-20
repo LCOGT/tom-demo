@@ -1,6 +1,7 @@
 import json
 from random import randint
 
+from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 import factory
 
@@ -78,6 +79,10 @@ def create_mock_observations():
             ObservingRecordFactory.create(target_id=target.id)
 
 
+def create_users():
+    User.objects.create_superuser('admin', email='dcollom@lco.global', password='password')
+
+
 class Command(BaseCommand):
     help = 'Seeds base data for TOM Demo'
 
@@ -86,3 +91,4 @@ class Command(BaseCommand):
         create_mpc_targets(['ceres', 'eris'])
         create_mars_targets()
         create_mock_observations()
+        create_users()
