@@ -80,8 +80,15 @@ def create_mock_observations():
 
 
 def create_users():
-    User.objects.create_superuser('admin', email='dcollom@lco.global', password='admin')
-    User.objects.create('guest', email='dcollom@lco.global', password='guest')
+    try:
+        User.objects.create_superuser('admin', email='dcollom@lco.global', password='admin')
+    except Exception:
+        pass
+
+    try:
+        User.objects.create_user('guest', email='dcollom@lco.global', password='guest')
+    except Exception:
+        pass
 
 
 class Command(BaseCommand):
