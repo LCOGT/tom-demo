@@ -1,4 +1,4 @@
 django<3.0
 tomtoolkit==1.2.6
-gunicorn[gevent]
-
+gunicorn[gevent]==20.0.4
+factory_boy==2.12.0
