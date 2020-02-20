@@ -13,5 +13,7 @@ RUN pip install --no-cache-dir -r /tom-demo/requirements.txt
 COPY . /tom-demo
 
 RUN python manage.py migrate
+#RUN python manage.py create_sample_data
 RUN python manage.py collectstatic --noinput
+RUN python manage.py test
 
