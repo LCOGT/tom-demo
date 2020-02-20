@@ -80,7 +80,8 @@ def create_mock_observations():
 
 
 def create_users():
-    User.objects.create_superuser('admin', email='dcollom@lco.global', password='password')
+    User.objects.create_superuser('admin', email='dcollom@lco.global', password='admin')
+    User.objects.create('guest', email='dcollom@lco.global', password='guest')
 
 
 class Command(BaseCommand):
