@@ -37,7 +37,7 @@ class ObservingRecordFactory(factory.django.DjangoModelFactory):
         'instrument_type': '1M0-SCICAM-SINISTRO'
     })
 
-
+# TODO: Remove arbitrary exception handling
 def create_simbad_targets(targets):
     simbad = SimbadHarvester()
     for target in targets:
