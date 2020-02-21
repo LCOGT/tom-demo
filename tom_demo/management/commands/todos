@@ -1,3 +1,0 @@
-fix dev by separating out settings
-fix static files by adding whitenoise
-handle duplicate record creation in seeddata.py better
