@@ -1,7 +1,7 @@
 import json
 from random import randint
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from django.core.management.base import BaseCommand
 import factory
 
@@ -80,21 +80,31 @@ def create_mock_observations():
 
 
 def create_users():
+    public_group = Group.objects.filter(name='Public').first()
     try:
-        User.objects.create_superuser('admin', email='dcollom@lco.global', password='admin')
+        admin = User.objects.create_superuser('admin', email='dcollom@lco.global', password='admin')
+        public_group.user_set.add(admin)
     except Exception:
         pass
 
     try:
-        User.objects.create_user('guest', email='dcollom@lco.global', password='guest')
+        guest = User.objects.create_user('guest', email='dcollom@lco.global', password='guest')
+        public_group.user_set.add(guest)
     except Exception:
         pass
+
+
+def create_public_group():
+    group = Group.objects.create(name='Public')
+    group.user_set.add(*User.objects.all())
+    group.save()
 
 
 class Command(BaseCommand):
     help = 'Seeds base data for TOM Demo'
 
     def handle(self, *args, **options):
+        create_public_group()
         create_simbad_targets(['m31', 'm41', 'm51'])
         create_mpc_targets(['ceres', 'eris'])
         create_mars_targets()
