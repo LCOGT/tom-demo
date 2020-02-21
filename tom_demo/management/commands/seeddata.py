@@ -37,7 +37,7 @@ class ObservingRecordFactory(factory.django.DjangoModelFactory):
         'instrument_type': '1M0-SCICAM-SINISTRO'
     })
 
-
+# TODO: Remove arbitrary exception handling
 def create_simbad_targets(targets):
     simbad = SimbadHarvester()
     for target in targets:
@@ -95,7 +95,10 @@ def create_users():
 
 
 def create_public_group():
-    group = Group.objects.create(name='Public')
+    try:
+        group = Group.objects.create(name='Public')
+    except Exception:
+        pass
     group.user_set.add(*User.objects.all())
     group.save()
 
