@@ -95,9 +95,14 @@ def create_users():
 
 
 def create_public_group():
-    group = Group.objects.create(name='Public')
-    group.user_set.add(*User.objects.all())
-    group.save()
+    """
+    If non-existent, create the Public group and add all existing Users."
+    If the Public group already exists, this is a no-op.
+    """
+    group, created = Group.objects.get_or_create(name='Public')
+    if created:
+        group.user_set.add(*User.objects.all())
+        group.save()
 
 
 class Command(BaseCommand):
