@@ -61,10 +61,6 @@ repeated in a bunch of places, so to keep from repeating ourselves, we'll
 build it here and use it everywhere.
 */}}
 {{- define "tom-demo.extraEnv" -}}
-- name: CSRF_COOKIE_SECURE
-  value: {{ .Values.csrfCookieSecure | quote }}
-- name: SESSION_COOKIE_SECURE
-  value: {{ .Values.csrfCookieSecure | quote }}
 - name: DEBUG
   value: {{ .Values.debug | quote }}
 {{- end }}

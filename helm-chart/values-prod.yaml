@@ -1,5 +1,7 @@
 # Helm chart values for Production Deployment
 
+debug: "False"
+
 replicaCount: 1
 
 resources:
