@@ -29,6 +29,8 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            {{ include "tom-demo.extraEnv" . | nindent 12 }}
           ports:
             - name: http
               containerPort: 80
