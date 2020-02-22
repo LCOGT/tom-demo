@@ -26,5 +26,4 @@ In TOM Toolkit release (_<insert-release-here>_) the following features were rel
 * The [Targets](http://tom-demo.lco.global/targets/) page shows how a list of targets can be displayed.
 
 #
-#### LCO Deployment
-This repo is deployed using the `helmPipeline()` ([LCO link](https://github.com/LCOGT/jenkins-shared-libraries/blob/master/vars/helmPipeline.md)).
+_Development Notes [here](README-dev.md)._
