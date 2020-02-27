@@ -2,12 +2,15 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-debug: "True"
+djangoDebug: true
+
+gunicornWorkers: 2
+gunicornTimeout: 300
 
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: "docker.lco.global/tom-demo"
   tag: stable
   pullPolicy: IfNotPresent
 
@@ -22,16 +25,17 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name:
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext:
+  fsGroup: 1000
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
 
 service:
   type: ClusterIP

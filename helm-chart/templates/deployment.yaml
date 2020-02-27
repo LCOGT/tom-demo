@@ -29,11 +29,20 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - gunicorn
+            - --bind=0.0.0.0:8080
+            - --worker-class=gevent
+            - --workers={{ .Values.gunicornWorkers | default 2 }}
+            - --timeout={{ .Values.gunicornTimeout | default 300 }}
+            - --access-logfile=-
+            - --error-logfile=-
+            - tom_demo.wsgi
           env:
             {{ include "tom-demo.extraEnv" . | nindent 12 }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -45,6 +54,17 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+              readOnly: false
+
+      volumes:
+        - name: tmp
+          emptyDir:
+            medium: Memory
+            sizeLimit: 16Mi
+
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
