@@ -32,7 +32,8 @@ securityContext:
   capabilities:
     drop:
     - ALL
-  readOnlyRootFilesystem: true
+  # TODO: make file system readOnly when we get rid of sqlite backend
+  readOnlyRootFilesystem: false
   runAsNonRoot: true
   runAsUser: 1000
   runAsGroup: 1000
