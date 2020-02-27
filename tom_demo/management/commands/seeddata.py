@@ -4,6 +4,7 @@ from random import randint
 from django.contrib.auth.models import Group, User
 from django.core.management.base import BaseCommand
 import factory
+from guardian.shortcuts import assign_perm
 
 from tom_alerts.brokers.mars import MARSBroker, MARSQueryForm
 from tom_catalogs.harvesters.simbad import SimbadHarvester
@@ -105,6 +106,11 @@ def create_public_group():
         group.save()
 
 
+def add_targets_to_public_group():
+    targets = Target.objects.all()
+    assign_perm('tom_targets.view_target', Group.objects.get(name='Public'), targets)
+
+
 class Command(BaseCommand):
     help = 'Seeds base data for TOM Demo'
 
@@ -113,5 +119,6 @@ class Command(BaseCommand):
         create_simbad_targets(['m31', 'm41', 'm51'])
         create_mpc_targets(['ceres', 'eris'])
         create_mars_targets()
+        add_targets_to_public_group()
         create_mock_observations()
         create_users()
