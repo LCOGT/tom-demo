@@ -1,5 +1,5 @@
 # TOM Toolkit Demonstration TOM
-To see the demonstration TOM, visit http://tom-demo.lco.global
+To see the demonstration TOM, visit http://tom-demo.lco.global.
 
 <!--- _(If you are interested in exploring a vanilla, unadorned, out-of-the-box TOM, visit http://tom-base.lco.global)._ --->
 
@@ -17,7 +17,7 @@ both to pages in the demonstration TOM and the implementing source code)._
 ### Latest Features (TOM Toolkit release _<insert-release-here>_)
 
 In TOM Toolkit release (_<insert-release-here>_) the following features were released:
-* The [Feature X](http://tom-demo.lco.global/) page shows _<something-about-feature-x>_.
+<!--- * The [Feature X](http://tom-demo.lco.global/) page shows _<something-about-feature-x>_. --->
 
 
 ### TOM Toolkit release 1.2.6
