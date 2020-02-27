@@ -1,6 +1,6 @@
 # Helm chart values for Production Deployment
 
-debug: "False"
+djangoDebug: false
 
 replicaCount: 1
 
