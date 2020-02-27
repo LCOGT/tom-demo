@@ -1,0 +1,31 @@
+{% extends 'tom_common/base.html' %}
+{% load static targets_extras observation_extras dataproduct_extras tom_common_extras %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <h2 class="text-center">Congratulations! Welcome to the TOM demo.</h2>
+    <p class="text-center"><img src="{% static 'tom_common/img/logo-color.png' %}" class="img-fluid mx-auto"></p>
+    <p>Check out the code for this demo TOM in the <a href="https://tom-toolkit.readthedocs.io/en/stable/" title="TOM Toolkit home page">TOM Demo Github repository.</a>.</p>
+    <h3>Demonstrated features</h3>
+    <ul>
+      <li>
+        In the future, this demo TOM will demonstrate a number of built-in features, the list of which will be found here. In the meantime, it simply exists.
+      </li>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        Latest Comments
+      </div>
+      {% recent_comments %}
+    </div>
+    <br/>
+    <div class="card">
+      <div class="card-header">
+        Latest Targets
+      </div>
+      {% recent_targets %}
+  </div>
+</div>
+{% endblock %}
