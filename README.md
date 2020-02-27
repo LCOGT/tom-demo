@@ -1,8 +1,7 @@
 # TOM Toolkit Demonstration TOM
 To see the demonstration TOM, visit http://tom-demo.lco.global
 
-_(If you are interested in exploring a vanilla, unadorned, out-of-the-box TOM, visit
-http://tom-base.lco.global)._
+<!--- _(If you are interested in exploring a vanilla, unadorned, out-of-the-box TOM, visit http://tom-base.lco.global)._ --->
 
 This demonstration TOM, with its source code, goes beyond the basic, out-of-the-box TOM and  is designed to provide
 examples of how to use the features provided by the [TOM Toolkit](https://tom-toolkit.readthedocs.io/).
