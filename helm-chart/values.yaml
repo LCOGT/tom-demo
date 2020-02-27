@@ -34,7 +34,7 @@ securityContext:
     - ALL
   # TODO: make file system readOnly when we get rid of sqlite backend
   readOnlyRootFilesystem: false
-  runAsNonRoot: true
+  runAsNonRoot: false
   runAsUser: 1000
   runAsGroup: 1000
 
