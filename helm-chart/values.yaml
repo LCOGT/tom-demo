@@ -32,11 +32,13 @@ securityContext:
   capabilities:
     drop:
     - ALL
-  # TODO: make file system readOnly when we get rid of sqlite backend
   readOnlyRootFilesystem: false
-  runAsNonRoot: true
-  runAsUser: 1000
-  runAsGroup: 1000
+  runAsNonRoot: false
+  # TODO: make file system readOnly (etc) when we get rid of sqlite backend
+  #readOnlyRootFilesystem: true
+  #runAsNonRoot: true
+  #runAsUser: 1000
+  #runAsGroup: 1000
 
 service:
   type: ClusterIP
