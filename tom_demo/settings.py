@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -279,6 +280,6 @@ HINTS_ENABLED = True
 HINT_LEVEL = 20
 
 try:
-    from local_settings import * # noqa
+    from local_settings import *  # noqa
 except ImportError:
     pass
