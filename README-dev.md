@@ -9,12 +9,17 @@ In this context, "Local" means on your local machine and there are a few ways of
 Each are described below, but there's a pre-requisite that must come first:
 
 #### Setting Up a Local `tom-demo` Database
-##### Start
+##### Start up the Database Server 
 As of `tom-demo` version 0.3.x, we are demonstrating the use of an external PostgreSQL database.
 Getting that database up and running is a pre-requisite to all of the local development methods. Here's how:
 ```bash
 #TODO: fill in these instructions
 ```
+##### Prepare the `tom-demo` Database
+```bash
+```
+#
+Now that you have a database server up and running on your local machine, consider these alternatives for local development your TOM:
 
 #### Aternative 1: Running `tom-demo` in your virtual environment, via `./manage.py runserver`
 <details>
