@@ -70,6 +70,22 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+# Settings for the PostgreSQL database
+applyDatabaseMigrations: true
+useDockerizedDatabase: true
+
+djangoDatabaseEngine: "django.db.backends.postgresql"
+postgresql:
+  hostname: ""
+  postgresqlUsername: "postgres"
+  postgresqlPassword: "changeme"
+  postgresqlDatabase: "postgres"
+  service:
+    port: "5432"
+
+loadInitialData:
+  enabled: false
+
 nodeSelector: {}
 
 tolerations: []
