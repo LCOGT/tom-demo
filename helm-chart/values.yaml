@@ -76,7 +76,7 @@ useDockerizedDatabase: true
 
 djangoDatabaseEngine: "django.db.backends.postgresql"
 postgresql:
-  hostname: ""
+  hostname: "asdf"
   postgresqlUsername: "postgres"
   postgresqlPassword: "changeme"
   postgresqlDatabase: "postgres"
