@@ -64,8 +64,7 @@ Generate the postgres DB hostname
 {{- else if .Values.useDockerizedDatabase -}}
 {{- printf "%s-postgresql" .Release.Name -}}
 {{- else -}}
-{{- required "`postgresql.hostname` must be set when `useDockerizedDatabase` is `false`" .Values.postgresql.hostnam
-e -}}
+{{- required "`postgresql.hostname` must be set when `useDockerizedDatabase` is `false`" .Values.postgresql.hostname -}}
 {{- end -}}
 {{- end -}}
 
