@@ -67,8 +67,11 @@ class CustomLCOObservationForm(LCOImagingObservationForm):
                     <a href="https://github.com/LCOGT/tom-demo/commit/2120934034eef07765f969943ce5ce7760a0adc4">here.
                     </a></p>
                     
-                    <p>Finally, <a href="https://django-crispy-forms.readthedocs.io/en/latest/index.html">
-                    django-crispy-forms</a> were used to render the form as an <code>AccordionGroup</code></p>
+                    <p>To make the accordion, <a href="https://django-crispy-forms.readthedocs.io/en/latest/index.html">
+                    django-crispy-forms</a> were used to render the form as an <code>AccordionGroup.</code></p>
+
+                    <p>Finally, a templatetag was created to render the form, and added to the overridden 
+                    <code>target_detail.html</code>.
 
                     <p>If you'd like to read more, a more detailed tutorial can be found in the 
                     <a href="https://tom-toolkit.readthedocs.io/en/stable/customization/customize_observations.html">
