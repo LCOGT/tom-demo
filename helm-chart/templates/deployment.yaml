@@ -60,7 +60,7 @@ spec:
             runAsNonRoot: true
             runAsUser: 1000
             runAsGroup: 1000
-            readOnlyRootFilesystem: false
+            readOnlyRootFilesystem: true
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
@@ -70,6 +70,9 @@ spec:
             - name: specutils
               mountPath: /.specutils
               readOnly: false
+            - name: astropy
+              mountPath: /.astropy
+              readonly: false
         {{- end }}
     
     {{- with .Values.imagePullSecrets }}
@@ -122,6 +125,10 @@ spec:
             medium: Memory
             sizeLimit: 16Mi
         - name: specutils
+          emptyDir:
+            medium: Memory
+            sizeLimit: 16Mi
+        - name: astropy
           emptyDir:
             medium: Memory
             sizeLimit: 16Mi
