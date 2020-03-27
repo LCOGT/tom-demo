@@ -68,7 +68,7 @@ spec:
               mountPath: /tmp
               readOnly: false
             - name: specutils
-              mountPath: /
+              mountPath: /.specutils
               readOnly: false
         {{- end }}
     
@@ -121,6 +121,10 @@ spec:
           emptyDir:
             medium: Memory
             sizeLimit: 16Mi
+        -name: specutils
+         emptyDir:
+           medium: Memory
+           sizeLimit: 16Mi
 
       {{- with .Values.nodeSelector }}
       nodeSelector:
