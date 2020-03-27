@@ -63,6 +63,10 @@ spec:
             readOnlyRootFilesystem: true
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+              readOnly: false
         {{- end }}
     
     {{- with .Values.imagePullSecrets }}
