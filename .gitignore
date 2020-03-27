@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Helm 
+helm-chart/charts/
+
 # Distribution / packaging
 .Python
 build/
@@ -108,4 +111,4 @@ venv.bak/
 .vscode/
 .idea/
 *~
-# trigger build
+
