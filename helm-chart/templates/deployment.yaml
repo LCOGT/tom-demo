@@ -67,7 +67,7 @@ spec:
             - name: tmp
               mountPath: /tmp
               readOnly: false
-            - name: /
+            - name: specutils
               mountPath: /
               readOnly: false
         {{- end }}
