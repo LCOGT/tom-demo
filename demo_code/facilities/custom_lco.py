@@ -56,10 +56,10 @@ class CustomLCOObservationForm(LCOImagingObservationForm):
                 HTML(
                     """
                     <p>The first thing that was done was including bootstrap.min.js in the static files of your TOM.
-                    The bootstrap files can be downloaded from 
+                    The bootstrap files can be downloaded from the 
                     <a href="https://github.com/twbs/bootstrap/releases/download/v4.4.1/bootstrap-4.4.1-dist.zip">
-                    the bootstrap website. Just extract the zip, and add the file to the <code>static</code>
-                    directory in your TOM.</a></p>
+                    bootstrap website.</a> Just extract the zip, and add the file to the <code>static</code>
+                    directory in your TOM.</p>
                     
                     <p>Next, a custom facility module was created. The module has two classes, <code>CustomLCO</code>
                     and <code>CustomLCOObservationForm</code>, both of which inherit from their LCO counterparts. You 
