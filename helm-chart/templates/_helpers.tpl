@@ -80,18 +80,20 @@ build it here and use it everywhere.
   value: {{ .Values.djangoDebug | toString | lower | title | quote }}
 {{- end }}
 
+{{/*
+Define shared database environment variables
+*/}}
 {{- define "tom-demo.backendEnv" -}}
-- name: DB_ENGINE
-  value: {{ .Values.djangoDatabaseEngine | quote }}
 - name: DB_HOST
   value: {{ include "tom-demo.dbhost" . | quote }}
 - name: DB_NAME
   value: {{ .Values.postgresql.postgresqlDatabase | quote }}
-- name: DB_PASSWORD
+- name: DB_PASS
   value: {{ .Values.postgresql.postgresqlPassword | quote }}
 - name: DB_USER
   value: {{ .Values.postgresql.postgresqlUsername | quote }}
 - name: DB_PORT
   value: {{ .Values.postgresql.service.port | quote }}
-  value: {{ .Values.djangoSecretKey | quote }}
+- name: SECRET_KEY
+  value: {{ .Values.secretKey | quote }}
 {{- end -}}
