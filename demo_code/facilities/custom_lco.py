@@ -51,6 +51,30 @@ class CustomLCOObservationForm(LCOImagingObservationForm):
                     Div('end', css_class='col'),
                     css_class='form-row'
                 )
+            ),
+            AccordionGroup('How It\'s Done',
+                HTML(
+                    """
+                    <p>The first thing that was done was including bootstrap.min.js in the static files of your TOM.
+                    The bootstrap files can be downloaded from 
+                    <a href="https://github.com/twbs/bootstrap/releases/download/v4.4.1/bootstrap-4.4.1-dist.zip">
+                    the bootstrap website. Just extract the zip, and add the file to the <code>static</code>
+                    directory in your TOM.</a></p>
+                    
+                    <p>Next, a custom facility module was created. The module has two classes, <code>CustomLCO</code>
+                    and <code>CustomLCOObservationForm</code>, both of which inherit from their LCO counterparts. You 
+                    can see what methods were overridden 
+                    <a href="https://github.com/LCOGT/tom-demo/commit/2120934034eef07765f969943ce5ce7760a0adc4">here.
+                    </a></p>
+                    
+                    <p>Finally, <a href="https://django-crispy-forms.readthedocs.io/en/latest/index.html">
+                    django-crispy-forms</a> were used to render the form as an <code>AccordionGroup</code></p>
+
+                    <p>If you'd like to read more, a more detailed tutorial can be found in the 
+                    <a href="https://tom-toolkit.readthedocs.io/en/stable/customization/customize_observations.html">
+                    TOM Toolkit documentation</a></p>
+                    """
+                )
             )
         )
 
