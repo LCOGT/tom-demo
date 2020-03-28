@@ -2,11 +2,37 @@ from crispy_forms.bootstrap import Accordion, AccordionGroup
 from crispy_forms.layout import Div, HTML, Layout
 from django import forms
 
-from tom_observations.facilities.lco import LCOFacility, LCOImagingObservationForm
+from tom_observations.facility import GenericObservationForm
+from tom_observations.facilities.lco import LCOFacility
 
-class CustomLCOObservationForm(LCOImagingObservationForm):
+
+end_help = """
+    Try the
+    <a href="https://lco.global/observatory/visibility/">
+        Target Visibility Calculator.
+    </a>
+"""
+
+
+class CustomLCOObservationForm(GenericObservationForm):
+    name = forms.CharField()
     ipp_value = forms.ChoiceField(label='Intra Proposal Priority (IPP factor',
                                   choices=((0.5, '0.5'), (1.0, '1.0'), (1.5, '1.5'), (2.0, '2.0')))
+    exposure_count = forms.IntegerField(min_value=1)
+    exposure_time = forms.FloatField(min_value=0.1)
+    max_airmass = forms.FloatField()
+    proposal = forms.ChoiceField(choices=[('LCOEngineering', 'LCOEngineering (LCOEngineering)')])
+    filter = forms.ChoiceField(
+        choices=[('R', 'Bessell-R'), ('B', 'Bessell-B'), ('V', 'Bessell-V'), ('I', 'Bessell-I'), ('air', 'Clear')]
+    )
+    instrument_type = forms.ChoiceField(
+        choices=[('2M0-SPECTRAL-AG', '2.0 meter Spectral AG'), ('1M0-SCICAM-SINISTRO', '1.0 meter Sinistro')]
+    )
+    start = forms.CharField(widget=forms.TextInput(attrs={'type': 'date'}))
+    end = forms.CharField(widget=forms.TextInput(attrs={'type': 'date'}), help_text=end_help)
+    observation_mode = forms.ChoiceField(
+        choices=(('NORMAL', 'Normal'), ('TARGET_OF_OPPORTUNITY', 'Rapid Response'))
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -15,11 +41,14 @@ class CustomLCOObservationForm(LCOImagingObservationForm):
             self.layout()
         )
 
+    def proposal_choices(self):
+        return [('LCOEngineering', 'LCOEngineering (LCOEngineering)')]
+
     def instrument_choices(self):
-        return [(k, v) for k, v in super().instrument_choices() if k in ['1M0-SCICAM-SINISTRO', '2M0-SPECTRAL-AG']]
+        return [('2M0-SPECTRAL-AG', '2.0 meter Spectral AG'), ('1M0-SCICAM-SINISTRO', '1.0 meter Sinistro')]
 
     def filter_choices(self):
-        return [(k, v) for k, v in super().filter_choices() if k in ['I', 'R', 'V', 'B', 'air']]
+        return [('R', 'Bessell-R'), ('B', 'Bessell-B'), ('V', 'Bessell-V'), ('I', 'Bessell-I'), ('air', 'Clear')]
 
     def layout(self):
         return Accordion(
@@ -62,7 +91,7 @@ class CustomLCOObservationForm(LCOImagingObservationForm):
                     directory in your TOM.</p>
                     
                     <p>Next, a custom facility module was created. The module has two classes, <code>CustomLCO</code>
-                    and <code>CustomLCOObservationForm</code>, both of which inherit from their LCO counterparts. You 
+                    and <code>CustomLCOObservationForm</code>, both of which inherit from Toolkit-interfaces. You 
                     can see what methods were overridden 
                     <a href="https://github.com/LCOGT/tom-demo/commit/2120934034eef07765f969943ce5ce7760a0adc4">here.
                     </a></p>
@@ -81,9 +110,21 @@ class CustomLCOObservationForm(LCOImagingObservationForm):
             )
         )
 
+    def is_valid(self):
+        self.add_error(None, 'This TOM is just for demonstration--submissions are not permitted.')
+        return False
+
+    def observation_payload(self):
+        return {}
 
 class CustomLCO(LCOFacility):
     observation_types = [('IMAGING', 'Imaging')]
 
     def get_form(self, observation_type):
         return CustomLCOObservationForm
+
+    def submit_observation(self, observation_payload):
+        return []
+
+    def validate_observation(self, observation_payload):
+        return []
