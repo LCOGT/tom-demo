@@ -16,6 +16,65 @@ spec:
         app.kubernetes.io/name: {{ include "tom-demo.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      initContainers:
+        # wait for database to become ready
+        - name: check-db-ready
+          image: "postgres:11.2-alpine"
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - >
+              until pg_isready \
+                  --username={{ .Values.postgresql.postgresqlUsername | quote }} \
+                  --dbname={{ .Values.postgresql.postgresqlDatabase | quote }} \
+                  --host={{ include "tom-demo.dbhost" . | quote }} \
+                  --port={{ .Values.postgresql.service.port | quote }};
+                do echo waiting for database;
+                sleep 2;
+                done;
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            readOnlyRootFilesystem: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 16Mi
+            limits:
+              cpu: 50m
+              memory: 16Mi
+        {{- if .Values.applyDatabaseMigrations }}
+        - name: apply-db-migrations
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - python
+            - manage.py
+            - migrate
+            - --no-input
+          env:
+            {{- include "tom-demo.backendEnv" . | nindent 12 }}
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            readOnlyRootFilesystem: true
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+              readOnly: false
+            - name: specutils
+              mountPath: /.specutils
+              readOnly: false
+            - name: astropy
+              mountPath: /.astropy
+              readonly: false
+        {{- end }}
+    
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -23,6 +82,7 @@ spec:
       serviceAccountName: {{ template "tom-demo.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -40,6 +100,7 @@ spec:
             - tom_demo.wsgi
           env:
             {{ include "tom-demo.extraEnv" . | nindent 12 }}
+            {{ include "tom-demo.backendEnv" . | nindent 12 }}
           ports:
             - name: http
               containerPort: 8080
@@ -61,6 +122,14 @@ spec:
 
       volumes:
         - name: tmp
+          emptyDir:
+            medium: Memory
+            sizeLimit: 16Mi
+        - name: specutils
+          emptyDir:
+            medium: Memory
+            sizeLimit: 16Mi
+        - name: astropy
           emptyDir:
             medium: Memory
             sizeLimit: 16Mi
