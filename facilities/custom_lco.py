@@ -99,8 +99,9 @@ class CustomLCOObservationForm(GenericObservationForm):
                     <p>To make the accordion, <a href="https://django-crispy-forms.readthedocs.io/en/latest/index.html">
                     django-crispy-forms</a> were used to render the form as an <code>AccordionGroup.</code></p>
 
-                    <p>Finally, a templatetag was created to render the form, and added to the overridden 
-                    <code>target_detail.html</code>.
+                    <p>Finally, the TOM Toolkit templatetag facility_observation_form was used to render the 
+                    form by adding it to our overridden <code>target_detail.html</code>. We overrode the template by 
+                    adding <code>target_detail.html</code> to templates/tom_targets.
 
                     <p>If you'd like to read more, a more detailed tutorial can be found in the 
                     <a href="https://tom-toolkit.readthedocs.io/en/stable/customization/customize_observations.html">
