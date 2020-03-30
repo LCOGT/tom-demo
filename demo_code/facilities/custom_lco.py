@@ -91,8 +91,8 @@ class CustomLCOObservationForm(GenericObservationForm):
                     directory in your TOM.</p>
                     
                     <p>Next, a custom facility module was created. The module has two classes, <code>CustomLCO</code>
-                    and <code>CustomLCOObservationForm</code>, both of which inherit from Toolkit-interfaces. You 
-                    can see what methods were overridden 
+                    and <code>CustomLCOObservationForm</code>, both of which inherit from Toolkit interfaces in 
+                    <code>facility.py</code>. You can see what methods were overridden 
                     <a href="https://github.com/LCOGT/tom-demo/commit/2120934034eef07765f969943ce5ce7760a0adc4">here.
                     </a></p>
                     

@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'tom_observations',
     'tom_dataproducts',
     'tom_publications',
-    'tom_demo'
+    'demo_code',
 ]
 
 SITE_ID = 1
@@ -108,7 +108,6 @@ DATABASES = {
        'PORT': os.getenv('DB_PORT', '5432'),
    },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -235,7 +234,7 @@ DATA_PROCESSORS = {
 }
 
 TOM_FACILITY_CLASSES = [
-    'tom_observations.facilities.lco.LCOFacility',
+    'demo_code.facilities.custom_lco.CustomLCO',
     'tom_observations.facilities.gemini.GEMFacility'
 ]
 
