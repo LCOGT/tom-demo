@@ -83,13 +83,13 @@ def create_mock_observations():
 def create_users():
     public_group = Group.objects.filter(name='Public').first()
     try:
-        admin = User.objects.create_superuser('admin', email='dcollom@lco.global', password='admin')
+        admin = User.objects.create_superuser('admin', email='toms.are.awesome@example.com', password='admin')
         public_group.user_set.add(admin)
     except Exception:
         pass
 
     try:
-        guest = User.objects.create_user('guest', email='dcollom@lco.global', password='guest')
+        guest = User.objects.create_user('guest', email='toms.are.awesome@example.com', password='guest')
         public_group.user_set.add(guest)
     except Exception:
         pass

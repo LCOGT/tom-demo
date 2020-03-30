@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'tom_observations',
     'tom_dataproducts',
     'tom_publications',
-    'tom_demo'
 ]
 
 SITE_ID = 1
@@ -108,7 +107,6 @@ DATABASES = {
        'PORT': os.getenv('DB_PORT', '5432'),
    },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -236,6 +234,7 @@ DATA_PROCESSORS = {
 
 TOM_FACILITY_CLASSES = [
     'tom_observations.facilities.lco.LCOFacility',
+    'facilities.custom_lco.CustomLCO',
     'tom_observations.facilities.gemini.GEMFacility'
 ]
 
@@ -263,6 +262,8 @@ EXTRA_FIELDS = []
 # Authentication strategy can either be LOCKED (required login for all views)
 # or READ_ONLY (read only access to views)
 AUTH_STRATEGY = 'READ_ONLY'
+
+TARGET_PERMISSIONS_ONLY = True
 
 # URLs that should be allowed access even with AUTH_STRATEGY = LOCKED
 # for example: OPEN_URLS = ['/', '/about']
