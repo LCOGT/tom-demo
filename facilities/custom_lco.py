@@ -2,7 +2,7 @@ from crispy_forms.bootstrap import Accordion, AccordionGroup
 from crispy_forms.layout import Div, HTML, Layout
 from django import forms
 
-from tom_observations.facility import GenericObservationForm
+from tom_observations.facility import GenericObservationFacility, GenericObservationForm
 from tom_observations.facilities.lco import LCOFacility
 
 
@@ -117,8 +117,48 @@ class CustomLCOObservationForm(GenericObservationForm):
     def observation_payload(self):
         return {}
 
-class CustomLCO(LCOFacility):
+class CustomLCO(GenericObservationFacility):
+    name = 'LCO Photometry'
     observation_types = [('IMAGING', 'Imaging')]
+
+    SITES = {
+        'Siding Spring': {
+            'sitecode': 'coj',
+            'latitude': -31.272,
+            'longitude': 149.07,
+            'elevation': 1116
+        },
+        'Sutherland': {
+            'sitecode': 'cpt',
+            'latitude': -32.38,
+            'longitude': 20.81,
+            'elevation': 1804
+        },
+        'Teide': {
+            'sitecode': 'tfn',
+            'latitude': 20.3,
+            'longitude': -16.511,
+            'elevation': 2390
+        },
+        'Cerro Tololo': {
+            'sitecode': 'lsc',
+            'latitude': -30.167,
+            'longitude': -70.804,
+            'elevation': 2198
+        },
+        'McDonald': {
+            'sitecode': 'elp',
+            'latitude': 30.679,
+            'longitude': -104.015,
+            'elevation': 2027
+        },
+        'Haleakala': {
+            'sitecode': 'ogg',
+            'latitude': 20.706,
+            'longitude': -156.258,
+            'elevation': 3065
+        }
+    }
 
     def get_form(self, observation_type):
         return CustomLCOObservationForm
@@ -128,3 +168,18 @@ class CustomLCO(LCOFacility):
 
     def validate_observation(self, observation_payload):
         return []
+
+    def data_products(self):
+        return []
+
+    def get_observation_status(self):
+        return ''
+
+    def get_observation_url(self):
+        return ''
+
+    def get_observing_sites(self):
+        return self.SITES
+
+    def get_terminal_observing_states(self):
+        return ['']
