@@ -20,6 +20,11 @@ In TOM Toolkit release (_<insert-release-here>_) the following features were rel
 <!--- * The [Feature X](http://tom-demo.lco.global/) page shows _<something-about-feature-x>_. --->
 
 
+### TOM Toolkit release [1.4.0](https://github.com/TOMToolkit/tom_base/releases/tag/1.4.0)
+* User Interface improvements for submitting observations. ([source]()).
+* Finder charts ([source]())
+
+
 ### TOM Toolkit release 1.2.6
 * How to write a simple test. ([_source_](https://github.com/LCOGT/tom-demo/blob/e7594737c068ce7b01f875aeaddbe7f575b4e755/tom_demo/tests/test.py#L5)).
 * The [Targets](http://tom-demo.lco.global/targets/) page shows how a list of targets can be displayed.
