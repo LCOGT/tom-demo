@@ -21,7 +21,7 @@ In TOM Toolkit release (_<insert-release-here>_) the following features were rel
 
 
 ### TOM Toolkit release [1.4.0](https://github.com/TOMToolkit/tom_base/releases/tag/1.4.0)
-* User Interface improvements for submitting observations. ([source]()).
+* User Interface improvements for submitting observations. ([source](https://github.com/TOMToolkit/tom_base/pull/263/)).
 * Finder charts ([source]())
 
 
