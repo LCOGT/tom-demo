@@ -85,7 +85,7 @@ postgresql:
     port: "5432"
   resources:
     requests:
-      cpu: 200m
+      cpu: 50m
       memory: 256Mi
     limits:
       cpu: 400m
