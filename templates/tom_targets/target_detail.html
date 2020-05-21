@@ -18,6 +18,8 @@
       {% target_buttons object %}
       {% target_data object %}
       {% aladin object %}
+      <h3>Recent Photometry</h3>
+      {% recent_photometry object limit=5 %}
     </div>
   </div>
   <div class="col-md-8">
@@ -45,6 +47,9 @@
       <div class="tab-pane active" id="observe">
         <h4>Observe with LCO</h4>
         {% facility_observation_form object 'LCO Photometry' 'photometry' %}
+        <hr/>
+        <h4>Other Facilities</h4>
+        {% observing_buttons object %}
         <hr/>
         {% observingstrategy_run object %}
         <hr/>
