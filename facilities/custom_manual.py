@@ -39,14 +39,11 @@ class DemonstrationManualObservationForm(BaseManualObservationForm):
 class DemonstrationManualObservingStrategyForm(GenericStrategyForm, DemonstrationManualObservationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        if self.fields.get('groups'):
-            self.fields.pop('groups')
+        for field_name in ['groups', 'target_id', 'name', 'start', 'end', 'observation_id', 'annotations']:
+            self.fields.pop(field_name, None)
         for field in self.fields:
             if field != 'strategy_name':
                 self.fields[field].required = False
-            if field in ['name', 'start', 'end', 'observation_id', 'annotations']:
-                self.fields[field].required = False
-                self.fields[field].widget = forms.HiddenInput()
         self.helper.layout = Layout(
             self.common_layout,
             self.layout()
