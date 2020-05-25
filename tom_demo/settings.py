@@ -236,7 +236,7 @@ TOM_FACILITY_CLASSES = [
     'tom_observations.facilities.lco.LCOFacility',
     'facilities.custom_lco.CustomLCO',
     'tom_observations.facilities.gemini.GEMFacility',
-    'facilities.custom_manual.CustomManualFacility'
+    'facilities.custom_manual.DemonstrationManualFacility'
 ]
 
 TOM_ALERT_CLASSES = [

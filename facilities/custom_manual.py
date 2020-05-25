@@ -36,13 +36,17 @@ class DemonstrationManualObservationForm(BaseManualObservationForm):
         )
 
 
-class DemonstrationManualObservingStrategyForm(GenericStrategyForm, CustomManualObservationForm):
+class DemonstrationManualObservingStrategyForm(GenericStrategyForm, DemonstrationManualObservationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        if self.fields.get('groups'):
+            self.fields.pop('groups')
         for field in self.fields:
             if field != 'strategy_name':
                 self.fields[field].required = False
-            if field in ['name', 'start', 'end', 'observation_id', 'annotations']
+            if field in ['name', 'start', 'end', 'observation_id', 'annotations']:
+                self.fields[field].required = False
+                self.fields[field].widget = forms.HiddenInput()
         self.helper.layout = Layout(
             self.common_layout,
             self.layout()
@@ -54,10 +58,10 @@ class DemonstrationManualFacility(BaseManualObservationFacility):
     observation_types = [('OBSERVATION', 'Photometry')]
 
     def get_form(self, observation_type):
-        return CustomManualObservationForm
+        return DemonstrationManualObservationForm
 
     def get_strategy_form(self, observation_type):
-        return CustomManualObservingStrategyForm
+        return DemonstrationManualObservingStrategyForm
 
     def get_observation_url(self, observation_id):
         return ''
