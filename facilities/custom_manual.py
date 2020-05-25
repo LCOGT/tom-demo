@@ -8,7 +8,7 @@ from tom_observations.observing_strategy import GenericStrategyForm
 from tom_targets.models import Target
 
 
-class CustomManualObservationForm(BaseManualObservationForm):
+class DemonstrationManualObservationForm(BaseManualObservationForm):
     name = forms.CharField()
     start = forms.CharField(widget=forms.TextInput(attrs={'type': 'date'}), help_text='Start date of the observation')
     end = forms.CharField(required=False, widget=forms.TextInput(attrs={'type': 'date'}), help_text='End date of the observation')
@@ -36,20 +36,21 @@ class CustomManualObservationForm(BaseManualObservationForm):
         )
 
 
-class CustomManualObservingStrategyForm(GenericStrategyForm, CustomManualObservationForm):
+class DemonstrationManualObservingStrategyForm(GenericStrategyForm, CustomManualObservationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields:
             if field != 'strategy_name':
                 self.fields[field].required = False
+            if field in ['name', 'start', 'end', 'observation_id', 'annotations']
         self.helper.layout = Layout(
             self.common_layout,
             self.layout()
         )
 
 
-class CustomManualFacility(BaseManualObservationFacility):
-    name = 'Custom Manual Facility'
+class DemonstrationManualFacility(BaseManualObservationFacility):
+    name = 'Demonstration Manual Facility'
     observation_types = [('OBSERVATION', 'Photometry')]
 
     def get_form(self, observation_type):
