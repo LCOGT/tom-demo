@@ -19,6 +19,12 @@ both to pages in the demonstration TOM and the implementing source code)._
 In TOM Toolkit release (_<insert-release-here>_) the following features were released:
 <!--- * The [Feature X](http://tom-demo.lco.global/) page shows _<something-about-feature-x>_. --->
 
+### TOM Toolkit release [1.5.0](https://github.com/TOMToolkit/tom_base/releases/tag/1.5.0-alpha.1)
+* Interface for creation of manual facilities ([source]()).
+* Support for manual creation of observation records ([source]()).
+* Support of creation of observation records associated with prior API-based observations ([source]()).
+* Templatetag for recent photometry ([source]()). 
+
 
 ### TOM Toolkit release [1.4.0](https://github.com/TOMToolkit/tom_base/releases/tag/1.4.0)
 * User Interface improvements for submitting observations. ([source](https://github.com/TOMToolkit/tom_base/pull/264)).
@@ -26,7 +32,7 @@ In TOM Toolkit release (_<insert-release-here>_) the following features were rel
 
 
 ### TOM Toolkit release 1.2.6
-* How to write a simple test. ([_source_](https://github.com/LCOGT/tom-demo/blob/e7594737c068ce7b01f875aeaddbe7f575b4e755/tom_demo/tests/test.py#L5)).
+* How to write a simple test ([_source_](https://github.com/LCOGT/tom-demo/blob/e7594737c068ce7b01f875aeaddbe7f575b4e755/tom_demo/tests/test.py#L5)).
 * The [Targets](http://tom-demo.lco.global/targets/) page shows how a list of targets can be displayed.
 
 #
