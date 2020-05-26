@@ -66,7 +66,7 @@ _NOTE: the `--network="hosts"` method is not secure and should never be used out
 #### Alternative 3: Running `tom-demo` dockerized, via `docker-compose`
 <details>
 <summary>Click to expand.</summary>
-# TODO
+# TODO...
 </details>
 
 

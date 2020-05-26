@@ -235,7 +235,8 @@ DATA_PROCESSORS = {
 TOM_FACILITY_CLASSES = [
     'tom_observations.facilities.lco.LCOFacility',
     'facilities.custom_lco.CustomLCO',
-    'tom_observations.facilities.gemini.GEMFacility'
+    'tom_observations.facilities.gemini.GEMFacility',
+    'facilities.custom_manual.DemonstrationManualFacility'
 ]
 
 TOM_ALERT_CLASSES = [
@@ -263,7 +264,7 @@ EXTRA_FIELDS = []
 # or READ_ONLY (read only access to views)
 AUTH_STRATEGY = 'READ_ONLY'
 
-TARGET_PERMISSIONS_ONLY = True
+TARGET_PERMISSIONS_ONLY = False
 
 # URLs that should be allowed access even with AUTH_STRATEGY = LOCKED
 # for example: OPEN_URLS = ['/', '/about']
