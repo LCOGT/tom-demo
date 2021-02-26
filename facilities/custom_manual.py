@@ -4,7 +4,7 @@ from django import forms
 from crispy_forms.layout import Column, Div, Layout, Row
 
 from tom_observations.facility import BaseManualObservationFacility, BaseManualObservationForm
-from tom_observations.observing_strategy import GenericStrategyForm
+from tom_observations.observation_template import GenericTemplateForm
 from tom_targets.models import Target
 
 
@@ -36,7 +36,7 @@ class DemonstrationManualObservationForm(BaseManualObservationForm):
         )
 
 
-class DemonstrationManualObservingStrategyForm(GenericStrategyForm, DemonstrationManualObservationForm):
+class DemonstrationManualObservingStrategyForm(GenericTemplateForm, DemonstrationManualObservationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name in ['groups', 'target_id', 'name', 'start', 'end', 'observation_id', 'annotations']:
