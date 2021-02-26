@@ -1,5 +1,5 @@
 {% extends 'tom_common/base.html' %}
-{% load comments bootstrap4 tom_common_extras targets_extras observation_extras dataproduct_extras publication_extras static cache %}
+{% load comments bootstrap4 tom_common_extras targets_extras observation_extras dataproduct_extras static cache %}
 {% block title %}Target {{ object.name }}{% endblock %}
 {% block additional_css %}
 <link rel="stylesheet" href="{% static 'tom_targets/css/main.css' %}">
@@ -51,7 +51,7 @@
         <h4>Other Facilities</h4>
         {% observing_buttons object %}
         <hr/>
-        {% observingstrategy_run object %}
+        {% observationtemplate_run object %}
         <hr/>
         <h4>Plan</h4>
         {% if object.type == 'SIDEREAL' %}
