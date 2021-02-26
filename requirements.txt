@@ -1,5 +1,4 @@
-django==3.0.3
-tomtoolkit==1.5.0
+tomtoolkit==2.5.1
 psycopg2===2.8.4
 gunicorn[gevent]==20.0.4
 factory_boy==2.12.0
