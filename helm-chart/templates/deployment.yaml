@@ -103,7 +103,7 @@ spec:
             {{ include "tom-demo.backendEnv" . | nindent 12 }}
           envFrom:
             - secretRef:
-              name: tom-demo-secrets
+                name: tom-demo-secrets
           ports:
             - name: http
               containerPort: 8080
