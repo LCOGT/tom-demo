@@ -267,6 +267,13 @@ TOM_ALERT_DASH_CLASSES = [
     'tom_alerts_dash.brokers.scimma.SCIMMADashBroker'
 ]
 
+TOM_HARVESTER_CLASSES = [
+    'tom_catalogs.harvesters.simbad.SimbadHarvester',
+    'tom_catalogs.harvesters.ned.NEDHarvester',
+    'tom_catalogs.harvesters.jplhorizons.JPLHorizonsHarvester',
+    'tom_catalogs.harvesters.tns.TNSHarvester',
+]
+
 BROKERS = {
     'SCIMMA': {
         'url': 'http://skip.dev.hop.scimma.org',
