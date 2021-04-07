@@ -17,7 +17,9 @@ from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
+    path('alerts/', include('tom_alerts_dash.urls', namespace='tom_alerts_dash')),
     path('', include('tom_common.urls')),
+    path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]
 
 # this is to serve static file from a debug Dockerfile environment (with collectstatic)

@@ -54,6 +54,9 @@ INSTALLED_APPS = [
     'tom_catalogs',
     'tom_observations',
     'tom_dataproducts',
+    'tom_alerts_dash',
+    'tom_scimma',
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig'
 ]
 
 SITE_ID = 1
@@ -67,7 +70,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_plotly_dash.middleware.BaseMiddleware',
+    'tom_common.middleware.Raise403Middleware',
     'tom_common.middleware.ExternalServiceMiddleware',
+    'tom_common.middleware.AuthStrategyMiddleware',
 ]
 
 ROOT_URLCONF = 'tom_demo.urls'
@@ -160,6 +166,15 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'data')
 MEDIA_URL = '/data/'
 
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+
+    'django_plotly_dash.finders.DashAssetFinder',
+    'django_plotly_dash.finders.DashComponentFinder',
+    'django_plotly_dash.finders.DashAppDirectoryFinder',
+]
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -243,9 +258,24 @@ TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.lasair.LasairBroker',
     'tom_alerts.brokers.scout.ScoutBroker',
     'tom_alerts.brokers.tns.TNSBroker',
+    'tom_scimma.scimma.SCIMMABroker'
 ]
 
-BROKER_CREDENTIALS = {
+TOM_ALERT_DASH_CLASSES = [
+    'tom_alerts_dash.brokers.mars.MARSDashBroker',
+    'tom_alerts_dash.brokers.alerce.ALeRCEDashBroker',
+    'tom_alerts_dash.brokers.scimma.SCIMMADashBroker'
+]
+
+BROKERS = {
+    'SCIMMA': {
+        'url': 'http://skip.dev.hop.scimma.org',
+        'api_key': os.getenv('SKIP_API_KEY', ''),
+        'hopskotch_url': 'dev.hop.scimma.org',
+        'hopskotch_username': os.getenv('HOPSKOTCH_USERNAME', ''),
+        'hopskotch_password': os.getenv('HOPSKOTCH_PASSWORD', ''),
+        'default_hopskotch_topic': ''
+    }
 }
 
 # Define extra target fields here. Types can be any of "number", "string", "boolean" or "datetime"
@@ -283,6 +313,26 @@ THUMBNAIL_DEFAULT_SIZE = (200, 200)
 
 HINTS_ENABLED = True
 HINT_LEVEL = 20
+
+# django-plotly-dash configuration
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+PLOTLY_COMPONENTS = [
+    # Common components
+    'dash_core_components',
+    'dash_html_components',
+    'dash_renderer',
+
+    # django-plotly-dash components
+    'dpd_components',
+    # static support if serving local assets
+    # 'dpd_static_support',
+
+    # Other components, as needed
+    'dash_bootstrap_components',
+    'dash_table'
+]
 
 try:
     from local_settings import *  # noqa

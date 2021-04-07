@@ -52,7 +52,9 @@ class DemonstrationManualObservingStrategyForm(GenericTemplateForm, Demonstratio
 
 class DemonstrationManualFacility(BaseManualObservationFacility):
     name = 'Demonstration Manual Facility'
-    observation_types = [('OBSERVATION', 'Photometry')]
+    observation_forms = {
+        'OBSERVATION': DemonstrationManualObservationForm
+    }
 
     def get_form(self, observation_type):
         return DemonstrationManualObservationForm
