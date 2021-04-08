@@ -95,8 +95,8 @@ This repository follows a convention in which the _repository_ `my-project`
 contains the _django project_ `my_project`. Thus,
 ```
 ├── tom-demo
-│   ├── tom_demo
-│   ├── Dockerfileb
+│   ├── tom_demo_base
+│   ├── Dockerfile
 │   ├── env
 │   ├── Jenkinsfile
 │   ├── manage.py
