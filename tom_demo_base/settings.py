@@ -247,7 +247,7 @@ DATA_PROCESSORS = {
 }
 
 TOM_FACILITY_CLASSES = [
-    'tom_observations.facilities.lco.LCOFacility',
+    'facilities.restricted_lco.RestrictedLCOFacility',
     'facilities.custom_lco.CustomLCO',
     'tom_observations.facilities.gemini.GEMFacility',
     'facilities.custom_manual.DemonstrationManualFacility'
