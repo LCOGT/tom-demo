@@ -76,7 +76,7 @@ MIDDLEWARE = [
     'tom_common.middleware.AuthStrategyMiddleware',
 ]
 
-ROOT_URLCONF = 'tom_demo.urls'
+ROOT_URLCONF = 'tom_demo_base.urls'
 
 TEMPLATES = [
     {
@@ -96,7 +96,7 @@ TEMPLATES = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-WSGI_APPLICATION = 'tom_demo.wsgi.application'
+WSGI_APPLICATION = 'tom_demo_base.wsgi.application'
 
 
 # Database
