@@ -11,7 +11,8 @@
       {% if object.url %}
       <a class="btn btn-success" href="{{ object.url }}">View at observatory »</a>
       {% endif %}
-      {% submit_upstream_scimma_form target observation_record "{{ url 'tom_observations:detail' object.id }}" 'TOMToolkit.test' %}
+      {% url 'tom_observations:detail' object.id as redirect_url %}
+      {% submit_upstream_scimma_form object.target object redirect_url 'TOMToolkit.test' %}
     </h2>
     <div class="col-md-6">
       {% if editable %}
