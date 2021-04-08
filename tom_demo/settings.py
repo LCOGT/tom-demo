@@ -281,7 +281,7 @@ BROKERS = {
         'hopskotch_url': 'dev.hop.scimma.org',
         'hopskotch_username': os.getenv('HOPSKOTCH_USERNAME', ''),
         'hopskotch_password': os.getenv('HOPSKOTCH_PASSWORD', ''),
-        'default_hopskotch_topic': ''
+        'default_hopskotch_topic': 'TOMToolkit.test'
     }
 }
 
