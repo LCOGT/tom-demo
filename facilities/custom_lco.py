@@ -120,7 +120,9 @@ class CustomLCOObservationForm(GenericObservationForm):
 
 class CustomLCO(GenericObservationFacility):
     name = 'LCO Photometry'
-    observation_types = [('IMAGING', 'Imaging')]
+    observation_forms = {
+        'IMAGING': CustomLCOObservationForm
+    }
 
     SITES = {
         'Siding Spring': {
