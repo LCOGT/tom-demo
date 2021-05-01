@@ -18,6 +18,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('alerts/', include('tom_alerts_dash.urls', namespace='tom_alerts_dash')),
+    path('superevents/', include('tom_superevents.urls')),
     path('observations/', include('tom_demo.urls')),
     path('', include('tom_common.urls')),
     path('django_plotly_dash/', include('django_plotly_dash.urls')),
