@@ -112,3 +112,13 @@ venv.bak/
 .idea/
 *~
 
+# Vuejs
+vue/node_modules/
+vue/public/
+vue/src/_drafts
+vue/package-lock.json
+vue/dist
+vue/npm-debug.log*
+vue/yarn-debug.log*
+vue/yarn-error.log*
+vue/pnpm-debug.log*
