@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_extensions',
+    'webpack_loader',
     'guardian',
     'tom_common',
     'django_comments',
@@ -325,6 +326,19 @@ THUMBNAIL_DEFAULT_SIZE = (200, 200)
 
 HINTS_ENABLED = True
 HINT_LEVEL = 20
+
+# Vue and django-webpack-loader/webpack-bundle-tracker configuration
+VUE_FRONTEND_DIR = os.path.join(BASE_DIR, 'vue')
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'vue/',  # must end with slash
+        'STATS_FILE': os.path.join(VUE_FRONTEND_DIR, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
+    }
+}
 
 # django-plotly-dash configuration
 
