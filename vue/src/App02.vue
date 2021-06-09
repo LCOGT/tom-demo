@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app02">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="This is the TOM Toolkit Vue.js Health Check Page"/>
+    <HelloWorld msg="This is the TOM Toolkit Vue.js Health Check Page (App02)"/>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
+  name: 'App02',
   components: {
     HelloWorld
   }
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style>
-#app {
+#app02 {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
