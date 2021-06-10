@@ -6,8 +6,9 @@ const BundleTracker = require("webpack-bundle-tracker");
 // and serve those bundles.
 
 //
-// declare a list of pages whcih will become the name of the bundles,
-// and define the entry point for each
+// declare a list of pages whcih will become the name of the bundles.
+// The bundle names are used in the django template: {% render_bundle NAME %}
+// Also, define the entry point JS for each bundle.
 //
 const pages = {
     'vue_health_check_01': {
@@ -30,7 +31,7 @@ module.exports = {
     publicPath: process.env.NODE_ENV === 'production'
         ? ''
         : 'http://localhost:8080/',
-    outputDir: '../django_vue_mpa/static/vue/',
+    outputDir: '../_static/vue/',
 
     chainWebpack: config => {
 
