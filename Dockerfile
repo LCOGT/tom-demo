@@ -35,7 +35,7 @@ ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 # write new webpack-stats.json for django-webpack-loader to use
 # and install the Vue JS/CSS etc as static files
 WORKDIR /tom-demo/vue
-RUN npm run build
+RUN npm install && npm run build
 
 WORKDIR /tom-demo
 
