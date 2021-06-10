@@ -1,0 +1,28 @@
+{% extends 'tom_common/base.html' %}
+{% load render_bundle from webpack_loader %}
+{% load static %}
+
+
+{% block content %}
+
+    <h3>First Vue Health Check App</h3>
+
+    <hr>
+
+    <div>
+        <p>trying to post static image</p>
+        <img src="{% static 'vue/img/logo.png' %}" />
+    </div>
+
+    <hr>
+
+    <div id="app">
+        <app></app>
+    
+    </div>
+    <hr>
+
+    {% render_bundle 'chunk-vendors' %}
+    {% render_bundle 'vue_health_check_01' %}
+
+{% endblock %}

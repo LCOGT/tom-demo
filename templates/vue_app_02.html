@@ -1,0 +1,20 @@
+{% extends 'tom_common/base.html' %}
+{% load render_bundle from webpack_loader %}
+
+
+{% block content %}
+
+    <h3>Second Vue Health Check App</h3>
+
+    <hr>
+
+    <div id="app">
+        <app></app>
+    </div>
+
+    <hr>
+
+    {% render_bundle 'chunk-vendors' %}
+    {% render_bundle 'vue_health_check_02' %}
+
+{% endblock %}

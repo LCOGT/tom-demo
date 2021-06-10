@@ -13,14 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.urls import path, include
+from django.views.generic import TemplateView
+
 
 urlpatterns = [
     path('alerts/', include('tom_alerts_dash.urls', namespace='tom_alerts_dash')),
     path('superevents/', include('tom_superevents.urls')),
     path('observations/', include('tom_demo.urls')),
     path('', include('tom_common.urls')),
+
+    # Vue health check urls
+    path('vue_health_check/', TemplateView.as_view(template_name="vue_health_check.html"), name="vue_health_check"),
+
+    path("vue_app_01/", TemplateView.as_view(template_name="vue_app_01.html"), name="vue_app_01"),
+    path("vue_app_02/", TemplateView.as_view(template_name="vue_app_02.html"), name="vue_app_02"),
+
+    # TODO: should probably be removed
     path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]
 
