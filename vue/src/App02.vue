@@ -1,17 +1,17 @@
 <template>
   <div id="app02">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="This is the TOM Toolkit Vue.js Health Check Page (App02)"/>
+    <ttk-target-table />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App02',
   components: {
-    HelloWorld
+    // HelloWorld
   }
 }
 </script>

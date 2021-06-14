@@ -1,5 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
+import BootstrapVue from 'bootstrap-vue';
+import { TOMToolkitComponentLib } from 'tom-toolkit-component-lib';
+
+Vue.use(BootstrapVue);  // TODO: document the need to do this
+Vue.use(TOMToolkitComponentLib);
 
 Vue.config.productionTip = false
 
