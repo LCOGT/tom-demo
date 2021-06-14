@@ -6,3 +6,5 @@ whitenoise~=5.2
 tom-alerts-dash[scimma]>=0.1.2
 tom-superevents>=0.1
 django-webpack-loader==0.6.0
+django-storages==1.11.1
+boto3==1.16.61
