@@ -116,7 +116,6 @@ venv.bak/
 vue/node_modules/
 vue/public/
 vue/src/_drafts
-vue/package-lock.json
 vue/dist
 vue/npm-debug.log*
 vue/yarn-debug.log*
