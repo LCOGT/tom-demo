@@ -1,7 +1,7 @@
 <template>
   <div id="app02">
     <img alt="Vue logo" src="./assets/logo.png">
-    <ttk-target-table />
+    <ttk-target-table></ttk-target-table>
   </div>
 </template>
 
