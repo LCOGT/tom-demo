@@ -3,6 +3,7 @@
 # Declare variables to be passed into your templates.
 
 djangoDebug: true
+nodeEnv: development
 
 gunicornWorkers: 2
 gunicornTimeout: 300

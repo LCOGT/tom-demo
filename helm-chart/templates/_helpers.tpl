@@ -78,6 +78,8 @@ build it here and use it everywhere.
   value: "/tmp"
 - name: DEBUG
   value: {{ .Values.djangoDebug | toString | lower | title | quote }}
+- name: NODE_ENV
+  value: {{ .Values.nodeEnv | toString | lower | title | quote }}
 {{- end }}
 
 {{/*
