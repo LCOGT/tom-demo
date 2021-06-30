@@ -28,7 +28,8 @@ module.exports = {
     // this key is written in to the webpack-stats.json file during local development
     // (i.e. non-production) and the JS is served by the npm run serve server.
     // in production, the pages are found in the outputDir and served by django.
-    publicPath: process.env.NODE_ENV === 'production'
+    // NB: in this context, staging means tom-demo-dev
+    publicPath: process.env.NODE_ENV === 'production' || 'staging'
         ? ''
         : 'http://localhost:8080/',
     outputDir: '../_static/vue/',

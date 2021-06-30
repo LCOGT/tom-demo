@@ -1,5 +1,8 @@
 # Helm chart values for Development Deployment
 
+# in this context, staging means tom-demo-dev
+nodeEnv: staging
+
 replicaCount: 1
 
 resources:

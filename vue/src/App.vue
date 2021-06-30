@@ -14,6 +14,12 @@ export default {
     HelloWorld
   }
 }
+// TODO: remove me
+console.log("--------------------------------------------");
+console.log(process.env.NODE_ENV);
+console.log(process.env.VUE_APP_TOM_TOOLKIT_API_ROOT);
+console.log(process.env.VUE_APP_SCIMMA_API_ROOT);
+console.log("--------------------------------------------");
 </script>
 
 <style>

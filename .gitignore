@@ -6,8 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
-# Helm 
+# Helm and k8s
 helm-chart/charts/
+*secrets*.yaml
 
 # Distribution / packaging
 .Python
