@@ -104,6 +104,8 @@ spec:
           envFrom:
             - secretRef:
                 name: tom-demo-secrets
+            - configMapRef:
+                name: {{ include "tom-demo.fullname" . }}
           ports:
             - name: http
               containerPort: 8080
