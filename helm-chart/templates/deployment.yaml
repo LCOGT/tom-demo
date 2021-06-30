@@ -119,11 +119,17 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
+            - name: app-configuration
+              mountPath: /static
+              readOnly: true
             - name: tmp
               mountPath: /tmp
               readOnly: false
 
       volumes:
+        - name: app-configuration
+          configMap:
+            name: {{ include "tom-demo.fullname" . }}
         - name: tmp
           emptyDir:
             medium: Memory
