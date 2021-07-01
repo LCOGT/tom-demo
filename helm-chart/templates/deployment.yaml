@@ -122,6 +122,7 @@ spec:
             - name: app-configuration
               mountPath: /static/urls.json
               subPath: urls.json
+              readonly: false
             - name: tmp
               mountPath: /tmp
               readOnly: false
