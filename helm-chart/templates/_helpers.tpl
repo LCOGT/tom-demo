@@ -36,7 +36,8 @@ Generate the tom-demo main deploy url
 */}}
 {{- define "tom-demo.mainDeployUrl" -}}
 {{- $ingressClass := index .Values.ingress.annotations "kubernetes.io/ingress.class" | quote -}}
-{{- $host := first .Values.ingress.hosts }}
+{{- $hosts := first .Values.ingress.hosts -}}
+{{- $host := pluck "host" $hosts | first -}}
 {{- if contains "nginx-ingress-public" $ingressClass -}}
 {{- printf "https://%s" $host -}}
 {{- else -}}
