@@ -120,7 +120,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: app-configuration
-              mountPath: static/
+              mountPath: /tom-demo/static
               readOnly: false
             - name: tmp
               mountPath: /tmp

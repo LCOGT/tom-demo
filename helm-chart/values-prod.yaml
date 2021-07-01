@@ -1,7 +1,6 @@
 # Helm chart values for Production Deployment
 
 djangoDebug: false
-nodeEnv: production
 
 replicaCount: 1
 

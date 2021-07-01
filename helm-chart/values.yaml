@@ -3,7 +3,6 @@
 # Declare variables to be passed into your templates.
 
 djangoDebug: true
-nodeEnv: development
 
 gunicornWorkers: 2
 gunicornTimeout: 300
@@ -33,9 +32,6 @@ securityContext:
   capabilities:
     drop:
     - ALL
-#  readOnlyRootFilesystem: false
-#  runAsNonRoot: false
-  # TODO: make file system readOnly (etc) when we get rid of sqlite backend
   readOnlyRootFilesystem: true
   runAsNonRoot: true
   runAsUser: 1000
