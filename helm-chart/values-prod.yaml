@@ -17,6 +17,4 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: nginx-ingress-public
   hosts:
-    - host: tom-demo.lco.global
-      paths:
-        - "/"
+    - tom-demo.lco.global
