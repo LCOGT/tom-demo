@@ -104,8 +104,6 @@ spec:
           envFrom:
             - secretRef:
                 name: tom-demo-secrets
-            - configMapRef:
-                name: {{ include "tom-demo.fullname" . }}
           ports:
             - name: http
               containerPort: 8080
@@ -122,8 +120,8 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: app-configuration
-              mountPath: /static/config
-              readOnly: true
+              mountPath: /static/config/urls.json
+              subPath: urls.json
             - name: tmp
               mountPath: /tmp
               readOnly: false
