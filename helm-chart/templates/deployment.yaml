@@ -120,9 +120,8 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: app-configuration
-              mountPath: /static/urls.json
-              subPath: urls.json
-              readonly: false
+              mountPath: /_static
+              readOnly: true
             - name: tmp
               mountPath: /tmp
               readOnly: false
