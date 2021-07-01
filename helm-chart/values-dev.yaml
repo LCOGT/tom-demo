@@ -15,4 +15,6 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: nginx-ingress-private
   hosts:
-    - tom-demo-dev.lco.gtn
+    - host: tom-demo-dev.lco.gtn
+      paths:
+        - "/"
