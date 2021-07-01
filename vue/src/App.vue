@@ -7,13 +7,28 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios';
 
 export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  mounted() {
+      console.log('mounted');
+      axios
+          .get('/static/urls.json')
+          .then(response => {
+              console.log(response);
+          })
+          .catch(
+              error => {
+                  console.log(error);
+              }
+          );
   }
 }
+
 // TODO: remove me
 console.log("--------------------------------------------");
 console.log(process.env.NODE_ENV);
