@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import axios from 'axios';
 import BootstrapVue from 'bootstrap-vue';
 import { TOMToolkitComponentLib } from 'tom-toolkit-component-lib';
 import 'bootstrap/dist/css/bootstrap.css'  // This line and the following is necessary to get bootstrap working
