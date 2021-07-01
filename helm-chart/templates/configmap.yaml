@@ -12,6 +12,6 @@ metadata:
 data:
   urls.json: |
     {
-      "tomDemoApiUrl": {{ include "tom-demo.mainDeployUrl" . | quote }}
+      "tomDemoApiUrl": "testvalue"
     }
   TOM_DEMO_TEST_API_URL: http://tom-demo-dev.lco.gtn
