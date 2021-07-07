@@ -36,4 +36,6 @@ In TOM Toolkit release (_<insert-release-here>_) the following features were rel
 * The [Targets](http://tom-demo.lco.global/targets/) page shows how a list of targets can be displayed.
 
 #
-_Development Notes [here](README-dev.md)._
+Development notes describing how this TOM was developed are:
+* [here](README-dev.md), for getting started and general TOM Toolkit/Django development; and,
+* [here](README-vue.md), for incorporating [Vue.js](https://www.vuejs.org) components into Django templates.
