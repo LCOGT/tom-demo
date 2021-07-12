@@ -32,6 +32,20 @@ Create chart name and version as used by the chart label.
 {{- end -}}
 
 {{/*
+Generate the tom-demo main deploy url
+*/}}
+{{- define "tom-demo.mainDeployUrl" -}}
+{{- $ingressClass := index .Values.ingress.annotations "kubernetes.io/ingress.class" | quote -}}
+{{- $hosts := first .Values.ingress.hosts -}}
+{{- $host := pluck "host" $hosts | first -}}
+{{- if contains "nginx-ingress-public" $ingressClass -}}
+{{- printf "https://%s" $host -}}
+{{- else -}}
+{{- printf "http://%s" $host -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Common labels
 */}}
 {{- define "tom-demo.labels" -}}

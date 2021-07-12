@@ -1,17 +1,41 @@
 <template>
   <div id="app02">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="This is the TOM Toolkit Vue.js Health Check Page (App02)"/>
+    <ttk-target-table :tomApiEndpoint="tomApiEndpoint"></ttk-target-table>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios';
+// import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App02',
   components: {
-    HelloWorld
+    // HelloWorld
+  },
+  data() {
+    return {
+      tomApiEndpoint: "test"
+    }
+  },
+  mounted() {
+    axios
+      .get('/static/urls.json')
+      .then(response => {
+        console.log('then');
+        console.log(response);
+        console.log('tomApiEndpoint');
+        console.log(this.tomApiEndpoint);
+        this.tomApiEndpoint = response['data']['tomDemoApiUrl'];
+        console.log(this.tomApiEndpoint);
+      })
+      .catch(
+        error => {
+          console.log('error');
+          console.log(error);
+        }
+      );
   }
 }
 </script>
