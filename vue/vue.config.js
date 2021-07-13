@@ -19,6 +19,10 @@ const pages = {
         entry: './src/main_02.js',
         chunks: ['chunk-vendors']
     },
+    'superevent_vue_app': {
+        entry: './src/superevent.js',
+        chunks: ['chunk-vendors']
+    }
 }
 
 module.exports = {
