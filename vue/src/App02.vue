@@ -1,7 +1,7 @@
 <template>
   <div id="app02">
     <img alt="Vue logo" src="./assets/logo.png">
-    <ttk-target-table :targets="data">
+    <ttk-target-table :targets="targets">
     </ttk-target-table>
   </div>
 </template>
@@ -19,8 +19,10 @@ export default {
   mixins: [TTKMixin.getDataMixin],
 
   data() {
+    console.log("App02.data: BEGIN");
+    console.log(this.targets);
     return {
-      data: this.targets
+      targets: [],
     };
   },
 
@@ -51,10 +53,14 @@ export default {
       return this.tomApiEndpoint + '/api/targets/';
     },
     onSuccessfulRetrieval: function(response) {
-      console.log("onSuccessfullRetrieval: BEGIN");
+      console.log("onSuccessfulRetrieval: BEGIN");
       this.targets = response['data']['results'];
-      //console.log("targets: " + this.targets);
-      console.log("onSuccessfullRetrieval: END");
+
+      console.log("this.targets: ");
+      console.log(this.targets[0]['name']);
+      console.log(this.targets[1]['name']);
+
+      console.log("onSuccessfulRetrieval: END");
       return response; // just like overridden method in super
     },
   }
