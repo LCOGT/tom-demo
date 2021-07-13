@@ -1,12 +1,14 @@
 <template>
   <div id="app02">
     <img alt="Vue logo" src="./assets/logo.png">
-    <ttk-target-table :tomApiEndpoint="tomApiEndpoint"></ttk-target-table>
+    <ttk-target-table :targets="data">
+    </ttk-target-table>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import { TTKMixin } from 'tom-toolkit-component-lib';
 // import HelloWorld from './components/HelloWorld.vue'
 
 export default {
@@ -14,28 +16,47 @@ export default {
   components: {
     // HelloWorld
   },
+  mixins: [TTKMixin.getDataMixin],
+
   data() {
     return {
-      tomApiEndpoint: "test"
-    }
+      data: this.targets
+    };
   },
-  mounted() {
-    axios
-      .get('/static/urls.json')
-      .then(response => {
-        console.log('then');
-        console.log(response);
-        console.log('tomApiEndpoint');
-        console.log(this.tomApiEndpoint);
-        this.tomApiEndpoint = response['data']['tomDemoApiUrl'];
-        console.log(this.tomApiEndpoint);
-      })
-      .catch(
-        error => {
-          console.log('error');
-          console.log(error);
-        }
-      );
+
+  created() {
+    console.log("App02.created: BEGIN");
+    // axios
+    //   .get('/static/urls.json')
+    //   .then(response => {
+    //     console.log("BEFORE assignment -- this.tomApiEndpoint: " + this.tomApiEndpoint);
+    //     this.tomApiEndpoint = response['data']['tomDemoApiUrl'];
+    //     console.log("AFTER assignment -- this.tomApiEndpoint: " + this.tomApiEndpoint);
+    //   })
+    //   .catch(
+    //     error => {
+    //       console.log('App020.created.axios.catch ERROR');
+    //       console.log(error);
+    //     }
+    //   );
+    this.tomApiEndpoint = 'http://tom-demo-dev.lco.gtn';
+
+    console.log("App02.created: END");
+  },
+  
+  methods: {
+    initializeDataEndpoint: function() {
+      this.tomApiEndpoint = 'http://tom-demo-dev.lco.gtn'; // TODO: Arrrrrgggggghhhhhh !!!!
+      console.log("initializeDataEndpoint to " + this.tomApiEndpoint)
+      return this.tomApiEndpoint + '/api/targets/';
+    },
+    onSuccessfulRetrieval: function(response) {
+      console.log("onSuccessfullRetrieval: BEGIN");
+      this.targets = response['data']['results'];
+      //console.log("targets: " + this.targets);
+      console.log("onSuccessfullRetrieval: END");
+      return response; // just like overridden method in super
+    },
   }
 }
 </script>
