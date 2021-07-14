@@ -9,25 +9,26 @@
 <script>
 import axios from 'axios';
 import { TTKMixin } from 'tom-toolkit-component-lib';
-// import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App02',
   components: {
-    // HelloWorld
   },
   mixins: [TTKMixin.getDataMixin],
 
   data() {
-    console.log("App02.data: BEGIN");
-    console.log(this.targets);
     return {
       targets: [],
     };
   },
 
   created() {
-    console.log("App02.created: BEGIN");
+    //console.log("App02.created: BEGIN");
+
+    // TODO: the tomApiEndpoint should NOT be hard-coded like it
+    // is here!! The problem is that the async axios call does
+    // not return a value before initializeDataEndpoint gets called.
+  
     // axios
     //   .get('/static/urls.json')
     //   .then(response => {
@@ -41,27 +42,21 @@ export default {
     //       console.log(error);
     //     }
     //   );
-    this.tomApiEndpoint = 'http://tom-demo-dev.lco.gtn';
 
-    console.log("App02.created: END");
+    //console.log("App02.created: END");
   },
   
   methods: {
+    // these methods override stubs in the getDataMixin
     initializeDataEndpoint: function() {
-      this.tomApiEndpoint = 'http://tom-demo-dev.lco.gtn'; // TODO: Arrrrrgggggghhhhhh !!!!
-      console.log("initializeDataEndpoint to " + this.tomApiEndpoint)
+      // TODO: don't hard-code the tomApiEndpoint; get it from static/urls.json !!
+      this.tomApiEndpoint = 'http://tom-demo-dev.lco.gtn';
       return this.tomApiEndpoint + '/api/targets/';
     },
     onSuccessfulRetrieval: function(response) {
-      console.log("onSuccessfulRetrieval: BEGIN");
+      // extract the target data from the reponse
       this.targets = response['data']['results'];
-
-      console.log("this.targets: ");
-      console.log(this.targets[0]['name']);
-      console.log(this.targets[1]['name']);
-
-      console.log("onSuccessfulRetrieval: END");
-      return response; // just like overridden method in super
+      return response; // like overridden method in getDataMixin
     },
   }
 }
