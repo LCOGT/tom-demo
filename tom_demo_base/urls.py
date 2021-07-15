@@ -30,9 +30,8 @@ urlpatterns = [
     # Vue health check urls
     path('vue_health_check/', TemplateView.as_view(template_name='vue_health_check.html'), name='vue_health_check'),
 
-    path('vue_app_01/', TemplateView.as_view(template_name='vue_app_01.html'), name='vue_app_01'),
-    path('vue_app_02/', TemplateView.as_view(template_name='vue_app_02.html'), name='vue_app_02'),
-
+    path("vue_app_01/", TemplateView.as_view(template_name="vue_app_01.html"), name="vue_app_01"),
+    path("target_list/", TemplateView.as_view(template_name="target_list.html"), name="target_list"),
 
     # TODO: should probably be removed
     path('django_plotly_dash/', include('django_plotly_dash.urls')),
