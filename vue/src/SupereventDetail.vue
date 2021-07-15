@@ -68,7 +68,7 @@ import axios from 'axios';
 import { AlertsTable } from '@/components';
 
 export default {
-    name: 'GravitationalWaveBanner',
+    name: 'SupereventDetail',
     components: {
         AlertsTable
     },
@@ -85,19 +85,29 @@ export default {
             superevent_data: {}
         }
     },
+    props: {
+        tomApiBaseUrl: {
+            type: String,
+            required: true
+        },
+        skipApiBaseUrl: {
+            type: String,
+            required: true
+        }
+    },
     mounted() {
         console.log('mounted');
+        console.log(this.tomApiBaseUrl);
+        console.log(this.skipApiBaseUrl);
         this.superevent_id = document.getElementById('superevent_id').textContent;
-        console.log(document.getElementById('superevent_id').textContext);
-        console.log(this.superevent_id)
         axios
-            .get('http://skip.dev.hop.scimma.org' + '/api/events/?identifier=' + this.superevent_id)
+            .get(this.skipApiBaseUrl + '/api/events/?identifier=' + this.superevent_id)
             .then(response => {
                 console.log(response);
                 console.log(response['data']['results'][0]);
                 this.superevent_data = response['data']['results'][0];
                 axios
-                    .get('http://skip.dev.hop.scimma.org' + '/api/events/' + response['data']['results'][0]['id'])
+                    .get(this.skipApiBaseUrl + '/api/events/' + response['data']['results'][0]['id'])
                     .then(alert_response => {
                         console.log(alert_response)
                         this.alerts = alert_response['data']['alerts'];

@@ -1,5 +1,6 @@
+import axios from 'axios';
 import Vue from 'vue'
-import App from './Superevent.vue'
+import SupereventDetail from './SupereventDetail.vue'
 import BootstrapVue from 'bootstrap-vue';
 import { TOMToolkitComponentLib } from 'tom-toolkit-component-lib';
 import 'bootstrap/dist/css/bootstrap.css'  // This line and the following is necessary to get bootstrap working
@@ -10,6 +11,20 @@ Vue.use(TOMToolkitComponentLib);
 
 Vue.config.productionTip = false
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+axios
+  .get('/static/urls.json')
+  .then(response => {
+    new Vue({
+      render: h => h(SupereventDetail, 
+        {
+          props: {
+            tomApiBaseUrl: response['data']['tomDemoApiUrl'],
+            skipApiBaseUrl: 'http://skip.dev.hop.scimma.org'
+          }
+        }
+      ),
+    }).$mount('#superevent-detail')
+  })
+  .catch(() => {
+    console.log('Error getting URL configuration');
+  });
