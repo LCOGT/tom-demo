@@ -1,6 +1,6 @@
 <template>
   <div id="target-list">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Vue logo" src="@/assets/logo.png">
     <ttk-target-table :targets="targets">
     </ttk-target-table>
   </div>
