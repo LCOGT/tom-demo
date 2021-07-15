@@ -15,8 +15,8 @@ const pages = {
         entry: './src/main.js',
         chunks: ['chunk-vendors']
     },
-    'vue_health_check_02': {
-        entry: './src/main_02.js',
+    'target_list': {
+        entry: './src/target_list.js',
         chunks: ['chunk-vendors']
     },
 }

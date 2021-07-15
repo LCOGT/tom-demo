@@ -1,6 +1,6 @@
-import Vue from 'vue'
-import App02 from './App02.vue'
 import axios from 'axios';
+import Vue from 'vue'
+import TargetList from '@/views/TargetList.vue'
 import BootstrapVue from 'bootstrap-vue';  // TODO: document all of this
 import { TOMToolkitComponentLib } from 'tom-toolkit-component-lib';
 import 'bootstrap/dist/css/bootstrap.css'  // This line and the following is necessary to get bootstrap working
@@ -11,6 +11,19 @@ Vue.use(TOMToolkitComponentLib);
 
 Vue.config.productionTip = false
 
-new Vue({
-  render: h => h(App02),
-}).$mount('#app')
+axios
+  .get('/static/urls.json')
+  .then(response => {
+    new Vue({
+      render: h => h(TargetList, 
+        {
+          props: {
+            tomApiBaseUrl: response['data']['tomDemoApiUrl'],
+          }
+        }
+      ),
+    }).$mount('#target-list')
+  })
+  .catch(() => {
+    console.log('Error getting URL configuration');
+  });
