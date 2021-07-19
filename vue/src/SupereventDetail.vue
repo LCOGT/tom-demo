@@ -1,54 +1,6 @@
 <template>
     <div>
-        <b-jumbotron id="superevent-banner" class="py-4 pl-3 text-white">
-            <b-row>
-                <b-col cols="2">
-                    <h1><span id="superevent_name">{{ superevent_id }}</span></h1>
-                </b-col>
-                <b-col cols="10">
-                    <b-row>
-                        <b-col>
-                            <h3><span>Update {{ superevent_data.event_attributes[0].sequence_number }}</span></h3>
-                        </b-col>
-                        <b-col>
-                            <h3><span>MassGap {{ superevent_data.event_attributes[0].attributes.prob_massgap }}</span></h3>
-                        </b-col>
-                        <b-col>
-                            <h3><span>NSBH {{ superevent_data.event_attributes[0].attributes.prob_nsbh }}</span></h3>
-                        </b-col>
-                        <b-col>
-                            <h3><span>90%: {{ superevent_data.event_attributes[0].attributes.area_90 }}</span></h3>
-                        </b-col>
-                        <b-col>
-                            <h3><span>{{ superevent_data.event_attributes[0].attributes.Instruments }}</span></h3>
-                        </b-col>
-                        <b-col>
-                            <h3><span>FAR {{ superevent_data.event_attributes[0].attributes.far }}</span></h3>
-                        </b-col>
-                    </b-row>
-                    <b-row>
-                        <b-col>
-                            <h3><span>BNS {{ superevent_data.event_attributes[0].attributes.prob_bns }}</span></h3>
-                        </b-col>
-                        <b-col>
-                            <h3><span>Terrestrial {{ superevent_data.event_attributes[0].attributes.prob_terres }}</span></h3>
-                        </b-col>
-                        <b-col>
-                            <h3><span>BBH {{ superevent_data.event_attributes[0].attributes.prob_bbh }}</span></h3>
-                        </b-col>
-                        <b-col>
-                            <h3><span>50%: {{ superevent_data.event_attributes[0].attributes.area_50 }}</span></h3>
-                        </b-col>
-                        <b-col>
-                            <h3><span>{{ superevent_data.event_attributes[0].attributes.unknown_field }}</span></h3>
-                        </b-col>
-                        <b-col>
-                            <h3><span>NS/Rem {{ superevent_data.event_attributes[0].attributes.prob_ns }}</span></h3>
-                        </b-col>
-                    </b-row>
-                </b-col>
-            </b-row>
-        </b-jumbotron>
+        <gravitational-wave-banner :supereventData="superevent_data" />
         <b-row>
             <b-col cols="6">
                 <alerts-table :alerts="alerts" :skipApiBaseUrl="skipApiBaseUrl"></alerts-table>
@@ -65,12 +17,13 @@
 
 <script>
 import axios from 'axios';
-import { AlertsTable } from '@/components';
+import { AlertsTable, GravitationalWaveBanner } from '@/components';
 
 export default {
     name: 'SupereventDetail',
     components: {
-        AlertsTable
+        AlertsTable,
+        GravitationalWaveBanner
     },
     data: function() {
         return {
@@ -126,14 +79,5 @@ export default {
 </script>
 
 <style scoped>
-#alerts-table {
-    height: 400px;
-}
-#superevent-banner {
-    width: 100%;
-    background-color: #06345c;
-}
-span {
-    color: white;
-}
+
 </style>
