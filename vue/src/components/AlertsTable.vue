@@ -7,7 +7,7 @@
         </b-row>
         <b-table
             id="alerts-table"
-            sticky-header
+            sticky-header="600px"
             hover
             head-variant="light"
             foot-clone
@@ -26,9 +26,9 @@
             <template #cell(identifier)="data">
                 <b-link :href="getAlertUrl(data.value)">{{ data.value }}</b-link>
             </template>
-            <!-- <template #cell(timestamp)="data">
-                {{ data.identifier }}
-            </template> -->
+            <template #cell(timestamp)="data">
+                {{ getAlertDate(data) }}
+            </template>
             <template #cell(from)="data">
                 {{ data.item.parsed_message.from }}
             </template>
@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 
 export default {
     name: 'AlertsTable',
@@ -79,6 +80,9 @@ export default {
         },
         getAlertsFromAlertData() {
             return this.alerts.filter(alert => alert.parsed_message.body !== undefined);
+        },
+        getAlertDate(alert) {
+            return moment(alert.timestamp).format('YYYY-MM-DD hh:mm:ss');
         }
     }
 }
