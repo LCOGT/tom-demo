@@ -1,10 +1,8 @@
 <template>
     <div>
-        <b-row>
-            <b-form-group>
-                <b-form-input id="filter-input" v-model="filter" type="search" placeholder="Search Alerts" />
-            </b-form-group>
-        </b-row>
+        <b-form-group>
+            <b-form-input id="filter-input" v-model="filter" type="search" placeholder="Search Alerts" />
+        </b-form-group>
         <b-table
             id="alerts-table"
             sticky-header="600px"
@@ -24,6 +22,9 @@
                     <b-icon-plus-square />
                 </b-link>
             </template>
+            <template #row-details="data">
+                <span>{{ data.item.parsed_message.body }}</span>
+            </template>
             <template #cell(identifier)="data">
                 <b-link :href="getAlertUrl(data.value)">{{ data.value }}</b-link>
             </template>
@@ -35,12 +36,6 @@
             </template>
             <template #cell(subject)="data">
                 {{ data.item.parsed_message.subject }}
-            </template>
-            <template #foot()="data">
-                <span>{{ data.value }}</span>
-            </template>
-            <template #row-details="data">
-                <span>{{ data.item.parsed_message.body }}</span>
             </template>
         </b-table>
     </div>
@@ -74,6 +69,9 @@ export default {
             type: String,
             required: true
         }
+    },
+    mounted() {
+        console.log(this.alerts);
     },
     methods: {
         getAlertUrl(alert) {
