@@ -34,7 +34,7 @@ export default {
                 { 'key': 'from' },
                 { 'key': 'subject' }
             ],
-            superevent_id: undefined,
+            superevent_identifier: undefined,
             superevent_data: {}
         }
     },
@@ -49,29 +49,26 @@ export default {
         }
     },
     mounted() {
-        console.log('mounted');
-        this.superevent_id = document.getElementById('superevent_id').textContent;
+        console.log('mounted SupereventDetail.vue');
+        this.superevent_identifier = document.getElementById('superevent_id').textContent;
         axios
-            .get(this.skipApiBaseUrl + '/api/events/?identifier=' + this.superevent_id)
+            .get(`${this.skipApiBaseUrl}/api/events/?identifier=${this.superevent_identifier}`)
             .then(response => {
-                console.log(response);
-                console.log(response['data']['results'][0]);
                 this.superevent_data = response['data']['results'][0];
                 axios
-                    .get(this.skipApiBaseUrl + '/api/events/' + response['data']['results'][0]['id'])
+                    .get(`${this.skipApiBaseUrl}/api/events/${response['data']['results'][0]['id']}`)
                     .then(alert_response => {
-                        console.log(alert_response)
                         this.alerts = alert_response['data']['alerts'];
                     })
                     .catch(
                         error => {
-                            console.log(error);
+                            console.log(`Error getting alerts for superevent ${this.superevent_identifier}: ${error}`);
                         }        
                     )
             })
             .catch(
                 error => {
-                    console.log(error);
+                    console.log(`Error getting details for superevent ${this.superevent_identifier}: ${error}`);
                 }
             )
     }

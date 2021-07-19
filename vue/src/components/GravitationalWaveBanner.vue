@@ -61,10 +61,6 @@ export default {
             required: true
         }
     },
-    mounted() {
-        console.log('mounted GWB');
-        console.log(this.supereventData);
-    }
 }
 </script>
 

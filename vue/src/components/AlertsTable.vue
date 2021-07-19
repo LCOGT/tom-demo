@@ -73,16 +73,12 @@ export default {
             required: true
         }
     },
-    created() {
-        console.log('alerts table');
-    },
     methods: {
         getAlertUrl(alert) {
-            return this.skipApiBaseUrl + '/api/v2/alerts/' + alert;
+            return `${this.skipApiBaseUrl}/api/v2/alerts/${alert}`;
         },
         getAlertsFromAlertData() {
-            console.log(this.alerts);
-            return this.alerts;
+            return this.alerts.filter(alert => alert.parsed_message.body !== undefined);
         }
     }
 }
