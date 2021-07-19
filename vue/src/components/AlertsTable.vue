@@ -14,13 +14,14 @@
             :filter="filter"
             :items="getAlertsFromAlertData()"
             :fields="alert_fields"
+            @row-clicked="showRowDetails"
         >
             <template #cell(show_details)="data">
                 <b-link v-if="data.detailsShowing" @click="data.toggleDetails">
-                    -
+                    <b-icon-dash-square />
                 </b-link>
                 <b-link v-else @click="data.toggleDetails">
-                    +
+                    <b-icon-plus-square />
                 </b-link>
             </template>
             <template #cell(identifier)="data">
@@ -83,6 +84,9 @@ export default {
         },
         getAlertDate(alert) {
             return moment(alert.timestamp).format('YYYY-MM-DD hh:mm:ss');
+        },
+        showRowDetails(item, index, event) {
+            item._showDetails = !item._showDetails;
         }
     }
 }

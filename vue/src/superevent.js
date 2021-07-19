@@ -1,12 +1,13 @@
 import axios from 'axios';
 import Vue from 'vue'
 import SupereventDetail from './SupereventDetail.vue'
-import BootstrapVue from 'bootstrap-vue';
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
 import { TOMToolkitComponentLib } from 'tom-toolkit-component-lib';
 import 'bootstrap/dist/css/bootstrap.css'  // This line and the following is necessary to get bootstrap working
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(BootstrapVue);  // TODO: document the need to do this
+Vue.use(BootstrapVueIcons);  // TODO: document icons as well
 Vue.use(TOMToolkitComponentLib);
 
 Vue.config.productionTip = false
