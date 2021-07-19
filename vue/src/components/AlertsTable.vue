@@ -1,7 +1,11 @@
 <template>
     <b-table id="alerts-table" sticky-header hover head-variant="light" foot-clone :items="getAlertsFromAlertData()" :fields="alert_fields">
+        <!-- <template #cell(show_details)="data">
+            <i class="fa fa-arrow-right"/><span>{{ data }}</span>
+        </template> -->
         <template #cell(identifier)="data">
-            <a href="{{ getAlertUrl(data.value) }}">{{ data.value }}</a>
+            <b-link :href="getAlertUrl(data.value)">{{ data.value }}</b-link>
+            <!-- <a href="{{ getAlertUrl(data.value) }}">{{ data.value }}</a> -->
         </template>
         <!-- <template #cell(timestamp)="data">
             {{ data.identifier }}
@@ -15,6 +19,8 @@
         <template #foot()="data">
             <span>{{ data.value }}</span>
         </template>
+        <template #row-details>
+        </template>
     </b-table>
 </template>
 
@@ -27,6 +33,7 @@ export default {
         return {
             alert_data: [],
             alert_fields: [
+                { 'key': 'show_details' },
                 { 'key': 'identifier' },
                 { 'key': 'timestamp', 'sortable': true },
                 { 'key': 'from' },
@@ -38,6 +45,10 @@ export default {
         alerts: {
             type: Array,
             required: true
+        },
+        skipApiBaseUrl: {
+            type: String,
+            required: true
         }
     },
     created() {
@@ -45,8 +56,9 @@ export default {
     },
     methods: {
         getAlertUrl(alert) {
+            console.log('getAlertUrl');
             console.log(alert);
-            return ''
+            return this.skipApiBaseUrl + '/api/v2/alerts/' + alert;
         },
         getAlertsFromAlertData() {
             console.log(this.alerts);

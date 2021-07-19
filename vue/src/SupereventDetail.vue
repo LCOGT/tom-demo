@@ -51,7 +51,7 @@
         </b-jumbotron>
         <b-row>
             <b-col cols="6">
-                <alerts-table :alerts="alerts"></alerts-table>
+                <alerts-table :alerts="alerts" :skipApiBaseUrl="skipApiBaseUrl"></alerts-table>
             </b-col>
             <b-col cols="3">
                 <b-img src="https://gracedb.ligo.org/api/superevents/S190426c/files/bayestar.volume.png" fluid></b-img>
@@ -97,8 +97,6 @@ export default {
     },
     mounted() {
         console.log('mounted');
-        console.log(this.tomApiBaseUrl);
-        console.log(this.skipApiBaseUrl);
         this.superevent_id = document.getElementById('superevent_id').textContent;
         axios
             .get(this.skipApiBaseUrl + '/api/events/?identifier=' + this.superevent_id)
