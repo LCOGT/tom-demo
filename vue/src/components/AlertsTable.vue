@@ -16,10 +16,10 @@
         >
             <template #cell(show_details)="data">
                 <b-link v-if="data.detailsShowing" @click="data.toggleDetails">
-                    <b-icon-dash-square />
+                    <b-icon-caret-down />
                 </b-link>
                 <b-link v-else @click="data.toggleDetails">
-                    <b-icon-plus-square />
+                    <b-icon-caret-right />
                 </b-link>
             </template>
             <template #row-details="data">
