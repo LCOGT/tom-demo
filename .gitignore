@@ -60,6 +60,7 @@ coverage.xml
 local_settings.py
 db.sqlite3
 _static/
+*.pg_dump
 
 # Flask stuff:
 instance/
