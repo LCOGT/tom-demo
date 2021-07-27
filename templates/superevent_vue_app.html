@@ -1,0 +1,16 @@
+{% extends 'tom_common/base.html' %}
+{% load render_bundle from webpack_loader %}
+
+
+{% block content %}
+
+    <div id="superevent_id" style="display: none">{{ superevent_id }}</div>
+
+    <div id="superevent-detail">
+        <app></app>
+    </div>
+
+    {% render_bundle 'chunk-vendors' %}
+    {% render_bundle 'superevent_vue_app' %}
+
+{% endblock %}

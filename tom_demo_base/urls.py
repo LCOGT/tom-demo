@@ -17,15 +17,18 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
 from django.views.generic import TemplateView
 
+from tom_demo.views import SupereventView
+
 
 urlpatterns = [
     path('alerts/', include('tom_alerts_dash.urls', namespace='tom_alerts_dash')),
+    path('superevents/<int:pk>/', SupereventView.as_view(), name='superevent_vue_app'),
     path('superevents/', include('tom_superevents.urls')),
     path('observations/', include('tom_demo.urls')),
     path('', include('tom_common.urls')),
 
     # Vue health check urls
-    path('vue_health_check/', TemplateView.as_view(template_name="vue_health_check.html"), name="vue_health_check"),
+    path('vue_health_check/', TemplateView.as_view(template_name='vue_health_check.html'), name='vue_health_check'),
 
     path("vue_app_01/", TemplateView.as_view(template_name="vue_app_01.html"), name="vue_app_01"),
     path("target_list/", TemplateView.as_view(template_name="target_list.html"), name="target_list"),

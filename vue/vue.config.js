@@ -19,6 +19,10 @@ const pages = {
         entry: './src/target_list.js',
         chunks: ['chunk-vendors']
     },
+    'superevent_vue_app': {
+        entry: './src/superevent.js',
+        chunks: ['chunk-vendors']
+    }
 }
 
 module.exports = {
