@@ -12,6 +12,7 @@
                 <b-img src="https://gracedb.ligo.org/api/superevents/S190426c/files/bayestar.png" fluid></b-img>
             </b-col>
         </b-row>
+        <candidate-form />
         <b-row>
             <b-col cols="6">
                 <h3>Viable Candidates</h3>
@@ -21,20 +22,20 @@
                 <h3>Retired Candidates</h3>
                 <target-list :tomApiBaseUrl="tomApiBaseUrl"></target-list>
             </b-col>
-
         </b-row>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
-import { AlertsTable, GravitationalWaveBanner } from '@/components';
+import { AlertsTable, CandidateForm, GravitationalWaveBanner } from '@/components';
 import TargetList from './views/TargetList.vue';
 
 export default {
     name: 'SupereventDetail',
     components: {
         AlertsTable,
+        CandidateForm,
         GravitationalWaveBanner,
         TargetList,
     },
