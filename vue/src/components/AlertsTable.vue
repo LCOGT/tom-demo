@@ -14,6 +14,11 @@
             :fields="alert_fields"
             @row-clicked="showRowDetails"
         >
+            <template #cell(selected)="row">
+                <div v-if="row.item.right_ascension !== null && row.item.declination !== null">
+                    <b-form-checkbox @change="$emit('selected-alert', row, $event)" />
+                </div>
+            </template>
             <template #cell(show_details)="data">
                 <b-link v-if="data.detailsShowing" @click="data.toggleDetails">
                     <b-icon-caret-down />
@@ -23,7 +28,7 @@
                 </b-link>
             </template>
             <template #row-details="data">
-                <span>{{ data.item.parsed_message.body }}</span>
+                <span v-if="data.item.parsed_message.body !== undefined">{{ data.item.parsed_message.body }}</span>
             </template>
             <template #cell(identifier)="data">
                 <b-link :href="getAlertUrl(data.value)">{{ data.value }}</b-link>
@@ -51,6 +56,7 @@ export default {
         return {
             alert_data: [],
             alert_fields: [
+                { 'key': 'selected', 'label': '' },
                 { 'key': 'show_details', 'label': '' },
                 { 'key': 'identifier' },
                 { 'key': 'timestamp', 'sortable': true },
@@ -78,9 +84,9 @@ export default {
             return `${this.skipApiBaseUrl}/api/v2/alerts/${alert}`;
         },
         getAlertsFromAlertData() {
-            return this.alerts.filter(alert => alert.parsed_message.body !== undefined);
+            return this.alerts.filter(alert => alert.parsed_message.title !== "GCN/LVC NOTICE");
         },
-        getAlertDate(alert) {
+        getAlertDate(alert) {  // TODO: fix this
             return moment(alert.timestamp).format('YYYY-MM-DD hh:mm:ss');
         },
         showRowDetails(item, index, event) {
