@@ -1,5 +1,7 @@
 import axios from 'axios';
 import Vue from 'vue'
+import Vuex from 'vuex';
+import storePlugin from "./vuex/vuex_store_as_plugin";
 import SupereventDetail from './SupereventDetail.vue'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
 import { TOMToolkitComponentLib } from 'tom-toolkit-component-lib';
@@ -9,6 +11,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue);  // TODO: document the need to do this
 Vue.use(BootstrapVueIcons);  // TODO: document icons as well
 Vue.use(TOMToolkitComponentLib);
+Vue.use(Vuex);
+Vue.use(storePlugin);
 
 Vue.config.productionTip = false
 

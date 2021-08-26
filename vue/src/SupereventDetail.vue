@@ -12,7 +12,7 @@
                 <b-img src="https://gracedb.ligo.org/api/superevents/S190426c/files/bayestar.png" fluid></b-img>
             </b-col>
         </b-row>
-        <candidate-form />
+        <add-candidate-modal :supereventId="this.superevent_id" />
         <b-row>
             <b-col cols="6">
                 <h3>Viable Candidates</h3>
@@ -28,14 +28,14 @@
 
 <script>
 import axios from 'axios';
-import { AlertsTable, CandidateForm, GravitationalWaveBanner } from '@/components';
+import { AddCandidateModal, AlertsTable, GravitationalWaveBanner } from '@/components';
 import TargetList from './views/TargetList.vue';
 
 export default {
     name: 'SupereventDetail',
     components: {
+        AddCandidateModal,
         AlertsTable,
-        CandidateForm,
         GravitationalWaveBanner,
         TargetList,
     },
@@ -64,11 +64,14 @@ export default {
     },
     mounted() {
         console.log('mounted SupereventDetail.vue');
-        this.superevent_identifier = document.getElementById('superevent_id').textContent;
+        this.superevent_id = window.location.pathname.split('/').filter(x => x)[1];  // primary key of superevent record
+        this.superevent_identifier = document.getElementById('superevent_identifier').textContent;  // identifier of superevent record
+        console.log(this.superevent_identifier);
         axios
             .get(`${this.skipApiBaseUrl}/api/events/?identifier=${this.superevent_identifier}`)
             .then(response => {
                 this.superevent_data = response['data']['results'][0];
+                console.log(this.superevent_data)
                 axios
                     .get(`${this.skipApiBaseUrl}/api/events/${response['data']['results'][0]['id']}`)
                     .then(alert_response => {
