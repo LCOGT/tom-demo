@@ -25,7 +25,6 @@ export default {
         return {
             targetFields: [
                 { 'key': 'selected', 'label': '' },
-                { 'key': 'id', 'sortable': true },
                 { 'key': 'name', 'sortable': true },
                 { 'key': 'ra' },
                 { 'key': 'dec' },

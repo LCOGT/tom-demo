@@ -1,16 +1,10 @@
 <template>
     <div>
-        <b-row>
-            <b-col>
-                <b-button @click="onCreateFromAlerts" variant="outline-primary">Add Candidates from Selected Alerts</b-button>
-            </b-col>
-            <b-col>
-                <b-button v-b-modal.candidate-form-modal variant="outline-primary">Add Candidate from Existing Target</b-button>
-            </b-col>
-        </b-row>
+        <b-button class="float-right mx-1" @click="onCreateFromAlerts" variant="outline-primary">Add Candidates from Alerts</b-button>
+        <b-button class="float-right" v-b-modal.candidate-form-modal variant="outline-primary">Add Candidate from Existing Target</b-button>
         <b-modal id="candidate-form-modal" size="xl" title="Add Event Candidate">
             <b-container>
-                <b-form @submit="onCreateCandidate">
+                <b-form @submit="onCreateCandidates">
                     <b-form-input id="target-name-input" v-model="form.name" placeholder="Target Name" @input="targetSearch" required />
                     <b-form-input id="target-ra-input" v-model="form.ra" placeholder="Right Ascension" @input="targetSearch" required />
                     <b-form-input id="target-dec-input" v-model="form.dec" placeholder="Declination" @input="targetSearch" required />
@@ -19,12 +13,8 @@
                 <selectable-target-table :targets="matches" @selected-target="onSelectTarget" />
             </b-container>
             <template #modal-footer="{ cancel }">
-                <div>
-                    <b-button class="float-right" @click="onCreateCandidates" variant="primary">Add Candidates</b-button>
-                </div>
-                <div>
-                    <b-button class="float-right" @click="cancel()">Cancel</b-button>
-                </div>
+                <b-button class="float-right" @click="onCreateCandidates" variant="primary">Add Candidates</b-button>
+                <b-button class="float-right" @click="cancel()">Cancel</b-button>
             </template>
         </b-modal>
     </div>
@@ -40,14 +30,14 @@
             SelectableTargetTable
         },
         props: {
-            tomApiBaseUrl: {
-                type: String,
-                required: true
-            },
             supereventId: {
                 type: Number,
                 required: true
-            }
+            },
+            existingEventCandidates: {
+                type: Array,
+                required: false
+            },
         },
         data() {
             return {
@@ -64,9 +54,10 @@
         mounted() {
             console.log('mounted add candidate modal');
             axios
-                .get(`${this.tomApiBaseUrl}/api/targets/`)
+                .get(`${this.$store.state.tomApiBaseUrl}/api/targets/`)
                 .then(response => {
                     this.matches = response['data']['results'];
+                    console.log(`re-mounted: ${this.matches}`);
                 })
                 .catch(error => {
                         console.log(`Unable to retrieve targets: ${error}.`);
@@ -75,13 +66,14 @@
         },
         methods: {
             targetSearch() {
+                console.log('targetSearch');
                 // TODO: filter out targets that are already associated with this superevent
                 let params = `name=${this.form.name}`;
                 if (this.form.ra !== '' && this.form.dec !== '') {  // TODO: make this check more robust
                     params += `&cone_search=${this.form.ra},${this.form.dec},5`;
                 }
                 axios
-                    .get(`${this.tomApiBaseUrl}/api/targets/?${params}`)
+                    .get(`${this.$store.state.tomApiBaseUrl}/api/targets/?${params}`)
                     .then(response => {
                         this.matches = response['data']['results'];
                     })
@@ -89,13 +81,13 @@
                         console.log(`Unable to retrieve any matching targets: ${error}.`);
                     })
             },
-            onCreateCandidates() {
+            onCreateCandidates() {  // TODO: require >1 candidate to select
                 let event_candidate_data = []
                 this.selectedTargets.forEach(target => event_candidate_data.push(
                     {superevent: this.supereventId, target: target}
                 ));
                 axios
-                    .post(`${this.tomApiBaseUrl}/api/eventcandidates/`, event_candidate_data)
+                    .post(`${this.$store.state.tomApiBaseUrl}/api/eventcandidates/`, event_candidate_data)
                     .then(response => {
                         console.log(`Successfully created event candidates: ${response}`)
                         this.$bvModal.hide('candidate-form-modal');
@@ -104,6 +96,7 @@
                     .catch(error => {
                         console.log(`Unable to create event candidates: ${error}`)
                     })
+                this.selectedTargets = [];
             },
             onCreateFromAlerts() {
                 // let alert_candidate_data = []
