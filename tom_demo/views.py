@@ -16,5 +16,5 @@ class SupereventView(TemplateView):
         context = super().get_context_data(**kwargs)
         superevent = Superevent.objects.get(pk=kwargs['pk'])
         print(superevent)
-        context['superevent_id'] = superevent.superevent_id
+        context['superevent_identifier'] = superevent.superevent_id
         return context

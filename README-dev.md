@@ -30,7 +30,6 @@ some data in the database that you just created.
 ```bash
 # make sure you are in your virtual environment, then
 ./manage.py migrate           # create the tables
-./manage.py seeddata          # add some targets and users
 ./manage.py collectstatic     # gather up the static files for serving
 ```
 #

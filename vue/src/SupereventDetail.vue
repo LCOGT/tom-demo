@@ -1,9 +1,15 @@
 <template>
     <div>
+        <div>
+            <b-alert v-for="message in messages" :key="message" show>
+                {{ message }}
+            </b-alert>
+            <b-alert :show="showCreatedCandidatesMessage" dismissable>{{ this.createdCandidatesMessage }}</b-alert>
+        </div>
         <gravitational-wave-banner :supereventData="superevent_data" />
         <b-row>
             <b-col cols="6">
-                <alerts-table :alerts="alerts" :skipApiBaseUrl="skipApiBaseUrl"></alerts-table>
+                <alerts-table :alerts="alerts" @selected-alert="onSelectAlert"></alerts-table>
             </b-col>
             <b-col cols="3">
                 <b-img src="https://gracedb.ligo.org/api/superevents/S190426c/files/bayestar.volume.png" fluid></b-img>
@@ -12,30 +18,40 @@
                 <b-img src="https://gracedb.ligo.org/api/superevents/S190426c/files/bayestar.png" fluid></b-img>
             </b-col>
         </b-row>
-        <b-row>
+        <b-row class="my-3">
+            <b-col class="col-md-auto">
+                <add-candidate-modal :supereventId="this.superevent_id" :existingEventCandidates="this.eventCandidates" @created-candidates="onCreatedCandidates" />
+            </b-col>
+            <b-col class="col-md-auto">
+                <b-button class="mx-1 float-left" @click="onCreateFromAlerts" variant="outline-primary">Add Candidates from Alerts</b-button>
+            </b-col>
+        </b-row>
+        <b-row class="my-3">
             <b-col cols="6">
                 <h3>Viable Candidates</h3>
-                <target-list :tomApiBaseUrl="tomApiBaseUrl"></target-list>
+                <selectable-target-table :targets="this.eventCandidates" />
             </b-col>
             <b-col cols="6">
                 <h3>Retired Candidates</h3>
-                <target-list :tomApiBaseUrl="tomApiBaseUrl"></target-list>
+                <target-list :tomApiBaseUrl="this.$store.state.tomApiBaseUrl" />
             </b-col>
-
         </b-row>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
-import { AlertsTable, GravitationalWaveBanner } from '@/components';
+import _ from 'lodash';
+import { AddCandidateModal, AlertsTable, GravitationalWaveBanner, SelectableTargetTable } from '@/components';
 import TargetList from './views/TargetList.vue';
 
 export default {
     name: 'SupereventDetail',
     components: {
+        AddCandidateModal,
         AlertsTable,
         GravitationalWaveBanner,
+        SelectableTargetTable,
         TargetList,
     },
     data: function() {
@@ -47,43 +63,97 @@ export default {
                 { 'key': 'from' },
                 { 'key': 'subject' }
             ],
+            messages: [],
+            eventCandidates: [],
+            selectedAlerts: [],
             superevent_identifier: undefined,
             superevent_data: {}
         }
     },
     props: {
-        tomApiBaseUrl: {
-            type: String,
-            required: true
-        },
-        skipApiBaseUrl: {
-            type: String,
-            required: true
-        }
     },
     mounted() {
         console.log('mounted SupereventDetail.vue');
-        this.superevent_identifier = document.getElementById('superevent_id').textContent;
-        axios
-            .get(`${this.skipApiBaseUrl}/api/events/?identifier=${this.superevent_identifier}`)
-            .then(response => {
-                this.superevent_data = response['data']['results'][0];
-                axios
-                    .get(`${this.skipApiBaseUrl}/api/events/${response['data']['results'][0]['id']}`)
-                    .then(alert_response => {
-                        this.alerts = alert_response['data']['alerts'];
-                    })
-                    .catch(
-                        error => {
+        this.superevent_id = window.location.pathname.split('/').filter(x => x)[1];  // primary key of superevent record
+        this.superevent_identifier = document.getElementById('superevent_identifier').textContent;  // identifier of superevent record
+        this.getSupereventData();
+        this.getGraceDBData();
+    },
+    methods: {
+        getSupereventData() {
+            let oldEventCandidates = this.eventCandidates.slice();
+            this.eventCandidates = [];
+            axios
+                .get(`${this.$store.state.tomApiBaseUrl}/api/superevents/${this.superevent_id}`)
+                .then(response => {
+                    response['data']['event_candidates'].forEach(event_candidate => {
+                        this.eventCandidates.push(event_candidate['target']);
+                    });
+                })
+                .catch(error => {
+                    console.log(`Error getting database data for ${this.superevent_id}: ${error}`);
+                    this.eventCandidates = oldEventCandidates;
+                })
+        },
+        getGraceDBData() {
+            axios
+                .get(`${this.$store.state.skipApiBaseUrl}/api/events/?identifier=${this.superevent_identifier}`)
+                .then(response => {
+                    this.superevent_data = response['data']['results'][0];
+                    console.log(this.superevent_data)
+                    axios
+                        .get(`${this.$store.state.skipApiBaseUrl}/api/events/${response['data']['results'][0]['id']}`, this.$store.state.skipAxiosConfig)
+                        .then(alert_response => {
+                            this.alerts = alert_response['data']['alerts'];
+                        })
+                        .catch(error => {
                             console.log(`Error getting alerts for superevent ${this.superevent_identifier}: ${error}`);
-                        }        
-                    )
-            })
-            .catch(
-                error => {
+                        })
+                })
+                .catch(error => {
                     console.log(`Error getting details for superevent ${this.superevent_identifier}: ${error}`);
-                }
-            )
+                })
+        },
+        onCreateFromAlerts() {  // WIP - create targets from alerts and create event candidates from new targets
+            console.log('onCreateFromAlerts');
+            let alert_candidate_data = []
+            console.log(this.selectedAlerts);
+            this.selectedAlerts.forEach(alert => {
+                let target_data = {
+                    name: alert['identifier'],
+                    ra: alert['right_ascension'],
+                    dec: alert['declination'],
+                    type: 'SIDEREAL',
+                    aliases: [],
+                    targetextra_set: [],
+                    groups: [{id: '1'}]
+                };
+                axios
+                    .post(`${this.$store.state.tomApiBaseUrl}/api/targets/`, target_data, this.$store.state.tomAxiosConfig)
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error.response);
+                        console.log(`Unable to create target from ${alert}.`)
+                    });
+            });
+        },
+        onCreatedCandidates(count) {  // TODO: get event candidates again to live update the page
+            this.messages.push(`Successfully added ${count} candidates.`);
+            this.getSupereventData();
+        },
+        onSelectAlert(row, event) {  // TODO: move to a utils.js
+            if (event === true) {
+                // add target to list
+                if (!_.includes(this.selectedAlerts, row.item)) this.selectedAlerts.push(row.item);
+            } else {
+                // remove target from list
+                this.selectedAlerts = this.selectedAlerts.filter(function(value){
+                    return value !== row.item;
+                });
+            }
+        }
     }
 }
 </script>
