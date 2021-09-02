@@ -41,7 +41,6 @@
 
 <script>
 import axios from 'axios';
-import skipAxios from '@/axiosConfig.js';
 import _ from 'lodash';
 import { AddCandidateModal, AlertsTable, GravitationalWaveBanner, SelectableTargetTable } from '@/components';
 import TargetList from './views/TargetList.vue';
