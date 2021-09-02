@@ -1,12 +1,15 @@
 <template>
     <div>
         <div>
+            <b-alert v-for="message in messages" :key="message" show>
+                {{ message }}
+            </b-alert>
             <b-alert :show="showCreatedCandidatesMessage" dismissable>{{ this.createdCandidatesMessage }}</b-alert>
         </div>
         <gravitational-wave-banner :supereventData="superevent_data" />
         <b-row>
             <b-col cols="6">
-                <alerts-table :alerts="alerts"></alerts-table>
+                <alerts-table :alerts="alerts" @selected-alert="onSelectAlert"></alerts-table>
             </b-col>
             <b-col cols="3">
                 <b-img src="https://gracedb.ligo.org/api/superevents/S190426c/files/bayestar.volume.png" fluid></b-img>
@@ -16,7 +19,12 @@
             </b-col>
         </b-row>
         <b-row class="my-3">
-            <add-candidate-modal :supereventId="this.superevent_id" :existingEventCandidates="this.eventCandidates" @created-candidates="onCreatedCandidates" />
+            <b-col class="col-md-auto">
+                <add-candidate-modal :supereventId="this.superevent_id" :existingEventCandidates="this.eventCandidates" @created-candidates="onCreatedCandidates" />
+            </b-col>
+            <b-col class="col-md-auto">
+                <b-button class="mx-1 float-left" @click="onCreateFromAlerts" variant="outline-primary">Add Candidates from Alerts</b-button>
+            </b-col>
         </b-row>
         <b-row class="my-3">
             <b-col cols="6">
@@ -33,6 +41,8 @@
 
 <script>
 import axios from 'axios';
+import skipAxios from '@/axiosConfig.js';
+import _ from 'lodash';
 import { AddCandidateModal, AlertsTable, GravitationalWaveBanner, SelectableTargetTable } from '@/components';
 import TargetList from './views/TargetList.vue';
 
@@ -54,9 +64,9 @@ export default {
                 { 'key': 'from' },
                 { 'key': 'subject' }
             ],
-            createdCandidatesMessage: '',
+            messages: [],
             eventCandidates: [],
-            showCreatedCandidatesMessage: false,
+            selectedAlerts: [],
             superevent_identifier: undefined,
             superevent_data: {}
         }
@@ -80,7 +90,6 @@ export default {
                     response['data']['event_candidates'].forEach(event_candidate => {
                         this.eventCandidates.push(event_candidate['target']);
                     });
-                    console.log(this.eventCandidates);
                 })
                 .catch(error => {
                     console.log(`Error getting database data for ${this.superevent_id}: ${error}`);
@@ -94,7 +103,7 @@ export default {
                     this.superevent_data = response['data']['results'][0];
                     console.log(this.superevent_data)
                     axios
-                        .get(`${this.$store.state.skipApiBaseUrl}/api/events/${response['data']['results'][0]['id']}`)
+                        .get(`${this.$store.state.skipApiBaseUrl}/api/events/${response['data']['results'][0]['id']}`, this.$store.state.skipAxiosConfig)
                         .then(alert_response => {
                             this.alerts = alert_response['data']['alerts'];
                         })
@@ -106,10 +115,45 @@ export default {
                     console.log(`Error getting details for superevent ${this.superevent_identifier}: ${error}`);
                 })
         },
+        onCreateFromAlerts() {  // WIP - create targets from alerts and create event candidates from new targets
+            console.log('onCreateFromAlerts');
+            let alert_candidate_data = []
+            console.log(this.selectedAlerts);
+            this.selectedAlerts.forEach(alert => {
+                let target_data = {
+                    name: alert['identifier'],
+                    ra: alert['right_ascension'],
+                    dec: alert['declination'],
+                    type: 'SIDEREAL',
+                    aliases: [],
+                    targetextra_set: [],
+                    groups: [{id: '1'}]
+                };
+                axios
+                    .post(`${this.$store.state.tomApiBaseUrl}/api/targets/`, target_data, this.$store.state.tomAxiosConfig)
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error.response);
+                        console.log(`Unable to create target from ${alert}.`)
+                    });
+            });
+        },
         onCreatedCandidates(count) {  // TODO: get event candidates again to live update the page
-            this.showCreatedCandidatesMessage = true;
-            this.createdCandidatesMessage = `Successfully added ${count} candidates.`;
+            this.messages.push(`Successfully added ${count} candidates.`);
             this.getSupereventData();
+        },
+        onSelectAlert(row, event) {  // TODO: move to a utils.js
+            if (event === true) {
+                // add target to list
+                if (!_.includes(this.selectedAlerts, row.item)) this.selectedAlerts.push(row.item);
+            } else {
+                // remove target from list
+                this.selectedAlerts = this.selectedAlerts.filter(function(value){
+                    return value !== row.item;
+                });
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Vue from 'vue'
 import Vuex from 'vuex';
-import store from "./vuex/vuex_store_as_plugin";
+import store from './vuex/vuex_store_as_plugin';
 import SupereventDetail from './SupereventDetail.vue'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
 import { TOMToolkitComponentLib } from 'tom-toolkit-component-lib';
@@ -16,11 +16,17 @@ Vue.use(store);
 
 Vue.config.productionTip = false
 
+// axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+// axios.defaults.xsrfCookieName = 'csrftoken';
+// axios.defaults.withCredentials = true;
+
 axios
   .get('/static/urls.json')
   .then(response => {
-    Vue.prototype.$store.commit('setTomApiBaseUrl', response['data']['tomDemoApiUrl']);  // TODO: figure out how this worked
-    Vue.prototype.$store.commit('setSkipApiBaseUrl', 'http://skip.dev.hop.scimma.org');  // TODO: figure out how this worked
+    Vue.prototype.$store.commit('setTomApiBaseUrl', response['data']['tomDemoApiUrl']);
+    Vue.prototype.$store.commit('setTomAxiosConfig', {xsrfHeaderName: 'x-csrftoken', xsrfCookieName: 'csrftoken', withCredentials: true});
+    Vue.prototype.$store.commit('setSkipApiBaseUrl', 'http://skip.dev.hop.scimma.org');
+    Vue.prototype.$store.commit('setSkipAxiosConfig', {withCredentials: false});
     new Vue({
       render: h => h(SupereventDetail, {}),
     }).$mount('#superevent-detail')
