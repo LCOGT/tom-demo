@@ -41,7 +41,7 @@
             </template>
             <template #cell(subject)="data">
                 <span v-if="data.item.parsed_message.subject !== undefined">{{ data.item.parsed_message.subject }}</span>
-                <span v-if="data.item.right_ascension !== undefined && data.item.declination !== undefined">
+                <span v-else-if="data.item.right_ascension !== undefined && data.item.declination !== undefined">
                     Right Ascension: {{ data.item.right_ascension_sexagesimal }}<br>
                     Declination: {{ data.item.declination_sexagesimal }}
                 </span>

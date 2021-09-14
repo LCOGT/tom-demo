@@ -15,9 +15,17 @@
                             <b-form-input id="target-dec-input" v-model="form.dec" placeholder="Declination" @input="targetSearch" required />
                         </b-col>
                     </b-form-row>
+                    <hr />
+                    <selectable-target-table :targets="matches" @selected-target="onSelectTarget" />
+                    <hr />
+                    <!-- <b-form-row>
+                        <b-form-checkbox-group>
+                            <b-form-checkbox v-for="group in userGroups" value=group>
+
+                            </b-form-checkbox>
+                        </b-form-checkbox-group>
+                    </b-form-row> -->
                 </b-form>
-                <hr />
-                <selectable-target-table :targets="matches" @selected-target="onSelectTarget" />
             </b-container>
             <template #modal-footer="{ cancel }">
                 <b-button class="float-right" @click="onCreateCandidates" variant="primary">Add Candidates</b-button>
@@ -59,6 +67,16 @@
             }
         },
         mounted() {
+            axios
+                .get(`${this.$store.state.tomApiBaseUrl}/api/groups/`, this.$store.state.tomAxiosConfig)
+                .then(response => {
+                    console.log('groups');
+                    console.log(response);
+                    this.userGroups = response['data']['results'];
+                })
+                .catch(error => {
+                    console.log(`Unable to retrieve groups: ${error}.`)
+                });
             axios  // Get all public targets in TOM
                 .get(`${this.$store.state.tomApiBaseUrl}/api/targets/`, this.$store.state.tomAxiosConfig)
                 .then(response => {
@@ -73,9 +91,8 @@
                     })
                 })
                 .catch(error => {
-                        console.log(`Unable to retrieve targets: ${error}.`);
-                    }
-                )
+                    console.log(`Unable to retrieve targets: ${error}.`);
+                });
             /* WIP - get user groups and add them to target form
                 axios
                     .get(`${this.$store.state.tomApiBaseUrl}/api/groups/`, this.$store.state.tomAxiosConfig)

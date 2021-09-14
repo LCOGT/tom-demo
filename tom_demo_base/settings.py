@@ -151,7 +151,7 @@ AUTHENTICATION_BACKENDS = (
 #     "http://localhost:8080",
 # ]
 CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True
 CORS_URLS_REGEX = r'^/(api)/.*$|^/o/.*'
 
 # Internationalization

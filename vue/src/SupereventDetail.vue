@@ -97,7 +97,7 @@ export default {
         },
         getGraceDBData() {
             axios
-                .get(`${this.$store.state.skipApiBaseUrl}/api/events/?identifier=${this.superevent_identifier}`)
+                .get(`${this.$store.state.skipApiBaseUrl}/api/events/?identifier=${this.superevent_identifier}`, this.$store.state.skipAxiosConfig)
                 .then(response => {
                     this.superevent_data = response['data']['results'][0];
                     console.log(this.superevent_data)
