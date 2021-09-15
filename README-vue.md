@@ -18,7 +18,7 @@ components into your Django templates. The overall strategy taken is based on [t
 
 5. Add `django-webpack-loader` to your TOM Toolkit project.
     - `requirements.txt` needs updating
-    - `INSTALLED_APPS` in your `settings.py` needs updating.
+    - `INSTALLED_APPS` in your `settings.py` needs `webpack_loader`.
 
 6. Configure `django-webpack-loader` in your `settings.py`.
     - add `VUE_FRONTEND_DIR`, which is used by
