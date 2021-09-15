@@ -14,7 +14,7 @@ components into your Django templates. The overall strategy taken is based on [t
 
 4. Add your components (`.vue`) and entry points (i.e. `main.js`) files. In this demonstration:
     - `vue/src/components/{App, App02}.vue`, and
-    - `vue/src/conponents/{main, main_02}.js` were added.
+    - `vue/src/components/{main, main_02}.js` were added.
 
 5. Add `django-webpack-loader` to your TOM Toolkit project.
     - `requirements.txt` needs updating
