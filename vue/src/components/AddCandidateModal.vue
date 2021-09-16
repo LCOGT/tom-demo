@@ -17,14 +17,6 @@
                     </b-form-row>
                     <hr />
                     <selectable-target-table :targets="matches" @selected-target="onSelectTarget" />
-                    <hr />
-                    <!-- <b-form-row>
-                        <b-form-checkbox-group>
-                            <b-form-checkbox v-for="group in userGroups" value=group>
-
-                            </b-form-checkbox>
-                        </b-form-checkbox-group>
-                    </b-form-row> -->
                 </b-form>
             </b-container>
             <template #modal-footer="{ cancel }">
@@ -67,44 +59,34 @@
             }
         },
         mounted() {
-            axios
-                .get(`${this.$store.state.tomApiBaseUrl}/api/groups/`, this.$store.state.tomAxiosConfig)
-                .then(response => {
-                    console.log('groups');
-                    console.log(response);
-                    this.userGroups = response['data']['results'];
-                })
-                .catch(error => {
-                    console.log(`Unable to retrieve groups: ${error}.`)
-                });
-            axios  // Get all public targets in TOM
-                .get(`${this.$store.state.tomApiBaseUrl}/api/targets/`, this.$store.state.tomAxiosConfig)
-                .then(response => {
-                    // Filter out targets that are already associated with the superevent--this should be broken into a reusable method
-                    this.matches = response['data']['results'];
-                    this.matches = this.matches.filter(value => {
-                        let match = false;
-                        this.existingEventCandidates.forEach(eventCandidate => {
-                            if (value.id === eventCandidate.id) match = true;
-                        });
-                        return !match;
-                    })
-                })
-                .catch(error => {
-                    console.log(`Unable to retrieve targets: ${error}.`);
-                });
-            /* WIP - get user groups and add them to target form
-                axios
+            this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
+                axios  // WIP - get user groups and add them to form
                     .get(`${this.$store.state.tomApiBaseUrl}/api/groups/`, this.$store.state.tomAxiosConfig)
                     .then(response => {
-                        console.log('user groups');
-                        this.userGroups = response['data']['results']
-                        console.log(this.userGroups);
+                        console.log('groups');
+                        console.log(response);
+                        this.userGroups = response['data']['results'];
                     })
                     .catch(error => {
-                        console.log(`Unable to retrieve user groups: ${error}.`);
+                        console.log(`Unable to retrieve groups: ${error}.`)
+                    });
+                axios  // Get all public targets in TOM
+                    .get(`${this.$store.state.tomApiBaseUrl}/api/targets/`, this.$store.state.tomAxiosConfig)
+                    .then(response => {
+                        // Filter out targets that are already associated with the superevent--this should be broken into a reusable method
+                        this.matches = response['data']['results'];
+                        this.matches = this.matches.filter(value => {
+                            let match = false;
+                            this.existingEventCandidates.forEach(eventCandidate => {
+                                if (value.id === eventCandidate.id) match = true;
+                            });
+                            return !match;
+                        })
                     })
-            */
+                    .catch(error => {
+                        console.log(`Unable to retrieve targets: ${error}.`);
+                    });
+                });
         },
         methods: {
             targetSearch() {  // Search for targets using form data in modal

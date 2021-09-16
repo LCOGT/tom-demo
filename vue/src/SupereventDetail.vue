@@ -23,7 +23,7 @@
                 <add-candidate-modal :supereventId="this.superevent_id" :existingEventCandidates="this.eventCandidates" @created-candidates="onCreatedCandidates" />
             </b-col>
             <b-col class="col-md-auto">
-                <b-button class="mx-1 float-left" @click="onCreateFromAlerts" variant="outline-primary">Add Candidates from Alerts</b-button>
+                <create-target-modal />
             </b-col>
         </b-row>
         <b-row class="my-3">
@@ -42,7 +42,7 @@
 <script>
 import axios from 'axios';
 import _ from 'lodash';
-import { AddCandidateModal, AlertsTable, GravitationalWaveBanner, SelectableTargetTable } from '@/components';
+import { AddCandidateModal, AlertsTable, CreateTargetModal, GravitationalWaveBanner, SelectableTargetTable } from '@/components';
 import TargetList from './views/TargetList.vue';
 
 export default {
@@ -50,6 +50,7 @@ export default {
     components: {
         AddCandidateModal,
         AlertsTable,
+        CreateTargetModal,
         GravitationalWaveBanner,
         SelectableTargetTable,
         TargetList,
