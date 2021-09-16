@@ -23,7 +23,7 @@
                 <add-candidate-modal :supereventId="this.superevent_id" :existingEventCandidates="this.eventCandidates" @created-candidates="onCreatedCandidates" />
             </b-col>
             <b-col class="col-md-auto">
-                <create-target-modal />
+                <create-target-modal :alerts="this.selectedAlerts" />
             </b-col>
         </b-row>
         <b-row class="my-3">

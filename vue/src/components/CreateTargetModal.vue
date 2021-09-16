@@ -53,7 +53,19 @@
                 });
         },
         methods: {
-            onCandidateFromAlert() {  // TODO: require >1 candidate to select, possibly split into multiple events, also add form validation
+            onCandidateFromAlert() {
+                this.alerts.forEach(alert => {
+                    axios
+                        .get(`${this.$store.state.tomApiBaseUrl}/api/targets/`, this.$store.state.tomAxiosConfig)
+                        .then(response => {
+                            // TODO: create event candidates from targets
+                            console.log(response);
+                            this.$bvModal.hide('candidate-from-target-modal');
+                        })
+                        .catch(error => {
+                            console.log(`Unable to create targets from alerts: ${error}`);
+                        });
+                });
             }
         }
     }
