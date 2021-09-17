@@ -60,16 +60,6 @@
         },
         mounted() {
             this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
-                axios  // WIP - get user groups and add them to form
-                    .get(`${this.$store.state.tomApiBaseUrl}/api/groups/`, this.$store.state.tomAxiosConfig)
-                    .then(response => {
-                        console.log('groups');
-                        console.log(response);
-                        this.userGroups = response['data']['results'];
-                    })
-                    .catch(error => {
-                        console.log(`Unable to retrieve groups: ${error}.`)
-                    });
                 axios  // Get all public targets in TOM
                     .get(`${this.$store.state.tomApiBaseUrl}/api/targets/`, this.$store.state.tomAxiosConfig)
                     .then(response => {
