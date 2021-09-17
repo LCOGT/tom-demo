@@ -34,7 +34,7 @@
                 <b-link :href="getAlertUrl(data.item)">{{ data.value }}</b-link>
             </template>
             <template #cell(timestamp)="data">
-                {{ getAlertDate(data) }}
+                {{ getAlertDate(data.item) }}
             </template>
             <template #cell(from)="data">
                 {{ data.item.parsed_message.from }}
@@ -85,7 +85,7 @@ export default {
         getAlertsFromAlertData() {
             return this.alerts.filter(alert => alert.parsed_message.title !== "GCN/LVC NOTICE");
         },
-        getAlertDate(alert) {  // TODO: fix this
+        getAlertDate(alert) {
             return moment(alert.timestamp).format('YYYY-MM-DD hh:mm:ss');
         },
         showRowDetails(item, index, event) {
