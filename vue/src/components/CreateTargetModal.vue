@@ -2,16 +2,20 @@
     <div>
         <b-button class="float-left" v-b-modal.candidate-from-target-modal variant="outline-primary" :disabled="alerts.length === 0">Add Candidates from Alerts</b-button>
         <b-modal id="candidate-from-target-modal" size="xl" title="Create Candidate(s) from Alerts">
-            <!-- TODO: display targets to be created -->
             <b-container>
+                <div class="my-2">
+                    <span>Targets to be created:</span>
+                </div>
+                <selectable-target-table :selectable="false" :targets="this.alerts" />
+                <hr />
                 <b-form @submit="onCandidateFromAlert">
-                    <b-form-row>
+                    <b-form-group label="Choose groups for new targets:">
                         <b-form-checkbox-group>
                             <b-form-checkbox v-for="group in userGroups" :key="group.name" :value="group.id" @change="onSelectGroup">
                                 {{ group.name }}
                             </b-form-checkbox>
                         </b-form-checkbox-group>
-                    </b-form-row>
+                    </b-form-group>
                 </b-form>
             </b-container>
             <template #modal-footer="{ cancel }">
@@ -25,9 +29,11 @@
 <script>
     import _ from 'lodash';
     import axios from 'axios';
+    import SelectableTargetTable from './SelectableTargetTable.vue';
 
     export default {
         components: {
+            SelectableTargetTable
         },
         props: {
             alerts: {
@@ -47,7 +53,17 @@
         },
         mounted() {
             this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
-                axios  // get groups available to user
+                // map alert properties to SelectableTargetTable properties in order to display them
+                this.alerts = this.alerts.map(alert => {
+                    let modifiedAlert = alert;
+                    modifiedAlert.name = alert.identifier;
+                    modifiedAlert.ra = alert.right_ascension;
+                    modifiedAlert.dec = alert.declination;
+                    return modifiedAlert;
+                });
+
+                // get groups available to user
+                axios
                     .get(`${this.$store.state.tomApiBaseUrl}/api/groups/`, this.$store.state.tomAxiosConfig)
                     .then(response => {
                         this.userGroups = response['data']['results'];

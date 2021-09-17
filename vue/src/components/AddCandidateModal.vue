@@ -16,12 +16,11 @@
                         </b-col>
                     </b-form-row>
                     <b-form-group class="my-3" v-show="targetFormValid()" label="Choose groups for new target:">
-                            <b-form-checkbox-group>
-                                <b-form-checkbox v-for="group in userGroups" :key="group.name" :value="group.id" @change="onSelectGroup">
-                                    {{ group.name }}
-                                </b-form-checkbox>
-                            </b-form-checkbox-group>
-
+                        <b-form-checkbox-group>
+                            <b-form-checkbox v-for="group in userGroups" :key="group.name" :value="group.id" @change="onSelectGroup">
+                                {{ group.name }}
+                            </b-form-checkbox>
+                        </b-form-checkbox-group>
                     </b-form-group>
                     <b-form-row class="my-2 pl-1">
                         <b-button class="float-right mr-2" @click="onCreateNewTarget" variant="primary" :disabled="!targetFormValid()">Create New Target</b-button>
@@ -85,9 +84,6 @@
         },
         methods: {
             getTargets(name, ra, dec) {
-                console.log(name);
-                console.log(ra);
-                console.log(dec);
                 let params = '';
                 if (name) params += `name=${name}`;
                 if (ra && dec) {  // TODO: make this check more robust for negative declination
