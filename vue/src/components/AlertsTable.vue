@@ -31,7 +31,7 @@
                 <span v-if="data.item.parsed_message.body !== undefined">{{ data.item.parsed_message.body }}</span>
             </template>
             <template #cell(identifier)="data">
-                <b-link :href="getAlertUrl(data.value)">{{ data.value }}</b-link>
+                <b-link :href="getAlertUrl(data.item)">{{ data.value }}</b-link>
             </template>
             <template #cell(timestamp)="data">
                 {{ getAlertDate(data) }}
@@ -80,7 +80,7 @@ export default {
     },
     methods: {
         getAlertUrl(alert) {
-            return `${this.$store.state.skipApiBaseUrl}/api/v2/alerts/${alert}`;
+            return `${this.$store.state.skipApiBaseUrl}/api/v2/alerts/${alert.id}`;
         },
         getAlertsFromAlertData() {
             return this.alerts.filter(alert => alert.parsed_message.title !== "GCN/LVC NOTICE");
