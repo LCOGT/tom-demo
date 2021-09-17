@@ -76,7 +76,7 @@
                 });
 
                 Promise
-                    .all(createdTargetPromises)
+                    .all(createdTargetPromises) // Wait for all targets to be created
                     .then(response => {
                         // create event candidates from new targets
                         let eventCandidateData = response.map(targetResponse => (
