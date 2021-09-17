@@ -3,6 +3,11 @@
 This describes the method and tooling used to incorporate [Vue.js](https://vuejs.org)
 components into your Django templates. The overall strategy taken is based on [this](https://medium.com/js-dojo/vue-django-best-of-both-frontends-701307871478) series of articles.
 
+### Dependencies
+
+- Ensure that your version of ``django-webpack-loader`` in ``requirements.txt`` is ``~=0.6.0``.
+- Ensure that your version of ``webpack-bundle-tracker`` in ``package.json`` is ``^0.4.3``.
+
 ### Step-by-Step
 1. Create a Vue.js application in your Django project.
    ```vue create vue```
