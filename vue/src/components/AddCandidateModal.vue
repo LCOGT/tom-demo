@@ -20,7 +20,7 @@
                 </b-form>
             </b-container>
             <template #modal-footer="{ cancel }">
-                <b-button class="float-right" @click="onCreateCandidates" variant="primary">Add Candidates</b-button>
+                <b-button class="float-right" @click="onCreateCandidates" variant="primary" :disabled="selectedTargets.length === 0 && !targetFormValid()">Add Candidates</b-button>
                 <b-button class="float-right" @click="cancel()">Cancel</b-button>
             </template>
         </b-modal>
@@ -79,6 +79,11 @@
                 });
         },
         methods: {
+            targetFormValid() {
+                console.log(this.form);
+                if (this.form.name !== '' && this.form.ra !== '' && this.form.dec !== '') return true;
+                return false;
+            },
             targetSearch() {  // Search for targets using form data in modal
                 let params = `name=${this.form.name}`;
                 if (this.form.ra !== '' && this.form.dec !== '') {  // TODO: make this check more robust for negative declination
