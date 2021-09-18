@@ -21,7 +21,6 @@ from tom_demo.views import SupereventView
 
 
 urlpatterns = [
-    path('alerts/', include('tom_alerts_dash.urls', namespace='tom_alerts_dash')),
     path('superevents/<int:pk>/', SupereventView.as_view(), name='superevent_vue_app'),
     path('superevents/', include('tom_superevents.urls')),
     path('observations/', include('tom_demo.urls')),
