@@ -14,9 +14,9 @@
             :fields="alert_fields"
             @row-clicked="showRowDetails"
         >
-            <template #cell(selected)="row">
-                <div v-if="row.item.right_ascension !== null && row.item.declination !== null">
-                    <b-form-checkbox @change="$emit('selected-alert', row, $event)" />
+            <template #cell(selected)="data">
+                <div v-if="data.item.right_ascension !== null && data.item.declination !== null">
+                    <b-form-checkbox @change="$emit('selected-alert', data, $event)" />
                 </div>
             </template>
             <template #cell(show_details)="data">
@@ -29,6 +29,12 @@
             </template>
             <template #row-details="data">
                 <span v-if="data.item.parsed_message.body !== undefined">{{ data.item.parsed_message.body }}</span>
+                <div v-else-if="data.item.topic === 'lvc.lvc-counterpart'">
+                    <dl class="row" v-for="[key, value] in Object.entries(data.item.parsed_message)" :key="[key, value]">
+                        <dt class="col-md-3">{{ key }}: </dt>
+                        <dd class="col-md-9">{{ value }}</dd>
+                    </dl>
+                </div>
             </template>
             <template #cell(identifier)="data">
                 <b-link :href="getAlertUrl(data.item)">{{ data.value }}</b-link>
@@ -37,7 +43,8 @@
                 {{ getAlertDate(data.item) }}
             </template>
             <template #cell(from)="data">
-                {{ data.item.parsed_message.from }}
+                <span v-if="data.item.topic === 'gcn-circular'">{{ data.item.parsed_message.from }}</span>
+                <span v-else-if="data.item.topic === 'lvc.lvc-counterpart'">Swift-XRT Observation</span>
             </template>
             <template #cell(subject)="data">
                 <span v-if="data.item.parsed_message.subject !== undefined">{{ data.item.parsed_message.subject }}</span>
