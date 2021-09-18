@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'django_gravatar',
-    # 'django_plotly_dash.apps.DjangoPlotlyDashConfig'
     'rest_framework',
     'tom_targets',
     'tom_alerts',
