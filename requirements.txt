@@ -5,4 +5,5 @@ psycopg2===2.8.4
 tom-superevents>=0.2
 django-webpack-loader==0.6.0
 tomtoolkit>=2.6.5
+tom_scimma
 whitenoise~=5.2
