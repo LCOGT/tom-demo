@@ -16,9 +16,9 @@ Vue.use(store);
 
 Vue.config.productionTip = false
 
-// axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-// axios.defaults.xsrfCookieName = 'csrftoken';
-// axios.defaults.withCredentials = true;
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.withCredentials = true;
 
 axios
   .get('/static/urls.json')

@@ -23,7 +23,7 @@
                 <add-candidate-modal :supereventId="this.superevent_id" :existingEventCandidates="this.eventCandidates" @created-candidates="onCreatedCandidates" />
             </b-col>
             <b-col class="col-md-auto">
-                <b-button class="mx-1 float-left" @click="onCreateFromAlerts" variant="outline-primary">Add Candidates from Alerts</b-button>
+                <create-target-modal :alerts="this.selectedAlerts" :supereventId="this.superevent_id" @created-target-candidates="onCreatedCandidates" />
             </b-col>
         </b-row>
         <b-row class="my-3">
@@ -42,7 +42,7 @@
 <script>
 import axios from 'axios';
 import _ from 'lodash';
-import { AddCandidateModal, AlertsTable, GravitationalWaveBanner, SelectableTargetTable } from '@/components';
+import { AddCandidateModal, AlertsTable, CreateTargetModal, GravitationalWaveBanner, SelectableTargetTable } from '@/components';
 import TargetList from './views/TargetList.vue';
 
 export default {
@@ -50,6 +50,7 @@ export default {
     components: {
         AddCandidateModal,
         AlertsTable,
+        CreateTargetModal,
         GravitationalWaveBanner,
         SelectableTargetTable,
         TargetList,
@@ -97,10 +98,9 @@ export default {
         },
         getGraceDBData() {
             axios
-                .get(`${this.$store.state.skipApiBaseUrl}/api/events/?identifier=${this.superevent_identifier}`)
+                .get(`${this.$store.state.skipApiBaseUrl}/api/events/?identifier=${this.superevent_identifier}`, this.$store.state.skipAxiosConfig)
                 .then(response => {
                     this.superevent_data = response['data']['results'][0];
-                    console.log(this.superevent_data)
                     axios
                         .get(`${this.$store.state.skipApiBaseUrl}/api/events/${response['data']['results'][0]['id']}`, this.$store.state.skipAxiosConfig)
                         .then(alert_response => {
@@ -114,32 +114,7 @@ export default {
                     console.log(`Error getting details for superevent ${this.superevent_identifier}: ${error}`);
                 })
         },
-        onCreateFromAlerts() {  // WIP - create targets from alerts and create event candidates from new targets
-            console.log('onCreateFromAlerts');
-            let alert_candidate_data = []
-            console.log(this.selectedAlerts);
-            this.selectedAlerts.forEach(alert => {
-                let target_data = {
-                    name: alert['identifier'],
-                    ra: alert['right_ascension'],
-                    dec: alert['declination'],
-                    type: 'SIDEREAL',
-                    aliases: [],
-                    targetextra_set: [],
-                    groups: [{id: '1'}]
-                };
-                axios
-                    .post(`${this.$store.state.tomApiBaseUrl}/api/targets/`, target_data, this.$store.state.tomAxiosConfig)
-                    .then(response => {
-                        console.log(response);
-                    })
-                    .catch(error => {
-                        console.log(error.response);
-                        console.log(`Unable to create target from ${alert}.`)
-                    });
-            });
-        },
-        onCreatedCandidates(count) {  // TODO: get event candidates again to live update the page
+        onCreatedCandidates(count) {
             this.messages.push(`Successfully added ${count} candidates.`);
             this.getSupereventData();
         },

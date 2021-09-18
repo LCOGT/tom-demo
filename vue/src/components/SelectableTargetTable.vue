@@ -1,10 +1,9 @@
 <template>
     <b-container>
         <b-table
-            selectable
             :fields="targetFields"
             :items="targets">
-            <template #cell(selected)="row">
+            <template v-if="selectable === true" #cell(selected)="row">
                 <b-form-checkbox @change="$emit('selected-target', row, $event)" />
             </template>
         </b-table>
@@ -16,6 +15,11 @@ export default {
     name: 'SelectableTargetTable',
     components: {},
     props: {
+      selectable: {
+          type: Boolean,
+          required: false,
+          default: true
+      },
       targets: {
         type: Array,
         required: true

@@ -3,7 +3,7 @@
         <b-button class="float-left" v-b-modal.candidate-form-modal variant="outline-primary">Add Candidate from Existing Target</b-button>
         <b-modal id="candidate-form-modal" size="xl" title="Add Event Candidate">
             <b-container>
-                <b-form @submit="onCreateCandidates">
+                <b-form @submit="onCreateNewTarget">
                     <b-form-row>
                         <b-col>
                             <b-form-input id="target-name-input" v-model="form.name" placeholder="Target Name" @input="targetSearch" required />
@@ -15,12 +15,23 @@
                             <b-form-input id="target-dec-input" v-model="form.dec" placeholder="Declination" @input="targetSearch" required />
                         </b-col>
                     </b-form-row>
+                    <b-form-group class="my-3" v-show="targetFormValid()" label="Choose groups for new target:">
+                        <b-form-checkbox-group>
+                            <b-form-checkbox v-for="group in userGroups" :key="group.name" :value="group.id" @change="onSelectGroup">
+                                {{ group.name }}
+                            </b-form-checkbox>
+                        </b-form-checkbox-group>
+                    </b-form-group>
+                    <b-form-row class="my-2 pl-1">
+                        <b-button class="float-right mr-2" @click="onCreateNewTarget" variant="primary" :disabled="!targetFormValid()">Create New Target</b-button>
+                        <b-button class="float-right ml-2" @click="onClearSearch" variant="outline-primary">Clear Search</b-button>
+                    </b-form-row>
                 </b-form>
                 <hr />
                 <selectable-target-table :targets="matches" @selected-target="onSelectTarget" />
             </b-container>
             <template #modal-footer="{ cancel }">
-                <b-button class="float-right" @click="onCreateCandidates" variant="primary">Add Candidates</b-button>
+                <b-button class="float-right" @click="onCreateCandidates" variant="primary" :disabled="selectedTargets.length === 0">Add Candidates</b-button>
                 <b-button class="float-right" @click="cancel()">Cancel</b-button>
             </template>
         </b-modal>
@@ -59,43 +70,26 @@
             }
         },
         mounted() {
-            axios  // Get all public targets in TOM
-                .get(`${this.$store.state.tomApiBaseUrl}/api/targets/`, this.$store.state.tomAxiosConfig)
-                .then(response => {
-                    // Filter out targets that are already associated with the superevent--this should be broken into a reusable method
-                    this.matches = response['data']['results'];
-                    this.matches = this.matches.filter(value => {
-                        let match = false;
-                        this.existingEventCandidates.forEach(eventCandidate => {
-                            if (value.id === eventCandidate.id) match = true;
-                        });
-                        return !match;
-                    })
-                })
-                .catch(error => {
-                        console.log(`Unable to retrieve targets: ${error}.`);
-                    }
-                )
-            /* WIP - get user groups and add them to target form
-                axios
+            this.$root.$on('bv::modal::show', (bvEvent, modalId) => {
+                this.getTargets();
+                axios  // get groups available to user
                     .get(`${this.$store.state.tomApiBaseUrl}/api/groups/`, this.$store.state.tomAxiosConfig)
                     .then(response => {
-                        console.log('user groups');
-                        this.userGroups = response['data']['results']
-                        console.log(this.userGroups);
+                        this.userGroups = response['data']['results'];
                     })
                     .catch(error => {
-                        console.log(`Unable to retrieve user groups: ${error}.`);
-                    })
-            */
+                        console.log(`Unable to retrieve groups: ${error}.`)
+                    });
+            });
         },
         methods: {
-            targetSearch() {  // Search for targets using form data in modal
-                let params = `name=${this.form.name}`;
-                if (this.form.ra !== '' && this.form.dec !== '') {  // TODO: make this check more robust for negative declination
-                    params += `&cone_search=${this.form.ra},${this.form.dec},5`;
+            getTargets(name, ra, dec) {
+                let params = '';
+                if (name) params += `name=${name}`;
+                if (ra && dec) {  // TODO: make this check more robust for negative declination
+                    params += `&cone_search=${ra},${dec},5`;
                 }
-                axios
+                axios  // Get all visible targets in TOM
                     .get(`${this.$store.state.tomApiBaseUrl}/api/targets/?${params}`, this.$store.state.tomAxiosConfig)
                     .then(response => {
                         // Filter out targets that are already associated with the superevent--this should be broken into a reusable method
@@ -109,8 +103,15 @@
                         })
                     })
                     .catch(error => {
-                        console.log(`Unable to retrieve any matching targets: ${error}.`);
-                    })
+                        console.log(`Unable to retrieve targets: ${error}.`);
+                    });
+            },
+            targetFormValid() {  // TODO: add more sophisticated form validation
+                if (this.form.name && this.form.ra && this.form.dec) return true;
+                return false;
+            },
+            targetSearch() {  // Search for targets using form data in modal
+                this.getTargets(this.form.name, this.form.ra, this.form.dec);
             },
             createEventCandidates(eventCandidateData, callback) {  // Create event candidates and call callback function with number of created eventCandidates
                 axios
@@ -127,6 +128,14 @@
                     .catch(error => {
                         console.log(`Unable to create event candidates: ${error}`)
                     })
+            },
+            onClearSearch() {
+                this.form = {
+                    name: '',
+                    ra: '',
+                    dec: ''
+                }
+                this.getTargets();
             },
             onCreateCandidates() {  // TODO: require >1 candidate to select, possibly split into multiple events, also add form validation
                 if (this.selectedTargets.length !== 0) {  // Check if any targets are selected
@@ -158,6 +167,29 @@
                     this.form = {name: '', ra: '', dec: ''};
                 }
                 this.selectedTargets = [];
+            },
+            onCreateNewTarget() {
+                axios
+                    .get(`${this.$store.state.tomApiBaseUrl}/api/groups/`, this.$store.state.tomAxiosConfig)
+                    .then(response => {
+                        console.log(response);
+                        let groups = response['data']['results'].map(group => ({id: group.id}));
+                        let targetData = {
+                            name: this.form.name, ra: this.form.ra, dec: this.form.dec, type: 'SIDEREAL', aliases: [], 
+                            targetextra_set: [], groups: groups
+                        };
+                        axios
+                            .post(`${this.$store.state.tomApiBaseUrl}/api/targets/`, targetData, this.$store.state.tomAxiosConfig)
+                            .then(response => {
+                                this.getTargets(this.form.name, this.form.ra, this.form.dec);
+                            })
+                            .catch(error => {
+                                console.log(`Unable to create target: ${error}`);
+                            });
+                        })
+                    .catch(error => {
+                        console.log(`Unable to retrieve groups: ${error}`);
+                    });
             },
             onSelectTarget(row, event) {  // TODO: move to a utils.js
                 if (event === true) {
