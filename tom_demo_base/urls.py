@@ -32,8 +32,7 @@ urlpatterns = [
     path("vue_app_01/", TemplateView.as_view(template_name="vue_app_01.html"), name="vue_app_01"),
     path("target_list/", TemplateView.as_view(template_name="target_list.html"), name="target_list"),
 
-    # TODO: should probably be removed
-    path('django_plotly_dash/', include('django_plotly_dash.urls')),
+    # path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]
 
 # this is to serve static file from a debug Dockerfile environment (with collectstatic)

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'django_gravatar',
+    # 'django_plotly_dash.apps.DjangoPlotlyDashConfig'
     'rest_framework',
     'tom_targets',
     'tom_alerts',
@@ -363,21 +364,21 @@ WEBPACK_LOADER = {
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-PLOTLY_COMPONENTS = [
-    # Common components
-    'dash_core_components',
-    'dash_html_components',
-    'dash_renderer',
+# PLOTLY_COMPONENTS = [
+#     # Common components
+#     'dash_core_components',
+#     'dash_html_components',
+#     'dash_renderer',
 
-    # django-plotly-dash components
-    'dpd_components',
-    # static support if serving local assets
-    # 'dpd_static_support',
+#     # django-plotly-dash components
+#     'dpd_components',
+#     # static support if serving local assets
+#     # 'dpd_static_support',
 
-    # Other components, as needed
-    'dash_bootstrap_components',
-    'dash_table'
-]
+#     # Other components, as needed
+#     'dash_bootstrap_components',
+#     'dash_table'
+# ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
