@@ -31,9 +31,11 @@
                 <h3>Viable Candidates</h3>
                 <selectable-target-table :targets="this.eventCandidates" />
             </b-col>
+        </b-row>
+        <b-row class="my-3">
             <b-col cols="6">
                 <h3>Retired Candidates</h3>
-                <target-list :tomApiBaseUrl="this.$store.state.tomApiBaseUrl" />
+                <selectable-target-table :targets="this.eventCandidates" />
             </b-col>
         </b-row>
     </div>
