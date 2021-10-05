@@ -64,6 +64,7 @@ _static/
 # DB dumps
 *.pg_dump
 *.dumpdata
+*.db
 
 # Flask stuff:
 instance/
@@ -114,6 +115,7 @@ venv.bak/
 
 # IDEs and emacs drit
 .vscode/
+*.code-workspace
 .idea/
 *~
 
