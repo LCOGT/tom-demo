@@ -30,13 +30,13 @@
         <b-row>
             <b-col cols="12">
                 <h3>Viable Candidates</h3>
-                <selectable-target-table :targets="this.eventCandidates" />
+                <candidate-target-table :targets="this.eventCandidates" />
             </b-col>
         </b-row>
         <b-row>
             <b-col cols="12">
                 <h3>Retired Candidates</h3>
-                <selectable-target-table :targets="this.eventCandidates" />
+                <candidate-target-table :targets="this.eventCandidates" />
             </b-col>
         </b-row>
     </div>
@@ -45,8 +45,12 @@
 <script>
 import axios from 'axios';
 import _ from 'lodash';
-import { AddCandidateModal, AlertsTable, CreateTargetModal, GravitationalWaveBanner, SelectableTargetTable } from '@/components';
-import TargetList from './views/TargetList.vue';
+import { AddCandidateModal, AlertsTable, CreateTargetModal,
+         GravitationalWaveBanner,
+         //SelectableTargetTable,
+         CandidateTargetTable
+         } from '@/components';
+//import TargetList from './views/TargetList.vue';
 
 export default {
     name: 'SupereventDetail',
@@ -54,9 +58,10 @@ export default {
         AddCandidateModal,
         AlertsTable,
         CreateTargetModal,
+        CandidateTargetTable,
         GravitationalWaveBanner,
-        SelectableTargetTable,
-        TargetList,
+        //SelectableTargetTable,
+        //TargetList,
     },
     data: function() {
         return {
