@@ -26,14 +26,15 @@
                 <create-target-modal :alerts="this.selectedAlerts" :supereventId="this.superevent_id" @created-target-candidates="onCreatedCandidates" />
             </b-col>
         </b-row>
-        <b-row class="my-3">
-            <b-col cols="6">
+        <hr>
+        <b-row>
+            <b-col cols="12">
                 <h3>Viable Candidates</h3>
                 <selectable-target-table :targets="this.eventCandidates" />
             </b-col>
         </b-row>
-        <b-row class="my-3">
-            <b-col cols="6">
+        <b-row>
+            <b-col cols="12">
                 <h3>Retired Candidates</h3>
                 <selectable-target-table :targets="this.eventCandidates" />
             </b-col>
@@ -90,7 +91,8 @@ export default {
                 .get(`${this.$store.state.tomApiBaseUrl}/api/superevents/${this.superevent_id}`)
                 .then(response => {
                     response['data']['event_candidates'].forEach(event_candidate => {
-                        this.eventCandidates.push(event_candidate['target']);
+                        //this.eventCandidates.push(event_candidate['target']);
+                        this.eventCandidates.push(event_candidate);
                     });
                 })
                 .catch(error => {
