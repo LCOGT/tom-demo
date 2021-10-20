@@ -30,13 +30,13 @@
         <b-row>
             <b-col cols="12">
                 <h3>Viable Candidates</h3>
-                <candidate-target-table :targets="this.eventCandidates" />
+                <candidate-target-table :candidates="this.eventCandidates" />
             </b-col>
         </b-row>
         <b-row>
             <b-col cols="12">
                 <h3>Retired Candidates</h3>
-                <candidate-target-table :targets="this.eventCandidates" />
+                <candidate-target-table :candidates="this.eventCandidates" />
             </b-col>
         </b-row>
     </div>
