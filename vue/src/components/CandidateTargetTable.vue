@@ -4,8 +4,9 @@
             striped     
             :fields="targetFields"
             :items="targets">
-            <template v-if="selectable === true" #cell(selected)="row">
-                <b-form-checkbox @change="$emit('selected-target', row, $event)" />
+            <template v-if="selectable === true" #cell(viable)="row">
+                <b-form-checkbox @change="$emit('selected-target', row, $event)"
+                checked=true />
             </template>
         </b-table>
     </b-container>
@@ -29,7 +30,6 @@ export default {
     data() {
         return {
             targetFields: [
-                { 'key': 'selected', 'label': '' },
                 { 'key': 'priority', 'label': 'Priority', 'sortable': true },
                 { 'key': 'target.name', 'label': 'Candidate', 'sortable': true },
                 { 'key': 'superevent.id', 'label': 'Reference' },
