@@ -36,7 +36,7 @@
         <b-row>
             <b-col cols="12">
                 <h3>Retired Candidates</h3>
-                <candidate-target-table :candidates="this.eventCandidates" />
+                <candidate-target-table :candidates="this.eventCandidates" :showViable="false" />
             </b-col>
         </b-row>
     </div>
