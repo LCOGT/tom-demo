@@ -3,7 +3,7 @@
         <b-table
             striped     
             :fields="candidateFields"
-            :items="candidates">
+            :items="filteredCandidates">
             <template v-if="selectable === true" #cell(viable)="row">
                 <b-form-checkbox @change="$emit('selected-target', row, $event)"
                 checked=true />
@@ -26,6 +26,17 @@ export default {
         type: Array,
         required: true
       },
+      showViable: {
+          type: Boolean,
+          required: false,
+          default: true
+      }
+    },
+    computed: {
+      filteredCandidates() {
+          return this.candidates.filter(
+              item => { return item.viable === this.showViable })
+      }
     },
     data() {
         return {
