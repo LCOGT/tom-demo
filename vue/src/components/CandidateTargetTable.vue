@@ -5,8 +5,9 @@
             :fields="candidateFields"
             :items="filteredCandidates">
             <template v-if="selectable === true" #cell(viable)="row">
-                <b-form-checkbox @change="$emit('selected-target', row, $event)"
-                checked=true />
+                <b-form-checkbox @change="$emit('toggle-viability', row, $event)"
+                :checked="true" />
+            </template>
             </template>
         </b-table>
     </b-container>
