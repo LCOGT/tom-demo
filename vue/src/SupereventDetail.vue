@@ -30,13 +30,18 @@
         <b-row>
             <b-col cols="12">
                 <h3>Viable Candidates</h3>
-                <candidate-target-table :candidates="this.eventCandidates" />
+                <candidate-target-table
+                  :candidates="this.eventCandidates"
+                  @toggle-viability="onToggleViability" />
             </b-col>
         </b-row>
         <b-row>
             <b-col cols="12">
                 <h3>Retired Candidates</h3>
-                <candidate-target-table :candidates="this.eventCandidates" :showViable="false" />
+                <candidate-target-table
+                  :candidates="this.eventCandidates"
+                  :showViable="false"
+                  @toggle-viability="onToggleViability" />
             </b-col>
         </b-row>
     </div>
@@ -137,6 +142,10 @@ export default {
                     return value !== row.item;
                 });
             }
+        },
+        onToggleViability(row, event) {
+            console.log('onToggleViability row: ' + row);
+            console.log('onToggleViability event: ' + event);
         }
     }
 }
