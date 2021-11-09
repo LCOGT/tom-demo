@@ -7,7 +7,7 @@
             <template v-if="selectable === true" #cell(viable)="row">
             <!-- see https://bootstrap-vue.org/docs/components/table#custom-data-rendering -->
             <template #cell(target-link)="row">
-                <b-link :href="getTargetDetailUrl(row.item)">{{ row.item.target.name }}</b-link>
+                <b-link :href="getTargetDetailUrl(row.item.target)">{{ row.item.target.name }}</b-link>
             </template>
                 <b-form-checkbox @change="$emit('toggle-viability', row, $event)"
                 :checked="true" />
