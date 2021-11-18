@@ -4,7 +4,6 @@
             striped     
             :fields="candidateFields"
             :items="filteredCandidates">
-            <template v-if="selectable === true" #cell(viable)="row">
             <!-- see https://bootstrap-vue.org/docs/components/table#custom-data-rendering -->
             <template #cell(target-link)="row">
                 <b-link :href="getTargetDetailUrl(row.item.target)">{{ row.item.target.name }}</b-link>
@@ -65,7 +64,6 @@ export default {
             // get the base url from the vuex store and append to it
             return `${this.$store.state.tomApiBaseUrl}/targets/${target.id}`;
         }
-
     }
 }
 </script>
