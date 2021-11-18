@@ -47,6 +47,7 @@
                   @toggle-viability="onToggleViability" />
             </b-col>
         </b-row>
+        <hr>
     </div>
 </template>
 
@@ -147,8 +148,37 @@ export default {
             }
         },
         onToggleViability(row, event) {
-            console.log('onToggleViability row: ' + row);
-            console.log('onToggleViability event: ' + event);
+            const event_candidate = row.item
+            // event is true when empty checkbox is checked; false when checked checkbox is un-checked
+            const new_viablility = event
+            const url = `${this.$store.state.tomApiBaseUrl}/api/eventcandidates/${event_candidate.id}`
+            const update = { viable: new_viablility }
+
+            console.log(`onToggleViability row: ` + JSON.stringify(row));
+
+            axios
+                .patch(url, update)  // patch only serializes/validates/updates the fields in the Request Body
+                .then(response => {
+                    row.item.viable = event;
+                    console.log('onToggleViabiliy(): response-data: ' + JSON.stringify(response["data"]));
+                })
+                .catch(error => {
+                    console.log(`onToggleViability: Error getting database data for ${event_candidate}: ${error}`);
+                    console.log();
+                })
+
+            //console.log('onToggleViability event: ' + event);
+            //console.log('CanidateEvent item: ' + JSON.stringify(row.item));
+            // access the eventCandidate viabile Boolean
+            //console.log('candiate 0: ' + JSON.stringify(this.eventCandidates[0]));
+            //console.log('candiate 0 viable: ' + this.eventCandidates[0].viable);
+            // get index of toggled eventCanddate
+            //console.log('row.index: ' + row.index);
+            //console.log('row.item.id: ' + row.item.id + ' ' + row.item.superevent);
+            //console.log('row.item.target.id: ' + row.item.target.id + ' ' + row.item.target.name);
+            //console.log('onToggleViability event: ' + event);
+            //console.log('row.item.viable (old): ' + row.item.viable);
+            //console.log('row.item.viable (new): ' + row.item.viable);
         }
     }
 }
