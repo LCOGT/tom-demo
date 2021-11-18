@@ -104,7 +104,6 @@ export default {
                 .get(`${this.$store.state.tomApiBaseUrl}/api/superevents/${this.superevent_id}`)
                 .then(response => {
                     response['data']['event_candidates'].forEach(event_candidate => {
-                        //this.eventCandidates.push(event_candidate['target']);
                         this.eventCandidates.push(event_candidate);
                     });
                 })
