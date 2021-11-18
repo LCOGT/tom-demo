@@ -14,8 +14,9 @@
             <template #cell(target-link)="row">
                 <b-link :href="getTargetDetailUrl(row.item.target)">{{ row.item.target.name }}</b-link>
             </template>
+            <template v-slot:cell(viable)="row">
                 <b-form-checkbox @change="$emit('toggle-viability', row, $event)"
-                :checked="true" />
+                v-model="row.item.viable"/>
             </template>
             <template #cell(priority)="row">
                 <b-form-spinbutton v-model="priority_value" value=1
