@@ -47,10 +47,10 @@ export default {
       }
     },
     computed: {
-      filteredCandidates() {
-          return this.candidates.filter(
-              item => { return item.viable === this.showViable })
-      }
+        filteredCandidates() {
+            return this.candidates.filter(
+                item => { return item.viable === this.showViable })
+        }
     },
     data() {
         return {
