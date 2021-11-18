@@ -106,9 +106,10 @@ export default {
                     response['data']['event_candidates'].forEach(event_candidate => {
                         this.eventCandidates.push(event_candidate);
                     });
+                    console.log(`getSupereventData: superevent event_candidates updated`);
                 })
                 .catch(error => {
-                    console.log(`Error getting database data for ${this.superevent_id}: ${error}`);
+                    console.log(`getSupereventData: Error getting database data for ${this.superevent_id}: ${error}`);
                     this.eventCandidates = oldEventCandidates;
                 })
         },
