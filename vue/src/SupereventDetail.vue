@@ -34,6 +34,7 @@
                 <h3>Viable Candidates</h3>
                 <candidate-target-table
                   :candidates="this.eventCandidates"
+                  :showViable="true"
                   @toggle-viability="onToggleViability" />
             </b-col>
         </b-row>
