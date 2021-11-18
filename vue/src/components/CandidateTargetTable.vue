@@ -17,6 +17,9 @@
                 <b-form-checkbox @change="$emit('toggle-viability', row, $event)"
                 :checked="true" />
             </template>
+            <template #cell(priority)="row">
+                <b-form-spinbutton v-model="priority_value" value=1
+                @change="$emit('change-priority', row, $event)" />
             </template>
         </b-table>
     </b-container>
@@ -50,6 +53,7 @@ export default {
     },
     data() {
         return {
+            priority_value: 'priority',
             candidateFields: [
                 { 'key': 'priority', 'label': 'Priority', 'sortable': true },
                 { 'key': 'target-link', 'label': 'Candidate', 'sortable': true },
