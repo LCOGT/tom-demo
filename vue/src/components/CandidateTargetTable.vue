@@ -1,7 +1,8 @@
 <template>
     <b-container>
         <b-table
-            striped     
+            striped
+            :primary-key="id"
             :fields="candidateFields"
             :items="filteredCandidates">
             <!-- see https://bootstrap-vue.org/docs/components/table#custom-data-rendering -->
