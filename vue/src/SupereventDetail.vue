@@ -8,14 +8,16 @@
         </div>
         <gravitational-wave-banner :supereventData="superevent_data" />
         <b-row>
-            <b-col cols="6">
+            <b-col cols="8">
                 <alerts-table :alerts="alerts" @selected-alert="onSelectAlert"></alerts-table>
             </b-col>
-            <b-col cols="3">
-                <b-img src="https://gracedb.ligo.org/api/superevents/S190426c/files/bayestar.volume.png" fluid></b-img>
-            </b-col>
-            <b-col cols="3">
-                <b-img src="https://gracedb.ligo.org/api/superevents/S190426c/files/bayestar.png" fluid></b-img>
+            <b-col cols="4">
+                <b-row>
+                    <b-img src="https://gracedb.ligo.org/api/superevents/S190426c/files/bayestar.volume.png" fluid></b-img>
+                </b-row>
+                <b-row>
+                    <b-img src="https://gracedb.ligo.org/api/superevents/S190426c/files/bayestar.png" fluid></b-img>
+                </b-row>
             </b-col>
         </b-row>
         <b-row class="my-3">
