@@ -5,6 +5,12 @@
             :fields="candidateFields"
             :items="filteredCandidates">
             <!-- see https://bootstrap-vue.org/docs/components/table#custom-data-rendering -->
+
+            <!-- A virtual column -->
+            <template #cell(index)="row">
+            {{ row.index }}
+            </template>
+
             <template #cell(target-link)="row">
                 <b-link :href="getTargetDetailUrl(row.item.target)">{{ row.item.target.name }}</b-link>
             </template>
@@ -47,9 +53,9 @@ export default {
             candidateFields: [
                 { 'key': 'priority', 'label': 'Priority', 'sortable': true },
                 { 'key': 'target-link', 'label': 'Candidate', 'sortable': true },
-                { 'key': 'superevent.id', 'label': 'Reference' },
-                { 'key': 'superevent.id', 'label': 'Discovery' },
-                { 'key': 'target.id', 'label': 'Mag', 'sortable': true },
+                'index',
+                { 'key': 'id', 'label': 'Superevent ID' },
+                { 'key': 'target.id', 'label': 'Target ID', 'sortable': true },
                 { 'key': 'superevent.note', 'label': 'Note' },
                 { 'key': 'superevent.plan', 'label': 'Plan' },
                 { 'key': 'superevent.note_on_plan', 'label': 'Note on Plan' },
