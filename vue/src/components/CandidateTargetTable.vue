@@ -65,8 +65,8 @@ export default {
                 { 'key': 'superevent.note', 'label': 'Note' },
                 { 'key': 'superevent.plan', 'label': 'Plan' },
                 { 'key': 'superevent.note_on_plan', 'label': 'Note on Plan' },
-                { 'key': 'target.ra', 'label': 'RA' },
-                { 'key': 'target.dec', 'label': 'DEC' },
+                { 'key': 'target.ra', 'label': 'RA', formatter: (value, key, item) => value.toLocaleString() },
+                { 'key': 'target.dec', 'label': 'DEC', formatter: (value, key, item) => value.toLocaleString() },
                 { 'key': 'viable' },
             ],
         }
