@@ -52,13 +52,16 @@
 </template>
 
 <script>
-import axios from 'axios';
-import _ from 'lodash';
-import { AddCandidateModal, AlertsTable, CreateTargetModal,
-         GravitationalWaveBanner,
-         //SelectableTargetTable,
-         CandidateTargetTable
-         } from '@/components';
+import axios from "axios";
+import _ from "lodash";
+import {
+  AddCandidateModal,
+  AlertsTable,
+  CreateTargetModal,
+  GravitationalWaveBanner,
+  //SelectableTargetTable,
+  CandidateTargetTable,
+} from "@/components";
 //import TargetList from './views/TargetList.vue';
 
 export default {
