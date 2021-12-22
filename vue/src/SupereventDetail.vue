@@ -204,7 +204,7 @@ export default {
     },
     onToggleViability(row, event) {
       const event_candidate = row.item;  // it's table of event_candidates, so row.items are event_candidates
-      const url = `${this.$store.state.tomApiBaseUrl}/api/eventcandidates/${event_candidate.id}`;
+      const url = `${this.$store.state.tomApiBaseUrl}/api/eventcandidates/${event_candidate.id}/`;
       const new_viablility = !event_candidate.viable;
       const patch = { viable: new_viablility };  // construct the payload for the PATCH request
 
