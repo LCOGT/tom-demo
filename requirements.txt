@@ -3,7 +3,9 @@ django_plotly_dash
 factory_boy==2.12.0
 gunicorn[gevent]==20.0.4
 psycopg2===2.8.4
-tom-superevents>=0.2
+tom-superevents>=0.3
+# uncomment the following line for local development
+#-e /home/llindstrom/dev/tom_superevents
 django-webpack-loader==0.6.0
 tomtoolkit>=2.6.5
 tom_scimma
