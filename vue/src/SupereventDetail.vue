@@ -17,7 +17,7 @@
         ></alerts-table>
       </b-col>
       <b-col cols="4">
-        <h3>GraceDB Bayestar Images</h3>
+        <h3>GraceDB BAYESTAR Images</h3>
         <b-row>
           <b-img-lazy
             :src="getBayestarImageUrl(this.superevent_identifier, 'bayestar.volume.png')"
