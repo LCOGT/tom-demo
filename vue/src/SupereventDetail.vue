@@ -19,16 +19,16 @@
       <b-col cols="4">
         <h3>GraceDB Bayestar Images</h3>
         <b-row>
-          <b-img
+          <b-img-lazy
             :src="getBayestarImageUrl(this.superevent_identifier, 'bayestar.volume.png')"
             fluid
-          ></b-img>
+          ></b-img-lazy>
         </b-row>
         <b-row>
-          <b-img
+          <b-img-lazy
             :src="getBayestarImageUrl(this.superevent_identifier, 'bayestar.png')"
             fluid
-          ></b-img>
+          ></b-img-lazy>
         </b-row>
       </b-col>
     </b-row>
