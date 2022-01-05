@@ -19,13 +19,13 @@
       <b-col cols="4">
         <b-row>
           <b-img
-            src="https://gracedb.ligo.org/api/superevents/S190426c/files/bayestar.volume.png"
+            :src="getBayestarImageUrl(this.superevent_identifier, 'bayestar.volume.png')"
             fluid
           ></b-img>
         </b-row>
         <b-row>
           <b-img
-            src="https://gracedb.ligo.org/api/superevents/S190426c/files/bayestar.png"
+            :src="getBayestarImageUrl(this.superevent_identifier, 'bayestar.png')"
             fluid
           ></b-img>
         </b-row>
@@ -184,6 +184,16 @@ export default {
             `Error getting details for superevent ${this.superevent_identifier}: ${error}`
           );
         });
+    },
+    getBayestarImageUrl(superevent_identifier, image_filename) {
+        // Construct URL with supplied argurments
+        // for example: https://gracedb.ligo.org/api/superevents/S190426c/files/bayestar.volume.png"
+          let url = 'https://gracedb.ligo.org/api/superevents/'
+                    + superevent_identifier
+                    + '/files/'
+                    + image_filename;
+          //console.log('getBayestarImageUrl: ' + url);
+          return url;
     },
     onCreatedCandidates(count) {
       this.messages.push(`Successfully added ${count} candidates.`);
