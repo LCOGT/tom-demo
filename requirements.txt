@@ -7,6 +7,6 @@ tom-superevents>=0.3
 # uncomment the following line for local development
 #-e /home/llindstrom/dev/tom_superevents
 django-webpack-loader==0.6.0
-tomtoolkit>=2.6.5
+tomtoolkit>=2.10.0
 tom_scimma
 whitenoise~=5.2
