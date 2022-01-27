@@ -43,7 +43,9 @@
                 {{ getAlertDate(data.item) }}
             </template>
             <template #cell(from)="data">
-                <span v-if="data.item.topic === 'gcn-circular'">{{ data.item.parsed_message.from }}</span>
+                <span v-if="data.item.topic === 'gcn-circular'">
+                    {{ getSimplifiedFromField(data.item.parsed_message.from) }}
+                </span>
                 <span v-else-if="data.item.topic === 'lvc.lvc-counterpart'">Swift-XRT Observation</span>
             </template>
             <template #cell(subject)="data">
@@ -94,6 +96,11 @@ export default {
         },
         getAlertDate(alert) {
             return moment(alert.timestamp).format('YYYY-MM-DD hh:mm:ss');
+        },
+        getSimplifiedFromField(from) {
+            // remove <name@example.com> part of from field; leave name at Institution
+            // split on the '<', take the first part, and trim the whitespace
+            return from.split('<')[0].trim();
         },
         showRowDetails(item, index, event) {
             item._showDetails = !item._showDetails;
