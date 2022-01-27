@@ -21,7 +21,6 @@ from tom_demo.views import SupereventView
 
 
 urlpatterns = [
-    path('alerts/', include('tom_alerts_dash.urls', namespace='tom_alerts_dash')),
     path('superevents/<int:pk>/', SupereventView.as_view(), name='superevent_vue_app'),
     path('superevents/', include('tom_superevents.urls')),
     path('observations/', include('tom_demo.urls')),
@@ -33,8 +32,7 @@ urlpatterns = [
     path("vue_app_01/", TemplateView.as_view(template_name="vue_app_01.html"), name="vue_app_01"),
     path("target_list/", TemplateView.as_view(template_name="target_list.html"), name="target_list"),
 
-    # TODO: should probably be removed
-    path('django_plotly_dash/', include('django_plotly_dash.urls')),
+    # path('django_plotly_dash/', include('django_plotly_dash.urls')),
 ]
 
 # this is to serve static file from a debug Dockerfile environment (with collectstatic)

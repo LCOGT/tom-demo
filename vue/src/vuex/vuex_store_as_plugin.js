@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Vue from "vue/dist/vue.js";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
@@ -12,9 +13,31 @@ plugins.push(createPersistedState({
 ));
 
 let store = new Vuex.Store({
+    state: {
+        tomApiBaseUrl: 'http://localhost:8000',
+        skipApiBaseUrl: 'http://skip.dev.hop.scimma.org',  // TODO: this should default to production whenever that exists
+        tomAxiosConfig: {},
+        skipAxiosConfig: {}
+    },
     plugins: plugins,
     modules: {
         counter: CounterModule, // see @/vuex/vuex_counter_module.js
+    },
+    mutations: {
+        setSkipApiBaseUrl(state, url) {
+            state.skipApiBaseUrl = url;
+        },
+        setTomApiBaseUrl(state, url) {
+            state.tomApiBaseUrl = url;
+        },
+        setSkipAxiosConfig(state, config) {
+            state.skipAxiosConfig = config;
+        },
+        setTomAxiosConfig(state, config) {
+            state.tomAxiosConfig = config;
+        },
+    },
+    actions: {
     },
     strict: process.env.NODE_ENV !== "production",
 });

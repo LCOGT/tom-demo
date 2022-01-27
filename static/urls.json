@@ -1,4 +1,4 @@
 {
-    "tomDemoApiUrl": "http://127.0.0.1:8000",
+    "tomDemoApiUrl": "http://localhost:8000",
     "skipApiBaseUrl": "http://skip.dev.hop.scimma.org"
 }

@@ -14,6 +14,11 @@
             :fields="alert_fields"
             @row-clicked="showRowDetails"
         >
+            <template #cell(selected)="data">
+                <div v-if="data.item.right_ascension !== null && data.item.declination !== null">
+                    <b-form-checkbox @change="$emit('selected-alert', data, $event)" />
+                </div>
+            </template>
             <template #cell(show_details)="data">
                 <b-link v-if="data.detailsShowing" @click="data.toggleDetails">
                     <b-icon-caret-down />
@@ -23,19 +28,32 @@
                 </b-link>
             </template>
             <template #row-details="data">
-                <span>{{ data.item.parsed_message.body }}</span>
+                <span v-if="data.item.parsed_message.body !== undefined">{{ data.item.parsed_message.body }}</span>
+                <div v-else-if="data.item.topic === 'lvc.lvc-counterpart'">
+                    <dl class="row" v-for="[key, value] in Object.entries(data.item.parsed_message)" :key="[key, value]">
+                        <dt class="col-md-3">{{ key }}: </dt>
+                        <dd class="col-md-9">{{ value }}</dd>
+                    </dl>
+                </div>
             </template>
             <template #cell(identifier)="data">
-                <b-link :href="getAlertUrl(data.value)">{{ data.value }}</b-link>
+                <b-link :href="getAlertUrl(data.item)">{{ data.value }}</b-link>
             </template>
             <template #cell(timestamp)="data">
-                {{ getAlertDate(data) }}
+                {{ getAlertDate(data.item) }}
             </template>
             <template #cell(from)="data">
-                {{ data.item.parsed_message.from }}
+                <span v-if="data.item.topic === 'gcn-circular'">
+                    {{ getSimplifiedFromField(data.item.parsed_message.from) }}
+                </span>
+                <span v-else-if="data.item.topic === 'lvc.lvc-counterpart'">Swift-XRT Observation</span>
             </template>
             <template #cell(subject)="data">
-                {{ data.item.parsed_message.subject }}
+                <span v-if="data.item.parsed_message.subject !== undefined">{{ data.item.parsed_message.subject }}</span>
+                <span v-else-if="data.item.right_ascension !== undefined && data.item.declination !== undefined">
+                    Right Ascension: {{ data.item.right_ascension_sexagesimal }}<br>
+                    Declination: {{ data.item.declination_sexagesimal }}
+                </span>
             </template>
         </b-table>
     </div>
@@ -51,6 +69,7 @@ export default {
         return {
             alert_data: [],
             alert_fields: [
+                { 'key': 'selected', 'label': '' },
                 { 'key': 'show_details', 'label': '' },
                 { 'key': 'identifier' },
                 { 'key': 'timestamp', 'sortable': true },
@@ -65,23 +84,23 @@ export default {
             type: Array,
             required: true
         },
-        skipApiBaseUrl: {
-            type: String,
-            required: true
-        }
     },
     mounted() {
-        console.log(this.alerts);
     },
     methods: {
         getAlertUrl(alert) {
-            return `${this.skipApiBaseUrl}/api/v2/alerts/${alert}`;
+            return `${this.$store.state.skipApiBaseUrl}/api/v2/alerts/${alert.id}`;
         },
         getAlertsFromAlertData() {
-            return this.alerts.filter(alert => alert.parsed_message.body !== undefined);
+            return this.alerts.filter(alert => alert.parsed_message.title !== "GCN/LVC NOTICE");
         },
         getAlertDate(alert) {
             return moment(alert.timestamp).format('YYYY-MM-DD hh:mm:ss');
+        },
+        getSimplifiedFromField(from) {
+            // remove <name@example.com> part of from field; leave name at Institution
+            // split on the '<', take the first part, and trim the whitespace
+            return from.split('<')[0].trim();
         },
         showRowDetails(item, index, event) {
             item._showDetails = !item._showDetails;
