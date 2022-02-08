@@ -141,7 +141,7 @@ export default {
       // retrieve the superevent data from the REST API
       axios
         .get(
-          `${this.$store.state.tomApiBaseUrl}/api/superevents/${this.superevent_id}`
+          `${this.$store.state.tomApiBaseUrl}/api/nonlocalizedevents/${this.superevent_id}`
         )
         .then((response) => {
           response["data"]["event_candidates"].forEach((event_candidate) => {
