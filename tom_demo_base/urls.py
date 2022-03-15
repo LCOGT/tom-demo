@@ -22,7 +22,7 @@ from tom_demo.views import SupereventView
 
 urlpatterns = [
     path('nonlocalizedevents/<int:pk>/', SupereventView.as_view(), name='superevent_vue_app'),
-    path('nonlocalizedevents/', include('tom_nonlocalizedevents.urls')),
+    path('nonlocalizedevents/', include('tom_nonlocalizedevents.urls', namespace='nonlocalizedevents')),
     path('observations/', include('tom_demo.urls')),
     path('', include('tom_common.urls')),
 
