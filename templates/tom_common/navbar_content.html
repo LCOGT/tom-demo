@@ -40,7 +40,7 @@ For customization instructions, see tom_common/base.html
 </li>
 
 <li class="nav-item {% if request.resolver_match.namespace == 'superevents' %}active{% endif %}">
-    <a class="nav-link" href="{% url 'superevents:index' %}">Non-Localized Events</a>
+    <a class="nav-link" href="{% url 'nonlocalizedevents:index' %}">Non-Localized Events</a>
 </li>
 
 <li class="nav-item {% if 'user' in request.resolver_match.url_name %}active{% endif %}">

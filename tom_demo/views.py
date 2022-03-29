@@ -2,7 +2,7 @@ from django.views.generic import TemplateView
 
 from tom_common.mixins import SuperuserRequiredMixin
 from tom_observations.views import ObservationCreateView
-from tom_superevents.models import Superevent
+from tom_nonlocalizedevents.models import Superevent
 
 
 class CustomObservationCreateView(SuperuserRequiredMixin, ObservationCreateView):

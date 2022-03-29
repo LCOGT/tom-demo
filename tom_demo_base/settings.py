@@ -52,13 +52,14 @@ INSTALLED_APPS = [
     'django_filters',
     'django_gravatar',
     'rest_framework',
+    'rest_framework.authtoken',
     'tom_targets',
     'tom_alerts',
     'tom_catalogs',
     'tom_observations',
     'tom_dataproducts',
     'tom_scimma',
-    'tom_superevents',
+    'tom_nonlocalizedevents',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig'
 ]
 
