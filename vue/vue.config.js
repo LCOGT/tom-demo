@@ -13,15 +13,9 @@ const BundleTracker = require("webpack-bundle-tracker");
 const pages = {
     'vue_health_check_01': {
         entry: './src/main.js',
-        chunks: ['chunk-vendors']
     },
     'target_list': {
         entry: './src/target_list.js',
-        chunks: ['chunk-vendors']
-    },
-    'superevent_vue_app': {
-        entry: './src/superevent.js',
-        chunks: ['chunk-vendors']
     }
 }
 
@@ -36,21 +30,12 @@ module.exports = {
     publicPath: process.env.NODE_ENV === 'production' || 'staging'
         ? ''
         : 'http://localhost:8080/',
-    outputDir: '../_static/vue/',
+    outputDir: '../static/tom_demo/vue/',
 
     chainWebpack: config => {
 
         config.optimization
-            .splitChunks({
-                cacheGroups: {
-                    vendor: {
-                        test: /[\\/]node_modules[\\/]/,
-                        name: "chunk-vendors",
-                        chunks: "all",
-                        priority: 1
-                    },
-                },
-            });
+            .splitChunks(false);
 
         Object.keys(pages).forEach(page => {
             config.plugins.delete(`html-${page}`);
@@ -61,7 +46,10 @@ module.exports = {
         // django-webpack-loader will read webpack-stats.json
         config
             .plugin('BundleTracker')
-            .use(BundleTracker, [{filename: '../vue/webpack-stats.json'}]);
+            .use(BundleTracker, [{
+                filename: '../static/tom_demo/vue/webpack-stats.json',
+                relativePath: true
+            }]);
 
         // this allows reference paths to static file within Vue components like this:
         // for example, <img src="~__STATIC__/logo.png">

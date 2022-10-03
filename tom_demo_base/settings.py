@@ -112,7 +112,7 @@ DATABASES = {
        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.postgresql'),
        'NAME': os.getenv('DB_NAME', 'tom_demo'),
        'USER': os.getenv('DB_USER', 'postgres'),
-       'PASSWORD': os.getenv('DB_PASS', ''),
+       'PASSWORD': os.getenv('DB_PASS', 'postgres'),
        'HOST': os.getenv('DB_HOST', '127.0.0.1'),
        'PORT': os.getenv('DB_PORT', '5432'),
    },
@@ -153,7 +153,24 @@ AUTHENTICATION_BACKENDS = (
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_URLS_REGEX = r'^/(api)/.*$|^/o/.*'
-
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8080',
+    'http://localhost:8000',
+    'http://localhost',
+    'http://127.0.0.1:8080',
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1',
+    'http://*'
+]
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8080',
+    'http://localhost:8000',
+    'http://localhost',
+    'http://127.0.0.1:8080',
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1:80',
+    'http://*'
+]
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -347,13 +364,22 @@ THUMBNAIL_DEFAULT_SIZE = (200, 200)
 HINTS_ENABLED = True
 HINT_LEVEL = 20
 
-# Vue and django-webpack-loader/webpack-bundle-tracker configuration
-VUE_FRONTEND_DIR = os.path.join(BASE_DIR, 'vue')
+VUE_FRONTEND_DIR = os.path.join(STATIC_ROOT, 'vue')  # I don't think this is actually used...
+VUE_FRONTEND_DIR_TOM_NONLOCAL = os.path.join(STATIC_ROOT, 'tom_nonlocalizedevents/vue')
+VUE_FRONTEND_DIR_TOM_DEMO = os.path.join(STATIC_ROOT, 'tom_demo/vue')
 WEBPACK_LOADER = {
-    'DEFAULT': {
+    'TOM_NONLOCALIZEDEVENTS': {
         'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': 'vue/',  # must end with slash
-        'STATS_FILE': os.path.join(VUE_FRONTEND_DIR, 'webpack-stats.json'),
+        'BUNDLE_DIR_NAME': 'tom_nonlocalizedevents/vue/',  # must end with slash
+        'STATS_FILE': os.path.join(VUE_FRONTEND_DIR_TOM_NONLOCAL, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
+    },
+    'TOM_DEMO': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'tom_demo/vue/',  # must end with slash
+        'STATS_FILE': os.path.join(VUE_FRONTEND_DIR_TOM_DEMO, 'webpack-stats.json'),
         'POLL_INTERVAL': 0.1,
         'TIMEOUT': None,
         'IGNORE': [r'.+\.hot-update.js', r'.+\.map']

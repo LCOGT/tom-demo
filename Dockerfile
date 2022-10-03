@@ -10,8 +10,6 @@ WORKDIR /tom-demo
 COPY requirements.txt /tom-demo
 RUN pip install --upgrade pip && pip install --no-cache-dir -r /tom-demo/requirements.txt
 
-COPY . /tom-demo
-
 # continue to setup the image with node and npm install (via nvm)
 # see https://stackoverflow.com/questions/25899912/
 
@@ -31,6 +29,8 @@ RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh | b
 
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+COPY . /tom-demo
 
 # write new webpack-stats.json for django-webpack-loader to use
 # and install the Vue JS/CSS etc as static files

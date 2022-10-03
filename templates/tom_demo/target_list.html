@@ -8,13 +8,12 @@
 
     <hr>
 
-    <div id="target-list">
+    <div id="target-list-view">
         <app></app>
     </div>
 
     <hr>
 
-    {% render_bundle 'chunk-vendors' %}
-    {% render_bundle 'target_list' %}
+    {% render_bundle 'target_list' config='TOM_DEMO' %}
 
 {% endblock %}
