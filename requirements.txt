@@ -1,15 +1,11 @@
 Werkzeug==2.0.2 # pinned b/c 2.1.0 breaks plotly/dash
 django-cors-headers>=3.7
 django_plotly_dash
+django-webpack-loader==1.6.0
 factory_boy==2.12.0
 gunicorn[gevent]==20.0.4
 psycopg2-binary
-tom-nonlocalizedevents>=0.5
-# uncomment the following line for local development
-#-e /home/llindstrom/dev/tom_nonlocalizedevents
-django-webpack-loader==0.6.0
+tom_nonlocalizedevents>=0.5.2
 tomtoolkit==2.10.3
-#-e /home/llindstrom/dev/tom_base
 tom_scimma==1.1.6
-#-e /home/llindstrom/dev/tom_scimma
 whitenoise~=5.2
