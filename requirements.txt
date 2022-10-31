@@ -6,6 +6,6 @@ factory_boy==2.12.0
 gunicorn[gevent]==20.0.4
 psycopg2-binary
 tom_nonlocalizedevents>=0.5.2
-tomtoolkit==2.10.3
+tomtoolkit~=2.11
 tom_scimma==1.1.6
 whitenoise~=5.2
