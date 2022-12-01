@@ -144,7 +144,7 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - name: tmp-ingester
+            - name: tmp-stream-ingester
               mountPath: /tmp
               readOnly: false
 
@@ -153,6 +153,10 @@ spec:
           configMap:
             name: {{ include "tom-demo.fullname" . }}
         - name: tmp
+          emptyDir:
+            medium: Memory
+            sizeLimit: 16Mi
+        - name: tmp-stream-ingester
           emptyDir:
             medium: Memory
             sizeLimit: 16Mi
