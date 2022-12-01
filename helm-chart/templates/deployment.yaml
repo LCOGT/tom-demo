@@ -126,6 +126,28 @@ spec:
               mountPath: /tmp
               readOnly: false
 
+        - name: {{ .Chart.Name }}-stream-ingester
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - python
+            - manage.py
+            - readstreams
+          env:
+            {{ include "tom-demo.extraEnv" . | nindent 12 }}
+            {{ include "tom-demo.backendEnv" . | nindent 12 }}
+          envFrom:
+            - secretRef:
+                name: tom-demo-secrets
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: tmp-ingester
+              mountPath: /tmp
+              readOnly: false
+
       volumes:
         - name: app-configuration
           configMap:
