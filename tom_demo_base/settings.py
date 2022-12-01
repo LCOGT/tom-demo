@@ -288,6 +288,17 @@ DATA_PROCESSORS = {
     'spectroscopy': 'tom_dataproducts.processors.spectroscopy_processor.SpectroscopyProcessor',
 }
 
+DATA_SHARING = {
+    'hermes': {
+        'DISPLAY_NAME': os.getenv('HERMES_DISPLAY_NAME', 'Hermes'),
+        'BASE_URL': os.getenv('HERMES_BASE_URL', 'http://hermes-dev.lco.gtn/'),
+        'SCIMMA_AUTH_USERNAME': os.getenv('SCIMMA_AUTH_USERNAME', None),
+        'CREDENTIAL_USERNAME': os.getenv('SCIMMA_CREDENTIAL_USERNAME', None),
+        'CREDENTIAL_PASSWORD': os.getenv('SCIMMA_CREDENTIAL_PASSWORD', None),
+        'USER_TOPICS': ['hermes.test', 'tomtoolkit.test']
+    },
+}
+
 TOM_FACILITY_CLASSES = [
     'facilities.restricted_lco.RestrictedLCOFacility',
     'facilities.custom_lco.CustomLCO',
