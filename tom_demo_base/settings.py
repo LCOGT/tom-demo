@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
+TOM_NAME = 'TOM Demo'
 
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
