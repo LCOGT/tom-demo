@@ -317,8 +317,8 @@ ALERT_STREAMS = [
             'PASSWORD': os.getenv('SCIMMA_AUTH_PASSWORD', None),
             'TOPIC_HANDLERS': {
                 'sys.heartbeat': 'tom_alertstreams.alertstreams.hopskotch.heartbeat_handler',
-                'tomtoolkit.test': 'tom_alertstreams.alertstreams.hopskotch.alert_logger',
-                'hermes.test': 'tom_alertstreams.alertstreams.hopskotch.alert_logger',
+                'tomtoolkit.test': 'tom_dataproducts.alertstreams.hermes.hermes_alert_handler',
+                'hermes.test': 'tom_dataproducts.alertstreams.hermes.hermes_alert_handler',
             },
         },
     },
