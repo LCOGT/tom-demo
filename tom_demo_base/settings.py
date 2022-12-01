@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'tom_dataproducts',
     'tom_scimma',
     'tom_nonlocalizedevents',
+    'tom_alertstreams',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig'
 ]
 
@@ -304,6 +305,44 @@ TOM_FACILITY_CLASSES = [
     'facilities.custom_lco.CustomLCO',
     'tom_observations.facilities.gemini.GEMFacility',
     'facilities.custom_manual.DemonstrationManualFacility'
+]
+
+ALERT_STREAMS = [
+    {
+        'ACTIVE': True,
+        'NAME': 'tom_alertstreams.alertstreams.hopskotch.HopskotchAlertStream',
+        'OPTIONS': {
+            'URL': 'kafka://kafka.scimma.org/',
+            'USERNAME': os.getenv('SCIMMA_AUTH_USERNAME', None),
+            'PASSWORD': os.getenv('SCIMMA_AUTH_PASSWORD', None),
+            'TOPIC_HANDLERS': {
+                'sys.heartbeat': 'tom_alertstreams.alertstreams.hopskotch.heartbeat_handler',
+                'tomtoolkit.test': 'tom_alertstreams.alertstreams.hopskotch.alert_logger',
+                'hermes.test': 'tom_alertstreams.alertstreams.hopskotch.alert_logger',
+            },
+        },
+    },
+    {
+        'ACTIVE': False,
+        'NAME': 'tom_alertstreams.alertstreams.gcn.GCNClassicAlertStream',
+        # The keys of the OPTIONS dictionary become (lower-case) properties of the AlertStream instance.
+        'OPTIONS': {
+            # see https://github.com/nasa-gcn/gcn-kafka-python#to-use for configuration details.
+            'GCN_CLASSIC_CLIENT_ID': os.getenv('GCN_CLASSIC_CLIENT_ID', None),
+            'GCN_CLASSIC_CLIENT_SECRET': os.getenv('GCN_CLASSIC_CLIENT_SECRET', None),
+            'DOMAIN': 'gcn.nasa.gov',  # optional, defaults to 'gcn.nasa.gov'
+            'CONFIG': {  # optional
+                # 'group.id': 'tom_alertstreams-my-custom-group-id',
+                # 'auto.offset.reset': 'earliest',
+                # 'enable.auto.commit': False
+            },
+            'TOPIC_HANDLERS': {
+                'gcn.classic.text.LVC_INITIAL': 'tom_alertstreams.alertstreams.alertstream.alert_logger',
+                'gcn.classic.text.LVC_PRELIMINARY': 'tom_alertstreams.alertstreams.alertstream.alert_logger',
+                'gcn.classic.text.LVC_RETRACTION': 'tom_alertstreams.alertstreams.alertstream.alert_logger',
+            },
+        },
+    }
 ]
 
 TOM_ALERT_CLASSES = [
