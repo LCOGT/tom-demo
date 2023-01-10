@@ -314,8 +314,8 @@ ALERT_STREAMS = [
         'NAME': 'tom_alertstreams.alertstreams.hopskotch.HopskotchAlertStream',
         'OPTIONS': {
             'URL': 'kafka://kafka.scimma.org/',
-            'USERNAME': os.getenv('SCIMMA_AUTH_USERNAME', None),
-            'PASSWORD': os.getenv('SCIMMA_AUTH_PASSWORD', None),
+            'USERNAME': os.getenv('SCIMMA_CREDENTIAL_USERNAME', None),
+            'PASSWORD': os.getenv('SCIMMA_CREDENTIAL_PASSWORD', None),
             'TOPIC_HANDLERS': {
                 'sys.heartbeat': 'tom_alertstreams.alertstreams.hopskotch.heartbeat_handler',
                 'tomtoolkit.test': 'tom_dataproducts.alertstreams.hermes.hermes_alert_handler',
