@@ -18,6 +18,11 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+# see https://helm.sh/docs/chart_best_practices/rbac/#rbac-resources-should-be-created-by-default
+rbac:
+  # Specifies whether Role-Based Access Control (RBAC) resources should be created
+  create: true
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
