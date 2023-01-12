@@ -20,4 +20,4 @@ ingress:
     - host: tom-demo.lco.global
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
