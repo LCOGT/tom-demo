@@ -33,7 +33,6 @@ spec:
         paths:
         {{- range .paths }}
           - path: {{ . }}
-            pathType: ImplementationSpecific
             {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
             pathType: {{ .pathType }}
             {{- end }}
