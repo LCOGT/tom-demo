@@ -19,5 +19,4 @@ ingress:
   hosts:
     - host: tom-demo.lco.global
       paths:
-        - path: /
-          pathType: Prefix
+        - "/"
