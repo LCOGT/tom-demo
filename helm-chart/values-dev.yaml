@@ -17,4 +17,6 @@ ingress:
   hosts:
     - host: tom-demo-dev.lco.gtn
       paths:
-        - "/"
+        - path: /
+          pathType: ImplementationSpecific
+
