@@ -18,5 +18,5 @@ ingress:
     - host: tom-demo-dev.lco.gtn
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
 
