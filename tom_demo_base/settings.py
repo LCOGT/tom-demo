@@ -353,7 +353,6 @@ TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.lasair.LasairBroker',
     'tom_alerts.brokers.scout.ScoutBroker',
     'tom_alerts.brokers.tns.TNSBroker',
-    'tom_fink.fink.FinkBroker'
 ]
 
 TOM_ALERT_DASH_CLASSES = [
