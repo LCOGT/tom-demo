@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'tom_catalogs',
     'tom_observations',
     'tom_dataproducts',
-    'tom_scimma',
     'tom_nonlocalizedevents',
     'tom_alertstreams',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig'
