@@ -347,11 +347,10 @@ ALERT_STREAMS = [
 
 TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.alerce.ALeRCEBroker',
-    'tom_alerts.brokers.mars.MARSBroker',
     'tom_alerts.brokers.lasair.LasairBroker',
     'tom_alerts.brokers.scout.ScoutBroker',
     'tom_alerts.brokers.tns.TNSBroker',
-    'tom_scimma.scimma.SCIMMABroker'
+    'tom_fink.fink.FinkBroker'
 ]
 
 TOM_ALERT_DASH_CLASSES = [
@@ -368,6 +367,7 @@ TOM_HARVESTER_CLASSES = [
 ]
 
 BROKERS = {
+    # TODO: the SCiMMA Broker should be replaced with a HERMES Broker
     'SCIMMA': {
         'url': 'http://skip.dev.hop.scimma.org',
         'api_key': os.getenv('SKIP_API_KEY', ''),
