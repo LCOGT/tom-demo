@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!hrpq+h(_n!ml847_!0h6hi8+1y0t&amp;#%&amp;eo_^=#yd6af_!+cf2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', False)
+DEBUG = os.getenv('TOM_DEMO_DEBUG', False)
 
 ALLOWED_HOSTS = ['*']
 
@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'tom_catalogs',
     'tom_observations',
     'tom_dataproducts',
-    'tom_scimma',
     'tom_nonlocalizedevents',
     'tom_alertstreams',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig'
@@ -316,6 +315,9 @@ ALERT_STREAMS = [
             'URL': 'kafka://kafka.scimma.org/',
             'USERNAME': os.getenv('SCIMMA_CREDENTIAL_USERNAME', None),
             'PASSWORD': os.getenv('SCIMMA_CREDENTIAL_PASSWORD', None),
+            # The hop-client requires that the GROUP_ID prefix match the SCIMMA_AUTH_USERNAME
+            'GROUP_ID': os.getenv('SCIMMA_CREDENTIAL_USERNAME', "") + '-' +
+                        os.getenv('HOPSKOTCH_GROUP_ID', 'tom-demo-dev' if DEBUG else 'tom-demo'),
             'TOPIC_HANDLERS': {
                 'sys.heartbeat': 'tom_alertstreams.alertstreams.hopskotch.heartbeat_handler',
                 'tomtoolkit.test': 'tom_dataproducts.alertstreams.hermes.hermes_alert_handler',
@@ -324,7 +326,7 @@ ALERT_STREAMS = [
         },
     },
     {
-        'ACTIVE': False,
+        'ACTIVE': True,
         'NAME': 'tom_alertstreams.alertstreams.gcn.GCNClassicAlertStream',
         # The keys of the OPTIONS dictionary become (lower-case) properties of the AlertStream instance.
         'OPTIONS': {
@@ -333,14 +335,14 @@ ALERT_STREAMS = [
             'GCN_CLASSIC_CLIENT_SECRET': os.getenv('GCN_CLASSIC_CLIENT_SECRET', None),
             'DOMAIN': 'gcn.nasa.gov',  # optional, defaults to 'gcn.nasa.gov'
             'CONFIG': {  # optional
-                # 'group.id': 'tom_alertstreams-my-custom-group-id',
+                'group.id': 'tom-demo-dev.lco.gtn' if DEBUG else 'tom-demo.lco.global',
                 # 'auto.offset.reset': 'earliest',
                 # 'enable.auto.commit': False
             },
             'TOPIC_HANDLERS': {
-                'gcn.classic.text.LVC_INITIAL': 'tom_alertstreams.alertstreams.alertstream.alert_logger',
-                'gcn.classic.text.LVC_PRELIMINARY': 'tom_alertstreams.alertstreams.alertstream.alert_logger',
-                'gcn.classic.text.LVC_RETRACTION': 'tom_alertstreams.alertstreams.alertstream.alert_logger',
+                'gcn.classic.text.LVC_INITIAL': 'tom_nonlocalizedevents.alertstream_handlers.gw_event_handler.handle_message',
+                'gcn.classic.text.LVC_PRELIMINARY': 'tom_nonlocalizedevents.alertstream_handlers.gw_event_handler.handle_message',
+                'gcn.classic.text.LVC_RETRACTION': 'tom_nonlocalizedevents.alertstream_handlers.gw_event_handler.handle_retraction',
             },
         },
     }
@@ -348,11 +350,9 @@ ALERT_STREAMS = [
 
 TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.alerce.ALeRCEBroker',
-    'tom_alerts.brokers.mars.MARSBroker',
     'tom_alerts.brokers.lasair.LasairBroker',
     'tom_alerts.brokers.scout.ScoutBroker',
     'tom_alerts.brokers.tns.TNSBroker',
-    'tom_scimma.scimma.SCIMMABroker'
 ]
 
 TOM_ALERT_DASH_CLASSES = [
@@ -369,6 +369,7 @@ TOM_HARVESTER_CLASSES = [
 ]
 
 BROKERS = {
+    # TODO: the SCiMMA Broker should be replaced with a HERMES Broker
     'SCIMMA': {
         'url': 'http://skip.dev.hop.scimma.org',
         'api_key': os.getenv('SKIP_API_KEY', ''),
@@ -414,6 +415,12 @@ THUMBNAIL_DEFAULT_SIZE = (200, 200)
 
 HINTS_ENABLED = True
 HINT_LEVEL = 20
+
+#
+# tom_nonlocalizedevents configuration
+#
+TOM_API_URL = os.getenv('TOM_API_URL', 'http://127.0.0.1:8000')
+HERMES_API_URL = os.getenv('HERMES_API_URL', 'http://hermes-dev.lco.gtn')
 
 VUE_FRONTEND_DIR = os.path.join(STATIC_ROOT, 'vue')  # I don't think this is actually used...
 VUE_FRONTEND_DIR_TOM_NONLOCAL = os.path.join(STATIC_ROOT, 'tom_nonlocalizedevents/vue')
