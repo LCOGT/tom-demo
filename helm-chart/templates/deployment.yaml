@@ -112,10 +112,12 @@ spec:
               containerPort: 8080
               protocol: TCP
           livenessProbe:
+            timeoutSeconds: 10
             httpGet:
               path: /
               port: http
           readinessProbe:
+            timeoutSeconds: 10
             httpGet:
               path: /
               port: http
