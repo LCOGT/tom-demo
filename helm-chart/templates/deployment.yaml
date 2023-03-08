@@ -26,10 +26,10 @@ spec:
             - -c
             - >
               until pg_isready \
-                  --username={{ .Values.postgresql.postgresqlUsername | quote }} \
-                  --dbname={{ .Values.postgresql.postgresqlDatabase | quote }} \
+                  --username={{ .Values.postgresql.auth.username | quote }} \
+                  --dbname={{ .Values.postgresql.auth.database | quote }} \
                   --host={{ include "tom-demo.dbhost" . | quote }} \
-                  --port={{ .Values.postgresql.service.port | quote }};
+                  --port={{ .Values.postgresql.primary.service.port.postgresql | quote }};
                 do echo waiting for database;
                 sleep 2;
                 done;
