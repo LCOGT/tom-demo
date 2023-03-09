@@ -4,3 +4,13 @@ appVersion: "0.0.0"
 description: A Helm chart for the TOM Toolkit demostration TOM
 name: tom-demo
 version: 0.6.0 # will be appended with -${git-commit-id}
+
+# for helm3, dependencies should be here in Chart.yaml and
+# requirements.yaml (where depencencies were for helm2) should go away
+
+dependencies:
+- name: postgresql
+  # this is the version of the bitnami-packaged postgresql helm chart
+  version: 12.2.1
+  repository: https://charts.bitnami.com/bitnami
+  condition: useDockerizedDatabase
