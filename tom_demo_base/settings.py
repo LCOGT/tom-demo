@@ -61,9 +61,12 @@ INSTALLED_APPS = [
     'tom_dataproducts',
     'tom_nonlocalizedevents',
     'tom_alertstreams',
+    'tom_fink',
+    'tom_hermes',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig'
 ]
 
+# TODO: please explain why this is necessary. what error does it prevent?
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -353,6 +356,8 @@ TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.lasair.LasairBroker',
     'tom_alerts.brokers.scout.ScoutBroker',
     'tom_alerts.brokers.tns.TNSBroker',
+    'tom_alerts.brokers.fink.FinkBroker',
+    'tom_alerts.brokers.hermes.HermesBroker',
 ]
 
 TOM_ALERT_DASH_CLASSES = [
