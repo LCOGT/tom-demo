@@ -361,9 +361,9 @@ TOM_ALERT_CLASSES = [
 ]
 
 TOM_ALERT_DASH_CLASSES = [
-    'tom_alerts_dash.brokers.mars.MARSDashBroker',
+    #'tom_alerts_dash.brokers.mars.MARSDashBroker',
     'tom_alerts_dash.brokers.alerce.ALeRCEDashBroker',
-    'tom_alerts_dash.brokers.scimma.SCIMMADashBroker'
+    #'tom_alerts_dash.brokers.scimma.SCIMMADashBroker'
 ]
 
 TOM_HARVESTER_CLASSES = [
@@ -375,13 +375,13 @@ TOM_HARVESTER_CLASSES = [
 
 BROKERS = {
     # TODO: the SCiMMA Broker should be replaced with a HERMES Broker
-    'SCIMMA': {
-        'url': 'http://skip.dev.hop.scimma.org',
-        'api_key': os.getenv('SKIP_API_KEY', ''),
-        'hopskotch_url': 'dev.hop.scimma.org',
-        'hopskotch_username': os.getenv('HOPSKOTCH_USERNAME', ''),
-        'hopskotch_password': os.getenv('HOPSKOTCH_PASSWORD', ''),
-        'default_hopskotch_topic': 'TOMToolkit.test'
+    'HERMES': {
+        #'url': 'http://skip.dev.hop.scimma.org',
+        #'api_key': os.getenv('SKIP_API_KEY', ''),
+        #'hopskotch_url': 'dev.hop.scimma.org',
+        #'hopskotch_username': os.getenv('HOPSKOTCH_USERNAME', ''),
+        #'hopskotch_password': os.getenv('HOPSKOTCH_PASSWORD', ''),
+        #'default_hopskotch_topic': 'TOMToolkit.test'
     }
 }
 
