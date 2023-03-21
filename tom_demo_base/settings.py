@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'tom_dataproducts',
     'tom_nonlocalizedevents',
     'tom_alertstreams',
+    'tom_swift',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig'
 ]
 
@@ -247,6 +248,18 @@ CACHES = {
 # TOM Specific configuration
 TARGET_TYPE = 'SIDEREAL'
 
+# These are the facilities that will be available on the TargetDetail page Observe tab
+# i.e. the facilities to which you can submit an observation request.
+TOM_FACILITY_CLASSES = [
+    'facilities.restricted_lco.RestrictedLCOFacility',
+    'facilities.custom_lco.CustomLCO',
+    'tom_observations.facilities.gemini.GEMFacility',
+    'facilities.custom_manual.DemonstrationManualFacility',
+    'tom_swift.swift.SwiftFacility'
+]
+
+# This is the configuration dictionary (of dictionaries) for the facilities
+# listed above in the TOM_FACILITY_CLASSES list.
 FACILITIES = {
     'LCO': {
         'portal_url': 'https://observe.lco.global',
@@ -273,6 +286,9 @@ FACILITIES = {
             },
         },
     },
+    'SWIFT': {
+        # TODO: determine and setup Swift Facility configuration params
+    }
 }
 
 # Define the valid data product types for your TOM. Be careful when removing items, as previously valid types will no
@@ -299,13 +315,6 @@ DATA_SHARING = {
         'USER_TOPICS': ['hermes.test', 'tomtoolkit.test']
     },
 }
-
-TOM_FACILITY_CLASSES = [
-    'facilities.restricted_lco.RestrictedLCOFacility',
-    'facilities.custom_lco.CustomLCO',
-    'tom_observations.facilities.gemini.GEMFacility',
-    'facilities.custom_manual.DemonstrationManualFacility'
-]
 
 ALERT_STREAMS = [
     {
