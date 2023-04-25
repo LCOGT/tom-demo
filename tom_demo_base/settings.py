@@ -353,11 +353,13 @@ ALERT_STREAMS = [
 
 TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.alerce.ALeRCEBroker',
+    'tom_alerts.brokers.antares.ANTARESBroker',
+    'tom_fink.fink.FinkBroker',
+    'tom_alerts.brokers.gaia.GaiaBroker',
+    'tom_hermes.hermes.HermesBroker',
     'tom_alerts.brokers.lasair.LasairBroker',
     'tom_alerts.brokers.scout.ScoutBroker',
     'tom_alerts.brokers.tns.TNSBroker',
-    'tom_fink.fink.FinkBroker',
-    'tom_hermes.hermes.HermesBroker',
 ]
 
 TOM_ALERT_DASH_CLASSES = [
