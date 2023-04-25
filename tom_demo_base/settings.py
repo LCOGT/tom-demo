@@ -425,7 +425,7 @@ HINT_LEVEL = 20
 # tom_nonlocalizedevents configuration
 #
 TOM_API_URL = os.getenv('TOM_API_URL', 'http://127.0.0.1:8000')
-HERMES_API_URL = os.getenv('HERMES_API_URL', 'http://hermes-dev.lco.gtn')
+HERMES_API_URL = os.getenv('HERMES_API_URL', 'https://hermes.lco.global')
 
 VUE_FRONTEND_DIR = os.path.join(STATIC_ROOT, 'vue')  # I don't think this is actually used...
 VUE_FRONTEND_DIR_TOM_NONLOCAL = os.path.join(STATIC_ROOT, 'tom_nonlocalizedevents/vue')
