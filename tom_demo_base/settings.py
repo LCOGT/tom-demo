@@ -102,6 +102,7 @@ TEMPLATES = [
     },
 ]
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 WSGI_APPLICATION = 'tom_demo_base.wsgi.application'

@@ -10,3 +10,4 @@ tomtoolkit~=2.0
 tom-fink~=0.4
 tom-hermes~=0.1
 whitenoise~=5.2
+crispy-bootstrap4
