@@ -7,7 +7,6 @@ psycopg2-binary~=2.9
 tom_nonlocalizedevents~=0.7
 tom-alertstreams~=0.6
 tomtoolkit>=2.14
-tom-fink~=0.4
 tom-hermes~=0.1
 whitenoise~=5.2
 crispy-bootstrap4

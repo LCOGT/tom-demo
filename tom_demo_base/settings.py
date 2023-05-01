@@ -62,7 +62,6 @@ INSTALLED_APPS = [
     'tom_dataproducts',
     'tom_nonlocalizedevents',
     'tom_alertstreams',
-    'tom_fink',
     'tom_hermes',
 ]
 
@@ -350,7 +349,6 @@ ALERT_STREAMS = [
 TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.alerce.ALeRCEBroker',
     'tom_alerts.brokers.antares.ANTARESBroker',
-    'tom_fink.fink.FinkBroker',
     'tom_alerts.brokers.gaia.GaiaBroker',
     'tom_hermes.hermes.HermesBroker',
     'tom_alerts.brokers.lasair.LasairBroker',
