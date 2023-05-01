@@ -61,9 +61,12 @@ INSTALLED_APPS = [
     'tom_dataproducts',
     'tom_nonlocalizedevents',
     'tom_alertstreams',
+    'tom_fink',
+    'tom_hermes',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig'
 ]
 
+# TODO: please explain why this is necessary. what error does it prevent?
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -350,15 +353,19 @@ ALERT_STREAMS = [
 
 TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.alerce.ALeRCEBroker',
+    'tom_alerts.brokers.antares.ANTARESBroker',
+    'tom_fink.fink.FinkBroker',
+    'tom_alerts.brokers.gaia.GaiaBroker',
+    'tom_hermes.hermes.HermesBroker',
     'tom_alerts.brokers.lasair.LasairBroker',
     'tom_alerts.brokers.scout.ScoutBroker',
     'tom_alerts.brokers.tns.TNSBroker',
 ]
 
 TOM_ALERT_DASH_CLASSES = [
-    'tom_alerts_dash.brokers.mars.MARSDashBroker',
+    #'tom_alerts_dash.brokers.mars.MARSDashBroker',
     'tom_alerts_dash.brokers.alerce.ALeRCEDashBroker',
-    'tom_alerts_dash.brokers.scimma.SCIMMADashBroker'
+    #'tom_alerts_dash.brokers.scimma.SCIMMADashBroker'
 ]
 
 TOM_HARVESTER_CLASSES = [
@@ -370,13 +377,13 @@ TOM_HARVESTER_CLASSES = [
 
 BROKERS = {
     # TODO: the SCiMMA Broker should be replaced with a HERMES Broker
-    'SCIMMA': {
-        'url': 'http://skip.dev.hop.scimma.org',
-        'api_key': os.getenv('SKIP_API_KEY', ''),
-        'hopskotch_url': 'dev.hop.scimma.org',
-        'hopskotch_username': os.getenv('HOPSKOTCH_USERNAME', ''),
-        'hopskotch_password': os.getenv('HOPSKOTCH_PASSWORD', ''),
-        'default_hopskotch_topic': 'TOMToolkit.test'
+    'HERMES': {
+        #'url': 'http://skip.dev.hop.scimma.org',
+        #'api_key': os.getenv('SKIP_API_KEY', ''),
+        #'hopskotch_url': 'dev.hop.scimma.org',
+        #'hopskotch_username': os.getenv('HOPSKOTCH_USERNAME', ''),
+        #'hopskotch_password': os.getenv('HOPSKOTCH_PASSWORD', ''),
+        #'default_hopskotch_topic': 'TOMToolkit.test'
     }
 }
 
@@ -420,7 +427,7 @@ HINT_LEVEL = 20
 # tom_nonlocalizedevents configuration
 #
 TOM_API_URL = os.getenv('TOM_API_URL', 'http://127.0.0.1:8000')
-HERMES_API_URL = os.getenv('HERMES_API_URL', 'http://hermes-dev.lco.gtn')
+HERMES_API_URL = os.getenv('HERMES_API_URL', 'https://hermes.lco.global')
 
 VUE_FRONTEND_DIR = os.path.join(STATIC_ROOT, 'vue')  # I don't think this is actually used...
 VUE_FRONTEND_DIR_TOM_NONLOCAL = os.path.join(STATIC_ROOT, 'tom_nonlocalizedevents/vue')
