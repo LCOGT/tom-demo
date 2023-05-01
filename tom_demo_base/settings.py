@@ -63,7 +63,6 @@ INSTALLED_APPS = [
     'tom_alertstreams',
     'tom_fink',
     'tom_hermes',
-    'django_plotly_dash.apps.DjangoPlotlyDashConfig'
 ]
 
 # TODO: please explain why this is necessary. what error does it prevent?
@@ -79,7 +78,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'django_plotly_dash.middleware.BaseMiddleware',
     'tom_common.middleware.Raise403Middleware',
     'tom_common.middleware.ExternalServiceMiddleware',
     'tom_common.middleware.AuthStrategyMiddleware',
@@ -204,10 +202,6 @@ MEDIA_URL = '/data/'
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-
-    # 'django_plotly_dash.finders.DashAssetFinder',
-    # 'django_plotly_dash.finders.DashComponentFinder',
-    # 'django_plotly_dash.finders.DashAppDirectoryFinder',
 ]
 
 LOGGING = {
@@ -451,25 +445,7 @@ WEBPACK_LOADER = {
     }
 }
 
-# django-plotly-dash configuration
-
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-
-# PLOTLY_COMPONENTS = [
-#     # Common components
-#     'dash_core_components',
-#     'dash_html_components',
-#     'dash_renderer',
-
-#     # django-plotly-dash components
-#     'dpd_components',
-#     # static support if serving local assets
-#     # 'dpd_static_support',
-
-#     # Other components, as needed
-#     'dash_bootstrap_components',
-#     'dash_table'
-# ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
