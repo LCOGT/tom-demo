@@ -7,5 +7,7 @@ gunicorn[gevent]==20.0.4
 psycopg2-binary~=2.9
 tom_nonlocalizedevents~=0.6
 tom-alertstreams~=0.6
-tomtoolkit~=2.13.0
+tomtoolkit~=2.0
+tom-fink~=0.4
+tom-hermes~=0.1
 whitenoise~=5.2
