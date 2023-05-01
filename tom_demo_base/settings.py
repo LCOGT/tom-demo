@@ -287,8 +287,9 @@ FACILITIES = {
         },
     },
     'SWIFT': {
-        # TODO: determine and setup Swift Facility configuration params
-    }
+        'SWIFT_USERNAME': os.getenv('SWIFT_USERNAME', 'anonymous'),
+        'SWIFT_SHARED_SECRET': os.getenv('SWIFT_SHARED_SECRET', 'anonymous'),
+    },
 }
 
 # Define the valid data product types for your TOM. Be careful when removing items, as previously valid types will no
