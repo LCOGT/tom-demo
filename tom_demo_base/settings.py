@@ -422,7 +422,14 @@ HINT_LEVEL = 20
 # tom_nonlocalizedevents configuration
 #
 TOM_API_URL = os.getenv('TOM_API_URL', 'http://127.0.0.1:8000')
-HERMES_API_URL = os.getenv('HERMES_API_URL', 'https://hermes.lco.global')
+
+# both tom_nonlocalized events and tom_hermes use HERMES_API_URL
+# first, try to get its value from the environment, otherwise use the settings.DEBUG var to determine
+# its value. settings.DEBUG is set above according to TOM_DEMO_DEBUG, which is set in the
+# helm-chart/values*.yaml files (and injected into the env via _helpers.tpl)
+# So, tom-demo-dev will use hermes-dev and tom-demo will use hermes
+HERMES_API_URL = os.getenv('HERMES_API_URL',
+                           'https://hermes-dev.lco.global' if DEBUG else 'https://hermes.lco.global')
 
 VUE_FRONTEND_DIR = os.path.join(STATIC_ROOT, 'vue')  # I don't think this is actually used...
 VUE_FRONTEND_DIR_TOM_NONLOCAL = os.path.join(STATIC_ROOT, 'tom_nonlocalizedevents/vue')
