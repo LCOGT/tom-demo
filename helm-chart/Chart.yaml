@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: v2
  # altered to be the git tag (if there is one) or  git commit SHA ID
 appVersion: "0.0.0"
 description: A Helm chart for the TOM Toolkit demostration TOM
