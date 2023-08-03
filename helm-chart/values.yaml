@@ -101,6 +101,9 @@ postgresql:
       limits:
         cpu: 400m
         memory: 512Mi
+    # temporarily expand the PVC size in order to clean up db
+    persistence:
+      size: 12Gi
 
 secretKey: "changeme"
 
