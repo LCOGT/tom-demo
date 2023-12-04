@@ -34,7 +34,6 @@ ALLOWED_HOSTS = ['*']
 TOM_NAME = 'TOM Demo'
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,26 +42,21 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_extensions',
-    'webpack_loader',
     'guardian',
     'tom_common',
     'django_comments',
     'bootstrap4',
-    'crispy_forms',
     'crispy_bootstrap4',
-    'corsheaders',
-    'django_filters',
-    'django_gravatar',
+    'crispy_forms',
     'rest_framework',
     'rest_framework.authtoken',
+    'django_filters',
+    'django_gravatar',
     'tom_targets',
     'tom_alerts',
     'tom_catalogs',
     'tom_observations',
     'tom_dataproducts',
-    'tom_nonlocalizedevents',
-    'tom_alertstreams',
-    'tom_hermes',
 ]
 
 # TODO: please explain why this is necessary. what error does it prevent?
@@ -299,10 +293,10 @@ DATA_SHARING = {
 }
 
 TOM_FACILITY_CLASSES = [
-    'facilities.restricted_lco.RestrictedLCOFacility',
-    'facilities.custom_lco.CustomLCO',
+    'tom_observations.facilities.lco.LCOFacility',
     'tom_observations.facilities.gemini.GEMFacility',
-    'facilities.custom_manual.DemonstrationManualFacility'
+    'tom_observations.facilities.soar.SOARFacility',
+    'tom_observations.facilities.lt.LTFacility'
 ]
 
 ALERT_STREAMS = [
@@ -351,7 +345,7 @@ TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.alerce.ALeRCEBroker',
     'tom_alerts.brokers.antares.ANTARESBroker',
     'tom_alerts.brokers.gaia.GaiaBroker',
-    'tom_hermes.hermes.HermesBroker',
+    # 'tom_hermes.hermes.HermesBroker',
     'tom_alerts.brokers.lasair.LasairBroker',
     'tom_alerts.brokers.scout.ScoutBroker',
     'tom_alerts.brokers.tns.TNSBroker',
