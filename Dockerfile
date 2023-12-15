@@ -35,8 +35,8 @@ COPY . /tom-demo
 
 # write new webpack-stats.json for django-webpack-loader to use
 # and install the Vue JS/CSS etc as static files
-WORKDIR /tom-demo/vue
-RUN npm install && npm run build
+# WORKDIR /tom-demo/vue
+# RUN npm install && npm run build
 
 WORKDIR /tom-demo
 
