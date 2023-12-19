@@ -64,7 +64,7 @@ spec:
           command:
             - python
             - manage.py
-            - readstreams
+#            - readstreams
           env:
             {{ include "tom-demo.extraEnv" . | nindent 12 }}
             {{ include "tom-demo.backendEnv" . | nindent 12 }}
