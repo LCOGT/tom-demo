@@ -19,7 +19,6 @@ from django.views.generic import TemplateView
 
 
 urlpatterns = [
-    path('observations/', include('tom_demo.urls')),
     path('', include('tom_common.urls')),
 
     # Vue health check urls
