@@ -34,7 +34,6 @@ ALLOWED_HOSTS = ['*']
 TOM_NAME = 'TOM Demo'
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,27 +42,24 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_extensions',
-    'webpack_loader',
     'guardian',
     'tom_common',
     'django_comments',
     'bootstrap4',
+    'crispy_bootstrap4',
     'crispy_forms',
-    'corsheaders',
-    'django_filters',
-    'django_gravatar',
     'rest_framework',
     'rest_framework.authtoken',
+    'django_filters',
+    'django_gravatar',
     'tom_targets',
     'tom_alerts',
     'tom_catalogs',
     'tom_observations',
     'tom_dataproducts',
-    'tom_nonlocalizedevents',
-    'tom_alertstreams',
-    'django_plotly_dash.apps.DjangoPlotlyDashConfig'
 ]
 
+# TODO: please explain why this is necessary. what error does it prevent?
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -76,7 +72,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'django_plotly_dash.middleware.BaseMiddleware',
     'tom_common.middleware.Raise403Middleware',
     'tom_common.middleware.ExternalServiceMiddleware',
     'tom_common.middleware.AuthStrategyMiddleware',
@@ -100,6 +95,7 @@ TEMPLATES = [
     },
 ]
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 WSGI_APPLICATION = 'tom_demo_base.wsgi.application'
@@ -201,10 +197,6 @@ MEDIA_URL = '/data/'
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-
-    # 'django_plotly_dash.finders.DashAssetFinder',
-    # 'django_plotly_dash.finders.DashComponentFinder',
-    # 'django_plotly_dash.finders.DashAppDirectoryFinder',
 ]
 
 LOGGING = {
@@ -301,10 +293,10 @@ DATA_SHARING = {
 }
 
 TOM_FACILITY_CLASSES = [
-    'facilities.restricted_lco.RestrictedLCOFacility',
-    'facilities.custom_lco.CustomLCO',
+    'tom_observations.facilities.lco.LCOFacility',
     'tom_observations.facilities.gemini.GEMFacility',
-    'facilities.custom_manual.DemonstrationManualFacility'
+    'tom_observations.facilities.soar.SOARFacility',
+    'tom_observations.facilities.lt.LTFacility'
 ]
 
 ALERT_STREAMS = [
@@ -322,11 +314,12 @@ ALERT_STREAMS = [
                 'sys.heartbeat': 'tom_alertstreams.alertstreams.hopskotch.heartbeat_handler',
                 'tomtoolkit.test': 'tom_dataproducts.alertstreams.hermes.hermes_alert_handler',
                 'hermes.test': 'tom_dataproducts.alertstreams.hermes.hermes_alert_handler',
+                'igwn.gwalert': 'tom_nonlocalizedevents.alertstream_handlers.igwn_event_handler.handle_igwn_message',
             },
         },
     },
     {
-        'ACTIVE': True,
+        'ACTIVE': False,
         'NAME': 'tom_alertstreams.alertstreams.gcn.GCNClassicAlertStream',
         # The keys of the OPTIONS dictionary become (lower-case) properties of the AlertStream instance.
         'OPTIONS': {
@@ -350,15 +343,18 @@ ALERT_STREAMS = [
 
 TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.alerce.ALeRCEBroker',
+    'tom_alerts.brokers.antares.ANTARESBroker',
+    'tom_alerts.brokers.gaia.GaiaBroker',
+    # 'tom_hermes.hermes.HermesBroker',
     'tom_alerts.brokers.lasair.LasairBroker',
     'tom_alerts.brokers.scout.ScoutBroker',
     'tom_alerts.brokers.tns.TNSBroker',
 ]
 
 TOM_ALERT_DASH_CLASSES = [
-    'tom_alerts_dash.brokers.mars.MARSDashBroker',
+    #'tom_alerts_dash.brokers.mars.MARSDashBroker',
     'tom_alerts_dash.brokers.alerce.ALeRCEDashBroker',
-    'tom_alerts_dash.brokers.scimma.SCIMMADashBroker'
+    #'tom_alerts_dash.brokers.scimma.SCIMMADashBroker'
 ]
 
 TOM_HARVESTER_CLASSES = [
@@ -370,13 +366,13 @@ TOM_HARVESTER_CLASSES = [
 
 BROKERS = {
     # TODO: the SCiMMA Broker should be replaced with a HERMES Broker
-    'SCIMMA': {
-        'url': 'http://skip.dev.hop.scimma.org',
-        'api_key': os.getenv('SKIP_API_KEY', ''),
-        'hopskotch_url': 'dev.hop.scimma.org',
-        'hopskotch_username': os.getenv('HOPSKOTCH_USERNAME', ''),
-        'hopskotch_password': os.getenv('HOPSKOTCH_PASSWORD', ''),
-        'default_hopskotch_topic': 'TOMToolkit.test'
+    'HERMES': {
+        #'url': 'http://skip.dev.hop.scimma.org',
+        #'api_key': os.getenv('SKIP_API_KEY', ''),
+        #'hopskotch_url': 'dev.hop.scimma.org',
+        #'hopskotch_username': os.getenv('HOPSKOTCH_USERNAME', ''),
+        #'hopskotch_password': os.getenv('HOPSKOTCH_PASSWORD', ''),
+        #'default_hopskotch_topic': 'TOMToolkit.test'
     }
 }
 
@@ -419,8 +415,16 @@ HINT_LEVEL = 20
 #
 # tom_nonlocalizedevents configuration
 #
-TOM_API_URL = os.getenv('TOM_API_URL', 'http://127.0.0.1:8000')
+
 HERMES_API_URL = os.getenv('HERMES_API_URL', 'https://hermes.lco.global')
+
+# both tom_nonlocalized events and tom_hermes use HERMES_API_URL
+# first, try to get its value from the environment, otherwise use the settings.DEBUG var to determine
+# its value. settings.DEBUG is set above according to TOM_DEMO_DEBUG, which is set in the
+# helm-chart/values*.yaml files (and injected into the env via _helpers.tpl)
+# So, tom-demo-dev will use hermes-dev and tom-demo will use hermes
+HERMES_API_URL = os.getenv('HERMES_API_URL',
+                           'https://hermes-dev.lco.global' if DEBUG else 'https://hermes.lco.global')
 
 VUE_FRONTEND_DIR = os.path.join(STATIC_ROOT, 'vue')  # I don't think this is actually used...
 VUE_FRONTEND_DIR_TOM_NONLOCAL = os.path.join(STATIC_ROOT, 'tom_nonlocalizedevents/vue')
@@ -444,25 +448,7 @@ WEBPACK_LOADER = {
     }
 }
 
-# django-plotly-dash configuration
-
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-
-# PLOTLY_COMPONENTS = [
-#     # Common components
-#     'dash_core_components',
-#     'dash_html_components',
-#     'dash_renderer',
-
-#     # django-plotly-dash components
-#     'dpd_components',
-#     # static support if serving local assets
-#     # 'dpd_static_support',
-
-#     # Other components, as needed
-#     'dash_bootstrap_components',
-#     'dash_table'
-# ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [

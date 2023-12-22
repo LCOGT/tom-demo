@@ -90,7 +90,7 @@ build it here and use it everywhere.
 {{- define "tom-demo.extraEnv" -}}
 - name: HOME
   value: "/tmp"
-- name: DEBUG
+- name: TOM_DEMO_DEBUG
   value: {{ .Values.djangoDebug | toString | lower | title | quote }}
 {{- end }}
 

@@ -19,8 +19,6 @@ from django.views.generic import TemplateView
 
 
 urlpatterns = [
-    path('nonlocalizedevents/', include('tom_nonlocalizedevents.urls', namespace='nonlocalizedevents')),
-    path('observations/', include('tom_demo.urls')),
     path('', include('tom_common.urls')),
 
     # Vue health check urls
