@@ -158,7 +158,8 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:8000',
     'http://127.0.0.1',
     'http://*',
-    'https://*'
+    'https://*',
+    'https://tom-demo.lco.global'
 ]
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8080',
@@ -168,7 +169,8 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://127.0.0.1:80',
     'http://*',
-    'https://*'
+    'https://*',
+    'https://tom-demo.lco.global'
 ]
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
