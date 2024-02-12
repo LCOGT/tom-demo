@@ -347,17 +347,17 @@ ALERT_STREAMS = [
 
 TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.alerce.ALeRCEBroker',
-    'tom_alerts.brokers.antares.ANTARESBroker',
+    # 'tom_alerts.brokers.antares.ANTARESBroker',
     'tom_alerts.brokers.gaia.GaiaBroker',
-    # 'tom_hermes.hermes.HermesBroker',
+    # # 'tom_hermes.hermes.HermesBroker',
     'tom_alerts.brokers.lasair.LasairBroker',
     'tom_alerts.brokers.scout.ScoutBroker',
-    'tom_alerts.brokers.tns.TNSBroker',
+    # 'tom_alerts.brokers.tns.TNSBroker',
 ]
 
 TOM_ALERT_DASH_CLASSES = [
     #'tom_alerts_dash.brokers.mars.MARSDashBroker',
-    'tom_alerts_dash.brokers.alerce.ALeRCEDashBroker',
+    # 'tom_alerts_dash.brokers.alerce.ALeRCEDashBroker',
     #'tom_alerts_dash.brokers.scimma.SCIMMADashBroker'
 ]
 
@@ -369,7 +369,9 @@ TOM_HARVESTER_CLASSES = [
 ]
 
 BROKERS = {
-    # TODO: the SCiMMA Broker should be replaced with a HERMES Broker
+    'LASAIR': {
+        'api_key': os.getenv('LASAIR_API_KEY', ''),
+    },
     'HERMES': {
         #'url': 'http://skip.dev.hop.scimma.org',
         #'api_key': os.getenv('SKIP_API_KEY', ''),
