@@ -6,5 +6,5 @@ gunicorn[gevent]==20.0.4
 psycopg2-binary~=2.9
 tom-alertstreams~=0.6
 tomtoolkit==2.15.18
-whitenoise~=5.2
+whitenoise~=6.6
 crispy-bootstrap4
