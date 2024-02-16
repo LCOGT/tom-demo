@@ -1,7 +1,6 @@
 Werkzeug==2.0.2 # pinned b/c 2.1.0 breaks plotly/dash
 django-cors-headers>=3.7
 django-webpack-loader==3.0.1
-factory_boy==3.3.0
 gunicorn[gevent]==20.0.4
 psycopg2-binary~=2.9
 tom-alertstreams~=0.6
