@@ -1,4 +1,3 @@
-Werkzeug==2.0.2 # pinned b/c 2.1.0 breaks plotly/dash
 django-cors-headers>=3.7
 django-webpack-loader==3.0.1
 factory_boy==2.12.0
