@@ -1,6 +1,6 @@
 django-cors-headers>=3.7
 django-webpack-loader==3.0.1
-gunicorn[gevent]==20.0.4
+gunicorn[gevent]==21.2.0
 psycopg2-binary~=2.9
 tom-alertstreams~=0.6
 tomtoolkit==2.15.18
