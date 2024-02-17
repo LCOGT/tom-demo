@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'tom_catalogs',
     'tom_observations',
     'tom_dataproducts',
+    'tom_hermes',
 ]
 
 # TODO: please explain why this is necessary. what error does it prevent?
@@ -349,10 +350,10 @@ TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.alerce.ALeRCEBroker',
     # 'tom_alerts.brokers.antares.ANTARESBroker',
     'tom_alerts.brokers.gaia.GaiaBroker',
-    # # 'tom_hermes.hermes.HermesBroker',
+    'tom_hermes.hermes.HermesBroker',
     'tom_alerts.brokers.lasair.LasairBroker',
     'tom_alerts.brokers.scout.ScoutBroker',
-    # 'tom_alerts.brokers.tns.TNSBroker',
+    'tom_alerts.brokers.tns.TNSBroker',
 ]
 
 TOM_ALERT_DASH_CLASSES = [
@@ -372,14 +373,13 @@ BROKERS = {
     'LASAIR': {
         'api_key': os.getenv('LASAIR_API_KEY', ''),
     },
-    'HERMES': {
-        #'url': 'http://skip.dev.hop.scimma.org',
-        #'api_key': os.getenv('SKIP_API_KEY', ''),
-        #'hopskotch_url': 'dev.hop.scimma.org',
-        #'hopskotch_username': os.getenv('HOPSKOTCH_USERNAME', ''),
-        #'hopskotch_password': os.getenv('HOPSKOTCH_PASSWORD', ''),
-        #'default_hopskotch_topic': 'TOMToolkit.test'
-    }
+    'TNS': {
+        'api_key': os.getenv('TNS_API_KEY', ''),
+        'bot_id': os.getenv('TNS_BOT_ID', '165852'),
+        'bot_name': os.getenv('TNS_BOT_NAME', 'TOM_BOT'),
+        'tns_base_url': 'https://sandbox.wis-tns.org/api',  # Note this is the Sandbox URL
+        'group_name': os.getenv('TNS_GROUP_NAME', 'Hermes_group'),
+    },
 }
 
 # Define extra target fields here. Types can be any of "number", "string", "boolean" or "datetime"
