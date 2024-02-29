@@ -351,9 +351,11 @@ TOM_ALERT_CLASSES = [
     # 'tom_alerts.brokers.antares.ANTARESBroker',
     'tom_alerts.brokers.gaia.GaiaBroker',
     'tom_hermes.hermes.HermesBroker',
+    'tom_alerts.brokers.gaia.GaiaBroker',
     'tom_alerts.brokers.lasair.LasairBroker',
     'tom_alerts.brokers.scout.ScoutBroker',
     'tom_alerts.brokers.tns.TNSBroker',
+    # 'tom_fink.fink.FinkBroker',
 ]
 
 TOM_ALERT_DASH_CLASSES = [
