@@ -6,6 +6,8 @@ EXPOSE 80
 ENTRYPOINT [ "/usr/local/bin/gunicorn", "tom_demo_base.wsgi", "-b", "0.0.0.0:80", "--access-logfile", "-", "--error-logfile", "-", "-k", "gevent", "--timeout", "300", "--workers", "2"]
 
 WORKDIR /tom-demo
+RUN pwd
+RUN ls
 
 COPY poetry.lock /tom-demo
 COPY pyproject.toml /tom-demo
@@ -34,6 +36,8 @@ RUN poetry install
 # ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 COPY . /tom-demo
+RUN pwd
+RUN ls
 
 # write new webpack-stats.json for django-webpack-loader to use
 # and install the Vue JS/CSS etc as static files
@@ -41,5 +45,7 @@ COPY . /tom-demo
 # RUN npm install && npm run build
 
 WORKDIR /tom-demo
+RUN pwd
+RUN ls
 
 RUN python manage.py collectstatic --noinput
