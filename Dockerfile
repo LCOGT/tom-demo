@@ -8,6 +8,7 @@ ENTRYPOINT [ "/usr/local/bin/gunicorn", "tom_demo_base.wsgi", "-b", "0.0.0.0:80"
 WORKDIR /tom-demo
 
 COPY poetry.lock /tom-demo
+COPY pyproject.toml /tom-demo
 RUN pip install --upgrade pip && pip install poetry
 RUN poetry install
 
