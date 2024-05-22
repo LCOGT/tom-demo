@@ -7,8 +7,9 @@ ENTRYPOINT [ "/usr/local/bin/gunicorn", "tom_demo_base.wsgi", "-b", "0.0.0.0:80"
 
 WORKDIR /tom-demo
 
-COPY requirements.txt /tom-demo
-RUN pip install --upgrade pip && pip install --no-cache-dir -r /tom-demo/requirements.txt
+COPY poetry.lock/tom-demo
+RUN pip install --upgrade pip && pip install poetry
+RUN poetry instll
 
 # Temporarily remove nodejs/npm from the base image until tom_nonlocalized events is installed
 # # continue to setup the image with node and npm install (via nvm)
