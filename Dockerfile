@@ -9,7 +9,7 @@ WORKDIR /tom-demo
 
 COPY poetry.lock /tom-demo
 RUN pip install --upgrade pip && pip install poetry
-RUN poetry instll
+RUN poetry install
 
 # Temporarily remove nodejs/npm from the base image until tom_nonlocalized events is installed
 # # continue to setup the image with node and npm install (via nvm)
