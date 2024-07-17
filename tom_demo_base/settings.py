@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'tom_observations',
     'tom_dataproducts',
     'tom_hermes',
+    'tom_dataservices',
     'tom_demo'
 ]
 
@@ -359,6 +360,7 @@ TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.scout.ScoutBroker',
     'tom_alerts.brokers.tns.TNSBroker',
     # 'tom_fink.fink.FinkBroker',
+    'tom_dataservices.data_services.lsst.RSPMultiTargetDataService'
 ]
 
 TOM_ALERT_DASH_CLASSES = [
