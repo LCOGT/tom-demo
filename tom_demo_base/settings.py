@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'tom_observations',
     'tom_dataproducts',
     'tom_hermes',
+    'tom_dataservices',
+    'tom_demo'
 ]
 
 # TODO: please explain why this is necessary. what error does it prevent?
@@ -244,6 +246,8 @@ CACHES = {
 # TOM Specific configuration
 TARGET_TYPE = 'SIDEREAL'
 
+TARGET_MODEL_CLASS = 'tom_demo.models.UserDefinedTarget'
+
 FACILITIES = {
     'LCO': {
         'portal_url': 'https://observe.lco.global',
@@ -356,6 +360,7 @@ TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.scout.ScoutBroker',
     'tom_alerts.brokers.tns.TNSBroker',
     # 'tom_fink.fink.FinkBroker',
+    'tom_dataservices.data_services.lsst.RSPMultiTargetDataService'
 ]
 
 TOM_ALERT_DASH_CLASSES = [
