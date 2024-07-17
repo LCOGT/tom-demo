@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'tom_observations',
     'tom_dataproducts',
     'tom_hermes',
+    'tom_demo'
 ]
 
 # TODO: please explain why this is necessary. what error does it prevent?
@@ -243,6 +244,8 @@ CACHES = {
 
 # TOM Specific configuration
 TARGET_TYPE = 'SIDEREAL'
+
+TARGET_MODEL_CLASS = 'tom_demo.models.UserDefinedTarget'
 
 FACILITIES = {
     'LCO': {
