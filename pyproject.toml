@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tom-demo"
-version = "1.0.7"
+version = "0.0.0"  # version supplied by poetry-dynamic-versioning
 description = "A Demonstration TOM hosted at http://tom-demo.lco.global"
 authors = ["TOM Toolkit Project"]
 maintainers = ["Joey Chatelain <jchate6@gmail.com>",
@@ -28,6 +28,18 @@ tom-swift = "^0.2.1"
 tom-tns = "^0.2.2"
 tom-fink = "^0.6.2"
 
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "pep440"
+# the default pattern regex makes the 'v' manditory
+# this pattern modifies the default regex in order to make the 'v' optional
+# ('v' becomes '[v]?' meaning a single v, [v], and ? means optional)
+pattern = "(?x)^[v]?((?P<epoch>\\d+)!)?(?P<base>\\d+(\\.\\d+)*)([-._]?((?P<stage>[a-zA-Z]+)[-._]?(?P<revision>\\d+)?))?(\\+(?P<tagged_metadata>.+))?$"
+
+# substitute version not only in pyproject.toml (which the config block above does)
+# but also the __version__.py file
+[tool.poetry-dynamic-versioning.substitution]
 
 [build-system]
 requires = ["poetry-core"]
