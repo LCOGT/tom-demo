@@ -247,20 +247,20 @@ CACHES = {
 # TOM Specific configuration
 TARGET_TYPE = 'SIDEREAL'
 
-# This is the configuration dictionary (of dictionaries) for the facilities
-# listed above in the TOM_FACILITY_CLASSES list.
 TARGET_MODEL_CLASS = 'tom_demo.models.UserDefinedTarget'
 
 # These are the facilities that will be available on the TargetDetail page Observe tab
 # i.e. the facilities to which you can submit an observation request.
 TOM_FACILITY_CLASSES = [
-    'facilities.restricted_lco.RestrictedLCOFacility',
-    'facilities.custom_lco.CustomLCO',
+    'tom_observations.facilities.lco.LCOFacility',
     'tom_observations.facilities.gemini.GEMFacility',
-    'facilities.custom_manual.DemonstrationManualFacility',
+    'tom_observations.facilities.soar.SOARFacility',
+    'tom_observations.facilities.lt.LTFacility',
     'tom_swift.swift.SwiftFacility'
 ]
 
+# This is the configuration dictionary (of dictionaries) for the facilities
+# listed above in the TOM_FACILITY_CLASSES list.
 FACILITIES = {
     'LCO': {
         'portal_url': 'https://observe.lco.global',
