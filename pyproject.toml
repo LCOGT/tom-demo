@@ -25,6 +25,7 @@ django-cors-headers = "^4.3.1"
 django-webpack-loader = "^3.1.0"
 gunicorn = {extras = ["gevent"], version = "^22.0.0"}
 tom-swift = "^0.2.1"
+tom-tns = "^0.2.2"
 
 
 [build-system]
