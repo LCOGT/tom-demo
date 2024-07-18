@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'tom_swift',
     'tom_hermes',
     'tom_dataservices',
+    'tom_tns',
     'tom_demo'
 ]
 
@@ -396,6 +397,7 @@ BROKERS = {
         'bot_name': os.getenv('TNS_BOT_NAME', 'TOM_BOT'),
         'tns_base_url': 'https://sandbox.wis-tns.org/api',  # Note this is the Sandbox URL
         'group_name': os.getenv('TNS_GROUP_NAME', 'Hermes_group'),
+        'default_authors': 'Foo Bar <foo@bar.com>, Rando Calrissian, et al.',
     },
 }
 

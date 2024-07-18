@@ -2487,6 +2487,20 @@ swifttools = "<4"
 tomtoolkit = ">=2.15"
 
 [[package]]
+name = "tom-tns"
+version = "0.2.2"
+description = "TOMtoolkit module for reporting transients to the TNS"
+optional = false
+python-versions = "<3.12,>=3.8.1"
+files = [
+    {file = "tom_tns-0.2.2-py3-none-any.whl", hash = "sha256:cec6178160f79d0abb84f42d843e4b88178d62a84effec9c946351dd4c1bf5e0"},
+    {file = "tom_tns-0.2.2.tar.gz", hash = "sha256:2874215a1fcad6a58b7272f0925eba974b53af6a9b46b31679977db7e9d6cf49"},
+]
+
+[package.dependencies]
+tomtoolkit = ">=2.18,<3.0"
+
+[[package]]
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
@@ -2799,4 +2813,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8.1,<3.12"
-content-hash = "194a0540c18fa2600878a582d5517036bc2e759fbc84b188b88f34ca78e45e2d"
+content-hash = "9911f14cfab9299861941176ccf1e4f63301e4eb4beef495d08bf6eb8b4b7156"
