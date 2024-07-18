@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'tom_catalogs',
     'tom_observations',
     'tom_dataproducts',
+    'tom_swift',
     'tom_hermes',
     'tom_dataservices',
     'tom_demo'
@@ -248,6 +249,18 @@ TARGET_TYPE = 'SIDEREAL'
 
 TARGET_MODEL_CLASS = 'tom_demo.models.UserDefinedTarget'
 
+# These are the facilities that will be available on the TargetDetail page Observe tab
+# i.e. the facilities to which you can submit an observation request.
+TOM_FACILITY_CLASSES = [
+    'tom_observations.facilities.lco.LCOFacility',
+    'tom_observations.facilities.gemini.GEMFacility',
+    'tom_observations.facilities.soar.SOARFacility',
+    'tom_observations.facilities.lt.LTFacility',
+    'tom_swift.swift.SwiftFacility'
+]
+
+# This is the configuration dictionary (of dictionaries) for the facilities
+# listed above in the TOM_FACILITY_CLASSES list.
 FACILITIES = {
     'LCO': {
         'portal_url': 'https://observe.lco.global',
@@ -273,6 +286,10 @@ FACILITIES = {
                 'PP': 'Rap: Some descriptive text',
             },
         },
+    },
+    'SWIFT': {
+        'SWIFT_USERNAME': os.getenv('SWIFT_USERNAME', 'anonymous'),
+        'SWIFT_SHARED_SECRET': os.getenv('SWIFT_SHARED_SECRET', 'anonymous'),
     },
 }
 
@@ -300,13 +317,6 @@ DATA_SHARING = {
         'USER_TOPICS': ['hermes.test', 'tomtoolkit.test']
     },
 }
-
-TOM_FACILITY_CLASSES = [
-    'tom_observations.facilities.lco.LCOFacility',
-    'tom_observations.facilities.gemini.GEMFacility',
-    'tom_observations.facilities.soar.SOARFacility',
-    'tom_observations.facilities.lt.LTFacility'
-]
 
 ALERT_STREAMS = [
     {
