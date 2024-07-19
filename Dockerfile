@@ -7,8 +7,10 @@ ENTRYPOINT [ "/usr/local/bin/gunicorn", "tom_demo_base.wsgi", "-b", "0.0.0.0:80"
 
 WORKDIR /tom-demo
 
-COPY requirements.txt /tom-demo
-RUN pip install --upgrade pip && pip install --no-cache-dir -r /tom-demo/requirements.txt
+COPY . /tom-demo
+RUN pip install --upgrade pip && pip install poetry
+RUN poetry config virtualenvs.create false --local
+RUN poetry install --no-interaction
 
 # Temporarily remove nodejs/npm from the base image until tom_nonlocalized events is installed
 # # continue to setup the image with node and npm install (via nvm)
@@ -30,8 +32,6 @@ RUN pip install --upgrade pip && pip install --no-cache-dir -r /tom-demo/require
 #
 # ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 # ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
-
-COPY . /tom-demo
 
 # write new webpack-stats.json for django-webpack-loader to use
 # and install the Vue JS/CSS etc as static files

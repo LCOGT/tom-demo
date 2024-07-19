@@ -57,7 +57,12 @@ INSTALLED_APPS = [
     'tom_catalogs',
     'tom_observations',
     'tom_dataproducts',
+    'tom_swift',
     'tom_hermes',
+    'tom_fink',
+    'tom_dataservices',
+    'tom_tns',
+    'tom_demo'
 ]
 
 # TODO: please explain why this is necessary. what error does it prevent?
@@ -116,7 +121,7 @@ DATABASES = {
    },
 }
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -244,6 +249,20 @@ CACHES = {
 # TOM Specific configuration
 TARGET_TYPE = 'SIDEREAL'
 
+TARGET_MODEL_CLASS = 'tom_demo.models.UserDefinedTarget'
+
+# These are the facilities that will be available on the TargetDetail page Observe tab
+# i.e. the facilities to which you can submit an observation request.
+TOM_FACILITY_CLASSES = [
+    'tom_observations.facilities.lco.LCOFacility',
+    'tom_observations.facilities.gemini.GEMFacility',
+    'tom_observations.facilities.soar.SOARFacility',
+    'tom_observations.facilities.lt.LTFacility',
+    'tom_swift.swift.SwiftFacility'
+]
+
+# This is the configuration dictionary (of dictionaries) for the facilities
+# listed above in the TOM_FACILITY_CLASSES list.
 FACILITIES = {
     'LCO': {
         'portal_url': 'https://observe.lco.global',
@@ -269,6 +288,10 @@ FACILITIES = {
                 'PP': 'Rap: Some descriptive text',
             },
         },
+    },
+    'SWIFT': {
+        'SWIFT_USERNAME': os.getenv('SWIFT_USERNAME', 'anonymous'),
+        'SWIFT_SHARED_SECRET': os.getenv('SWIFT_SHARED_SECRET', 'anonymous'),
     },
 }
 
@@ -296,13 +319,6 @@ DATA_SHARING = {
         'USER_TOPICS': ['hermes.test', 'tomtoolkit.test']
     },
 }
-
-TOM_FACILITY_CLASSES = [
-    'tom_observations.facilities.lco.LCOFacility',
-    'tom_observations.facilities.gemini.GEMFacility',
-    'tom_observations.facilities.soar.SOARFacility',
-    'tom_observations.facilities.lt.LTFacility'
-]
 
 ALERT_STREAMS = [
     {
@@ -355,7 +371,8 @@ TOM_ALERT_CLASSES = [
     'tom_alerts.brokers.lasair.LasairBroker',
     'tom_alerts.brokers.scout.ScoutBroker',
     'tom_alerts.brokers.tns.TNSBroker',
-    # 'tom_fink.fink.FinkBroker',
+    'tom_fink.fink.FinkBroker',
+    'tom_dataservices.data_services.lsst.RSPMultiTargetDataService'
 ]
 
 TOM_ALERT_DASH_CLASSES = [
@@ -381,6 +398,7 @@ BROKERS = {
         'bot_name': os.getenv('TNS_BOT_NAME', 'TOM_BOT'),
         'tns_base_url': 'https://sandbox.wis-tns.org/api',  # Note this is the Sandbox URL
         'group_name': os.getenv('TNS_GROUP_NAME', 'Hermes_group'),
+        'default_authors': 'Foo Bar <foo@bar.com>, Rando Calrissian, et al.',
     },
 }
 
