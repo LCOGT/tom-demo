@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_filters',
     'django_gravatar',
+    'django_htmx',
     'tom_targets',
     'tom_alerts',
     'tom_catalogs',
@@ -78,6 +79,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
     'tom_common.middleware.Raise403Middleware',
     'tom_common.middleware.ExternalServiceMiddleware',
     'tom_common.middleware.AuthStrategyMiddleware',
@@ -301,12 +303,14 @@ DATA_PRODUCT_TYPES = {
     'photometry': ('photometry', 'Photometry'),
     'fits_file': ('fits_file', 'FITS File'),
     'spectroscopy': ('spectroscopy', 'Spectroscopy'),
+    'panstarrs_photometry': ('panstarrs_photometry', 'PanSTARRS Photometry'),
     'image_file': ('image_file', 'Image File')
 }
 
 DATA_PROCESSORS = {
     'photometry': 'tom_dataproducts.processors.photometry_processor.PhotometryProcessor',
     'spectroscopy': 'tom_dataproducts.processors.spectroscopy_processor.SpectroscopyProcessor',
+    'panstarrs_photometry': 'tom_dataproducts.processors.panstarrs_processor.PanstarrsProcessor',
 }
 
 DATA_SHARING = {
@@ -317,6 +321,15 @@ DATA_SHARING = {
         'CREDENTIAL_USERNAME': os.getenv('SCIMMA_CREDENTIAL_USERNAME', None),
         'CREDENTIAL_PASSWORD': os.getenv('SCIMMA_CREDENTIAL_PASSWORD', None),
         'USER_TOPICS': ['hermes.test', 'tomtoolkit.test']
+    },
+}
+
+SINGLE_TARGET_DATA_SERVICES = {
+    'PANSTARRS': {
+        'class': 'tom_dataproducts.single_target_data_service.panstarrs_service.panstarrs.PanstarrsSingleTargetDataService',
+        'url': 'https://catalogs.mast.stsci.edu/api/v0.1/panstarrs',  # MAST Base URL
+        # MAST_API_TOKEN is not required for public data
+        'api_key': os.getenv('MAST_API_TOKEN', 'MAST_API_TOKEN not set')
     },
 }
 
