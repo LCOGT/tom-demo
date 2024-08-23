@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import ast
 import tempfile
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -25,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!hrpq+h(_n!ml847_!0h6hi8+1y0t&amp;#%&amp;eo_^=#yd6af_!+cf2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('TOM_DEMO_DEBUG', False)
+DEBUG = ast.literal_eval(os.getenv('TOM_DEMO_DEBUG', 'False'))
 
 ALLOWED_HOSTS = ['*']
 
