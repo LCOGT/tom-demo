@@ -15,7 +15,7 @@ packages = [{include = "tom_demo"}]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.12"
-tomtoolkit = "^2.18.5"
+tomtoolkit = "^2.19.7"
 tom-hermes = "^0.1.10"
 whitenoise = "6.6"
 crispy-bootstrap4 = "^2024.1"
