@@ -2903,13 +2903,13 @@ files = [
 
 [[package]]
 name = "tomtoolkit"
-version = "2.19.6"
+version = "2.20.1"
 description = "TOM Toolkit and base modules"
 optional = false
 python-versions = "<3.12,>=3.8.1"
 files = [
-    {file = "tomtoolkit-2.19.6-py3-none-any.whl", hash = "sha256:c57f6e9af9b156ed8d12db77b89ca7da04b76244e40ad6219e9fb9fd75975b52"},
-    {file = "tomtoolkit-2.19.6.tar.gz", hash = "sha256:e3bfb918606c1b74838958e2367e3e181c7705efc4dd671c10be9198802698c4"},
+    {file = "tomtoolkit-2.20.1-py3-none-any.whl", hash = "sha256:5b116ef9ee6a1aaee8c704b96ed28e5523310d8840f4a8490496fe5b5e280e37"},
+    {file = "tomtoolkit-2.20.1.tar.gz", hash = "sha256:8af73d8350b7a29a5134538eb61afe6cdf47e61765bbe8f5c60dd29ab932b98e"},
 ]
 
 [package.dependencies]
@@ -2917,7 +2917,7 @@ astroplan = ">=0.8,<0.11"
 astropy = {version = ">=5.3.3,<6", markers = "python_version < \"3.12\" and python_version >= \"3.9\""}
 astroquery = "<1"
 beautifulsoup4 = "<5"
-crispy-bootstrap4 = ">=2023.1,<2024.2"
+crispy-bootstrap4 = ">=2023.1,<2024.11"
 django = "<5"
 django-bootstrap4 = ">3,<25"
 django-contrib-comments = ">=2.0,<3.0"
@@ -3201,4 +3201,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "a3d1c4c4d30bb9b7511c1ae2e68527f8159d70ccbbd3bf00e2883fd296692534"
+content-hash = "1737321b37e324ac13347c8542d79db16b3b78808cd5341fb33bbe441748329c"
