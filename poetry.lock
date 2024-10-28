@@ -3089,17 +3089,17 @@ files = [
 
 [[package]]
 name = "whitenoise"
-version = "6.6.0"
+version = "6.8.0"
 description = "Radically simplified static file serving for WSGI applications"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.9"
 files = [
-    {file = "whitenoise-6.6.0-py3-none-any.whl", hash = "sha256:b1f9db9bf67dc183484d760b99f4080185633136a273a03f6436034a41064146"},
-    {file = "whitenoise-6.6.0.tar.gz", hash = "sha256:8998f7370973447fac1e8ef6e8ded2c5209a7b1f67c1012866dbcd09681c3251"},
+    {file = "whitenoise-6.8.0-py3-none-any.whl", hash = "sha256:58c4663bd050decb7fe06781ec26984e80895ee7178d3ee5d53e31086596b11f"},
+    {file = "whitenoise-6.8.0.tar.gz", hash = "sha256:591aebe08d78dfc79d69517381fbce1625ee69fd0fcb795fe745bc51c4b7ae56"},
 ]
 
 [package.extras]
-brotli = ["Brotli"]
+brotli = ["brotli"]
 
 [[package]]
 name = "xmltodict"
@@ -3201,4 +3201,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "a3d1c4c4d30bb9b7511c1ae2e68527f8159d70ccbbd3bf00e2883fd296692534"
+content-hash = "48aa581d58c1d9bdb0b06ff19bebedd5d2dccd9d416a27436278cad9c8f4987a"
