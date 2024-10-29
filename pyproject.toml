@@ -17,7 +17,7 @@ packages = [{include = "tom_demo"}]
 python = ">=3.9,<3.12"
 tomtoolkit = "^2.18.5"
 tom-hermes = "^0.1.10"
-whitenoise = "6.6"
+whitenoise = "6.8.1"
 crispy-bootstrap4 = "^2024.1"
 tom-alertstreams = "^0.6.2"
 psycopg2-binary = "^2.9.9"
