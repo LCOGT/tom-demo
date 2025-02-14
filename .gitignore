@@ -6,7 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
-# Helm and k8s
+# Helm and k8s and DevOps
+.devenv
+.pre-commit-config.yaml
+.direnv 
 helm-chart/charts/
 *secrets*.yaml
 *secrets*.sh
