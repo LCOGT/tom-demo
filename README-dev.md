@@ -69,6 +69,49 @@ _NOTE: the `--network="hosts"` method is not secure and should never be used out
 </details>
 
 
+## Local Development in a Kind (Kubernetes in Docker) Cluster
+
+### Shell
+
+Always enter the development shell before doing anything else. This will make
+sure everyone is using the same version of tools, to avoid any system discrepancies.
+
+Install [Nix](https://github.com/LCOGT/public-wiki/wiki/Install-Nix) if you have
+not already.
+
+If you have [direnv](https://github.com/LCOGT/public-wiki/wiki/Install-direnv)
+installed, the shell will automatically activate and deactive anytime you change
+directories. You may have to grant permissions initially with:
+
+```sh
+direnv allow
+```
+
+Otherwise, you can manually enter the shell with:
+
+```sh
+./develop.sh
+```
+
+### Skaffold
+
+Deploy application dependencies:
+
+```sh
+skaffold -m tom-demo-deps run
+```
+
+Start application development loop:
+
+```sh
+skaffold -m tom-demo dev
+```
+
+If there are any Ingresses, they should be exposed at:
+  - http://tom-demo.local.lco.earth
+
+
+
 ### Developing Demonstrations of Un-released `tom_base` Features
 You may want to `pip install` into your `tom-demo` virtual environment the `development` or some other pre-release
 branch of `tom_base`.
