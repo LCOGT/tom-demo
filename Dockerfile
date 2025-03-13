@@ -1,15 +1,17 @@
-FROM python:3.9
+FROM python:3.11
 LABEL maintainer="llindstrom@lco.global"
 
 # the exposed port must match the deployment.yaml containerPort value
 EXPOSE 80
-ENTRYPOINT [ "/usr/local/bin/gunicorn", "tom_demo_base.wsgi", "-b", "0.0.0.0:80", "--access-logfile", "-", "--error-logfile", "-", "-k", "gevent", "--timeout", "300", "--workers", "2"]
+ENTRYPOINT [ "poetry", "run", "gunicorn", "tom_demo_base.wsgi", "-b", "0.0.0.0:80", "--access-logfile", "-", "--error-logfile", "-", "-k", "gevent", "--timeout", "300", "--workers", "2"]
 
 WORKDIR /tom-demo
 
-COPY . /tom-demo
 RUN pip install --upgrade pip && pip install poetry
+
+COPY . /tom-demo
 RUN poetry config virtualenvs.create false --local
+RUN poetry lock
 RUN poetry install --no-interaction
 
 # Temporarily remove nodejs/npm from the base image until tom_nonlocalized events is installed
@@ -40,4 +42,4 @@ RUN poetry install --no-interaction
 
 WORKDIR /tom-demo
 
-RUN python manage.py collectstatic --noinput
+RUN poetry run python manage.py collectstatic --noinput

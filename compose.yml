@@ -1,0 +1,31 @@
+services:
+  tom-demo:
+    build: .
+    ports:
+      - "8000:80"
+    # volumes:
+    #   - .:/app
+    depends_on:
+      - tom-demo-db
+    environment:
+      DB_HOST: tom-demo-db
+
+  tom-demo-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tom_demo
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  tom-demo-worker:
+    build: .
+    depends_on:
+      - tom-demo-db
+    environment:
+      DB_HOST: tom-demo-db
+    entrypoint: poetry run python manage.py db_worker -v3
+
+volumes:
+  postgres_data:
