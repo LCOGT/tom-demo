@@ -7,7 +7,7 @@ ENTRYPOINT [ "poetry", "run", "gunicorn", "tom_demo_base.wsgi", "-b", "0.0.0.0:8
 
 WORKDIR /tom-demo
 
-RUN pip install --upgrade pip && pip install poetry
+RUN pip install --upgrade pip && pip install 'poetry >=2.0,<3.0'
 
 COPY . /tom-demo
 RUN poetry config virtualenvs.create false --local
