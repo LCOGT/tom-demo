@@ -11,7 +11,6 @@ RUN pip install --upgrade pip && pip install 'poetry >=2.0,<3.0'
 
 COPY . /tom-demo
 RUN poetry config virtualenvs.create false --local
-RUN poetry lock
 RUN poetry install --no-interaction
 
 # Temporarily remove nodejs/npm from the base image until tom_nonlocalized events is installed
