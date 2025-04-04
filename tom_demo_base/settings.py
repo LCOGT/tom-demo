@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_extensions',
+    'django_tasks',
+    'django_tasks.backends.database',
     'guardian',
     'tom_common',
     'django_comments',
@@ -235,6 +237,13 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
         'LOCATION': tempfile.gettempdir()
+    }
+}
+
+TASKS = {
+    "default": {
+         "BACKEND": "django_tasks.backends.database.DatabaseBackend"
+        # "BACKEND": "django_tasks.backends.immediate.ImmediateBackend"
     }
 }
 

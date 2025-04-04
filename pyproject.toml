@@ -1,21 +1,21 @@
-[tool.poetry]
+[project]
 name = "tom-demo"
 version = "1.0.7"
 description = "A Demonstration TOM hosted at http://tom-demo.lco.global"
-authors = ["TOM Toolkit Project"]
-maintainers = ["Joey Chatelain <jchate6@gmail.com>",
-    "William Lindstrom <llindstrom@lco.global>",
-    "Rachel Street <rstreet@lco.global>"
+authors = [{name="Tom Toolkit Authors", email="tomtoolkit@lco.global"}]
+maintainers = [{name="Joey Chatelain", email="jchate6@gmail.com"},
+    {name="William Lindstrom", email="llindstrom@lco.global"},
+    {name="Rachel Street", email="rstreet@lco.global"}
 ]
 readme = "README.md"
 license = "GPL-3.0-only"
 homepage = "http://tom-demo.lco.global"
 repository = "https://github.com/LCOGT/tom-demo"
 packages = [{include = "tom_demo"}]
+requires-python = ">=3.9,<3.12"
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.12"
-tomtoolkit = "^2.18.5"
+tomtoolkit = "^2.24.2"
 tom-hermes = "^0.1.10"
 whitenoise = "6.6"
 crispy-bootstrap4 = "^2024.1"
@@ -24,11 +24,15 @@ psycopg2-binary = "^2.9.9"
 django-cors-headers = "^4.3.1"
 django-webpack-loader = "^3.1.0"
 gunicorn = {extras = ["gevent"], version = "^22.0.0"}
-tom-swift = "^0.3.0"
-tom-tns = "^0.2.2"
-tom-fink = "^0.6.2"
+tom-swift = "^0.3.1"
+tom-tns = "^0.3.1"
+tom-fink = "^0.7.5"
+
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false
