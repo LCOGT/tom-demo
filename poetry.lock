@@ -2964,22 +2964,22 @@ test = ["pytest", "tornado (>=4.5)", "typeguard"]
 
 [[package]]
 name = "tom-alertstreams"
-version = "0.6.3"
+version = "1.0.2"
 description = "Reusable TOMToolkit app for listening to kafka streams."
 optional = false
-python-versions = "<3.12,>=3.8"
+python-versions = "<3.13,>=3.9.0"
 groups = ["main"]
 markers = "platform_python_implementation == \"CPython\""
 files = [
-    {file = "tom_alertstreams-0.6.3-py3-none-any.whl", hash = "sha256:b89de7435b05b7c21ca6cfacf1ad99d9264798cadd9f5bed258c07b4f895db35"},
-    {file = "tom_alertstreams-0.6.3.tar.gz", hash = "sha256:9fa81a17025e20d28e19aeadbfc5dff273379b560de2ee5f9ed718612f8459d2"},
+    {file = "tom_alertstreams-1.0.2-py3-none-any.whl", hash = "sha256:b7c84464eaf194760b24e65f732aba9b0ab8ce197c05d8cfe247bb771364fe45"},
+    {file = "tom_alertstreams-1.0.2.tar.gz", hash = "sha256:5298b7f5d2cf333ced3c113e1e3de603999a850072c330448ff1b24af8493c7d"},
 ]
 
 [package.dependencies]
-gcn-kafka = ">=0.3,<0.4"
-hop-client = ">=0.10,<0.11"
+gcn-kafka = ">=0.3,<1.0"
+hop-client = ">=0.10,<1.0"
 psycopg2-binary = ">=2.9,<3.0"
-tomtoolkit = ">=2.10,<3.0"
+tomtoolkit = ">=2.22,<3.0"
 
 [[package]]
 name = "tom-fink"
@@ -3342,4 +3342,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<3.12"
-content-hash = "3b32e759240ffd1c36371a8fc12420fa9d6ad7e67041fa850a286fbe6675df85"
+content-hash = "7a30be2b74833c0882020d4c042374daaf84b6bcdd3396f7521e9ed9173f250c"
