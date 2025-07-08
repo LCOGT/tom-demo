@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'tom_fink',
     'tom_dataservices',
     'tom_tns',
+    'tom_registration',
     'tom_demo'
 ]
 
@@ -86,6 +87,7 @@ MIDDLEWARE = [
     'tom_common.middleware.Raise403Middleware',
     'tom_common.middleware.ExternalServiceMiddleware',
     'tom_common.middleware.AuthStrategyMiddleware',
+    'tom_registration.middleware.RedirectAuthenticatedUsersFromRegisterMiddleware',
 ]
 
 ROOT_URLCONF = 'tom_demo_base.urls'
@@ -423,6 +425,15 @@ BROKERS = {
         'group_name': os.getenv('TNS_GROUP_NAME', 'Hermes_group'),
         'default_authors': 'Foo Bar <foo@bar.com>, Rando Calrissian, et al.',
     },
+}
+
+TOM_REGISTRATION = {
+    'REGISTRATION_AUTHENTICATION_BACKEND': 'django.contrib.auth.backends.ModelBackend',
+    'REGISTRATION_REDIRECT_PATTERN': 'home',
+    'REGISTRATION_STRATEGY': 'open',  # ['open', 'approval_required']
+    'SEND_APPROVAL_EMAILS': True,  # Optional email behavior if `REGISTRATION_STRATEGY = 'approval_required'`, default is False
+    'APPROVAL_SUBJECT': f'Your {TOM_NAME} registration has been approved!',  # Optional subject line of approval email, (Default Shown)
+    'APPROVAL_MESSAGE': f'Your {TOM_NAME} registration has been approved. You can log in <a href="mytom.com/login">here</a>.'  # Optional html-enabled body for approval email, (Default Shown)
 }
 
 # Define extra target fields here. Types can be any of "number", "string", "boolean" or "datetime"
