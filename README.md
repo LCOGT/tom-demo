@@ -17,6 +17,8 @@ The current version of TOM-Demo includes the following apps:
 
 Register with a username with the demonstration TOM to see the full suite of features.
 
+(Note: Observation submission has been deactivated, see [the docs](https://tom-toolkit.readthedocs.io/en/stable/api/tom_observations/facilities.html) for informaiton on how to configure facilities in your own TOM.)
+
 # Building your own TOM
 If you are interested in implementing your own TOM using the TOM Toolkit, you may also be interested in the following:
 * [TOM Toolkit Documentation](https://tom-toolkit.readthedocs.io/)
