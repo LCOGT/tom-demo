@@ -3858,14 +3858,14 @@ tomtoolkit = ">=2.10,<3.0"
 
 [[package]]
 name = "tom-registration"
-version = "1.0.1"
+version = "1.0.2"
 description = "Reusable TOMToolkit app to support multiple user registration flows."
 optional = false
 python-versions = "<3.13,>=3.9.0"
 groups = ["main"]
 files = [
-    {file = "tom_registration-1.0.1-py3-none-any.whl", hash = "sha256:b8a0218938e22b5f7e8fa86a5bca9c31a1a83b9a523e7a34f1e145327a70c9fa"},
-    {file = "tom_registration-1.0.1.tar.gz", hash = "sha256:b325344bdad7c1b4e28f533eba4ddd2b255dc893737a32d4e93dd650b4326535"},
+    {file = "tom_registration-1.0.2-py3-none-any.whl", hash = "sha256:f8a5bdbfc0d898c33788aab929ad698299b08e5468b119b68f657bcd500aa750"},
+    {file = "tom_registration-1.0.2.tar.gz", hash = "sha256:f0cf86b0da774de40bbccdf7fa317aad9c3fa0751b48806f2b87c459e973c1a0"},
 ]
 
 [package.dependencies]
@@ -4220,4 +4220,4 @@ testing = ["coverage[toml]", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<3.12"
-content-hash = "e0f1d63535465c3f4e9caeadfc160ab13661183be362c5703cba9b2f68baf84b"
+content-hash = "01ab7c5caa43d755336fdd4a0344615a70cd7180ab5b9b2b081322b0ea51d6dc"

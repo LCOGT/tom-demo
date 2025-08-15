@@ -27,7 +27,7 @@ gunicorn = {extras = ["gevent"], version = "^23.0.0"}
 tom-swift = "^0.3.1"
 tom-tns = "^0.3.1"
 tom-fink = "^0.7.5"
-tom-registration = "^1.0.1"
+tom-registration = "^1.0.2"
 
 
 [build-system]
