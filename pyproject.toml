@@ -17,7 +17,7 @@ requires-python = ">=3.9,<3.12"
 [tool.poetry.dependencies]
 tomtoolkit = "^2.26.0"
 tom-hermes = "^0.1.10"
-whitenoise = "6.9.0"
+whitenoise = "6.10.0"
 crispy-bootstrap4 = "^2024.10"
 tom-alertstreams = "^1.0.2"
 psycopg2-binary = "^2.9.10"
