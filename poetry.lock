@@ -3960,14 +3960,14 @@ files = [
 
 [[package]]
 name = "tomtoolkit"
-version = "2.26.0"
+version = "2.26.1"
 description = "TOM Toolkit and base modules"
 optional = false
 python-versions = "<3.13,>=3.9.0"
 groups = ["main"]
 files = [
-    {file = "tomtoolkit-2.26.0-py3-none-any.whl", hash = "sha256:56ffbe3e2a99431a230ff6da60223ff866290daabeaca92ed462473d77f44e54"},
-    {file = "tomtoolkit-2.26.0.tar.gz", hash = "sha256:10e762865b647b7adc13c474f758df85c08d0bf686a2fe0e8b7c5e9bde0c5095"},
+    {file = "tomtoolkit-2.26.1-py3-none-any.whl", hash = "sha256:664b47a655b3395a536e412e6e4affe3267ed20059f208964bdd99445f8beafb"},
+    {file = "tomtoolkit-2.26.1.tar.gz", hash = "sha256:ca61687cd7c236d20603fb251b0a3ae4a548e0a65efcaff4fea73a4dd34d6512"},
 ]
 
 [package.dependencies]
@@ -4220,4 +4220,4 @@ testing = ["coverage[toml]", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<3.12"
-content-hash = "01ab7c5caa43d755336fdd4a0344615a70cd7180ab5b9b2b081322b0ea51d6dc"
+content-hash = "9798ce75a6df9df89e670fe8512deb1ee5aea4e6808e9a9b142d34122be840ed"
