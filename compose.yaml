@@ -1,4 +1,13 @@
 services:
+  tom-demo-migrate:
+    build: .
+    depends_on:
+      - tom-demo-db
+    environment:
+      DB_HOST: tom-demo-db
+    entrypoint: poetry run python manage.py migrate
+    restart: "no"
+
   tom-demo:
     build: .
     ports:
@@ -6,6 +15,7 @@ services:
     # volumes:
     #   - .:/app
     depends_on:
+      - tom-demo-migrate
       - tom-demo-db
     environment:
       DB_HOST: tom-demo-db
@@ -22,6 +32,7 @@ services:
   tom-demo-worker:
     build: .
     depends_on:
+      - tom-demo-migrate
       - tom-demo-db
     environment:
       DB_HOST: tom-demo-db
