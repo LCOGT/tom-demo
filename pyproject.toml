@@ -12,7 +12,7 @@ license = "GPL-3.0-only"
 homepage = "http://tom-demo.lco.global"
 repository = "https://github.com/LCOGT/tom-demo"
 packages = [{include = "tom_demo"}]
-requires-python = ">=3.9,<3.12"
+requires-python = ">=3.10,<3.12"
 
 [tool.poetry.dependencies]
 tomtoolkit = "^2.26.0"
@@ -20,14 +20,16 @@ tom-hermes = "^0.1.10"
 whitenoise = "6.9.0"
 crispy-bootstrap4 = "^2024.10"
 tom-alertstreams = "^1.0.2"
+tom-nonlocalizedevents = "^0.9.0"
 psycopg2-binary = "^2.9.10"
 django-cors-headers = "^4.7.0"
 django-webpack-loader = "^3.2.1"
-gunicorn = {extras = ["gevent"], version = "^23.0.0"}
 tom-swift = "^0.3.1"
-tom-tns = "^0.3.1"
-tom-fink = "^0.7.5"
+tom-tns = "^0.3.2"
+tom-fink = "^0.7.6"
 tom-registration = "^1.0.2"
+gunicorn = "^23.0.0"
+gevent = "^23.0.0"
 
 
 [build-system]
