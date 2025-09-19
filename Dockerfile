@@ -10,35 +10,44 @@ WORKDIR /tom-demo
 RUN pip install --upgrade pip && pip install 'poetry >=2.0,<3.0'
 
 COPY . /tom-demo
-RUN poetry config virtualenvs.create false --local
-RUN poetry install --no-interaction
 
-# Temporarily remove nodejs/npm from the base image until tom_nonlocalized events is installed
-# # continue to setup the image with node and npm install (via nvm)
-# # see https://stackoverflow.com/questions/25899912/
-#
-# # Use bash for subsequent RUN, CMD, ENTRYPOINT commands
-# SHELL ["/bin/bash", "--login", "-c"]
-#
-# ENV NVM_DIR /usr/local/nvm
-# RUN mkdir -p $NVM_DIR
-# ENV NODE_VERSION 14.17.0
-#
-# # Install nvm with node and npm
-# RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh | bash \
-#     && source $NVM_DIR/nvm.sh \
-#     && nvm install $NODE_VERSION \
-#     && nvm alias default $NODE_VERSION \
-#     && nvm use default
-#
-# ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
-# ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+# tell poetry: do NOT create a virtual env; should install everything globally
+RUN poetry config virtualenvs.create false --local
+# tell poetry: even if you find a virtual env, don't use it; install everything globally
+RUN poetry config virtualenvs.in-project false --local
+# now have poetry install dependencies according to pyproject.toml
+RUN poetry install -vv --no-interaction
+
+# this just adds some debugging info to the logs
+RUN pip freeze
+
+
+# continue to setup the image with node and npm install (via nvm)
+# see https://stackoverflow.com/questions/25899912/
+
+# Use bash for subsequent RUN, CMD, ENTRYPOINT commands
+SHELL ["/bin/bash", "--login", "-c"]
+
+ENV NVM_DIR=/usr/local/nvm
+RUN mkdir -p $NVM_DIR
+ENV NODE_VERSION=14.17.0
+
+# Install nvm with node and npm
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.38.0/install.sh | bash \
+    && source $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+
+ENV NODE_PATH=$NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # write new webpack-stats.json for django-webpack-loader to use
 # and install the Vue JS/CSS etc as static files
-# WORKDIR /tom-demo/vue
-# RUN npm install && npm run build
+WORKDIR /tom-demo/vue
+RUN npm install && npm run build
 
 WORKDIR /tom-demo
 
+# this should put the vue.js components in an accessible place
 RUN poetry run python manage.py collectstatic --noinput

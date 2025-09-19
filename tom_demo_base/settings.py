@@ -67,7 +67,10 @@ INSTALLED_APPS = [
     'tom_dataservices',
     'tom_tns',
     'tom_registration',
-    'tom_demo'
+    'tom_demo',
+    'tom_alertstreams',
+    'webpack_loader',
+    'tom_nonlocalizedevents',
 ]
 
 # TODO: please explain why this is necessary. what error does it prevent?
@@ -475,7 +478,7 @@ HINT_LEVEL = 20
 #
 # tom_nonlocalizedevents configuration
 #
-
+TOM_API_URL = os.getenv('TOM_API_URL', 'http://127.0.0.1:8000')
 HERMES_API_URL = os.getenv('HERMES_API_URL', 'https://hermes.lco.global')
 
 # both tom_nonlocalized events and tom_hermes use HERMES_API_URL
