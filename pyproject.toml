@@ -29,7 +29,7 @@ tom-tns = "^0.3.2"
 tom-fink = "^0.7.6"
 tom-registration = "^1.0.2"
 gunicorn = "^23.0.0"
-gevent = "^23.0.0"
+gevent = "^25.9.1"
 
 
 [build-system]
