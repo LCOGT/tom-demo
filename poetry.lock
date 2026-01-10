@@ -4354,18 +4354,18 @@ tomtoolkit = ">=2.15"
 
 [[package]]
 name = "tom-tns"
-version = "0.3.2"
+version = "0.3.4"
 description = "TOMtoolkit module for reporting transients to the TNS"
 optional = false
 python-versions = "<3.13,>=3.9"
 groups = ["main"]
 files = [
-    {file = "tom_tns-0.3.2-py3-none-any.whl", hash = "sha256:62f3023620ecdd0d4d2d514adffe717bd507ec4eb817c517820a68a9a2ed6022"},
-    {file = "tom_tns-0.3.2.tar.gz", hash = "sha256:689c6ad7b7768182e6af67a9100e8fa0f6674c2b6783dd6de036e7c3ac518644"},
+    {file = "tom_tns-0.3.4-py3-none-any.whl", hash = "sha256:88e4a0b95525f34d03c0bbbac42176f9e5df28776482ef6b32f7422dae47b0fb"},
+    {file = "tom_tns-0.3.4.tar.gz", hash = "sha256:628470d5b50625dfa700ca27c7db793000f3ffc94fc90d3cba620bd765e3aca3"},
 ]
 
 [package.dependencies]
-tomtoolkit = ">=2.20.0,<3"
+tomtoolkit = ">=2.28.0,<3"
 
 [[package]]
 name = "toml"
@@ -4693,4 +4693,4 @@ testing = ["coverage[toml]", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.12"
-content-hash = "20dde72dbf0e9921e9fe93144aba9e58fbef73e50b5aeb1dba80da72e7f3ad88"
+content-hash = "872928e1004f877e81081eabde3a839d2aa67cecb5f308c4c2e7afe190c20fbf"
