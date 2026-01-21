@@ -275,7 +275,8 @@ TOM_FACILITY_CLASSES = [
     'tom_observations.facilities.gemini.GEMFacility',
     'tom_observations.facilities.soar.SOARFacility',
     'tom_observations.facilities.lt.LTFacility',
-    'tom_swift.swift.SwiftFacility'
+    'tom_observations.facilities.lco_redirect.LCORedirectFacility',
+    'tom_swift.swift.SwiftFacility',
 ]
 
 # This is the configuration dictionary (of dictionaries) for the facilities
