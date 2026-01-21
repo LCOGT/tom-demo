@@ -1,6 +1,6 @@
 [project]
 name = "tom-demo"
-version = "1.0.7"
+version = "1.4.0"
 description = "A Demonstration TOM hosted at http://tom-demo.lco.global"
 authors = [{name="Tom Toolkit Authors", email="tomtoolkit@lco.global"}]
 maintainers = [{name="Joey Chatelain", email="jchate6@gmail.com"},
