@@ -48,8 +48,6 @@ INSTALLED_APPS = [
     'guardian',
     'tom_common',
     'django_comments',
-    'bootstrap4',
-    'crispy_bootstrap4',
     'crispy_forms',
     'rest_framework',
     'rest_framework.authtoken',
