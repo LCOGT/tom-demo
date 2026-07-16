@@ -1152,23 +1152,6 @@ requests = ">=1.0.0,<3.0.0"
 yaml = ["pyyaml (>=3.10,<7.0)"]
 
 [[package]]
-name = "crispy-bootstrap4"
-version = "2024.10"
-description = "Bootstrap4 template pack for django-crispy-forms"
-optional = false
-python-versions = ">=3.8"
-groups = ["main"]
-markers = "sys_platform == \"win32\" or sys_platform == \"emscripten\" or sys_platform != \"win32\" and sys_platform != \"emscripten\""
-files = [
-    {file = "crispy-bootstrap4-2024.10.tar.gz", hash = "sha256:503e8922b0f3b5262a6fdf303a3a94eb2a07514812f1ca130b88f7c02dd25e2b"},
-    {file = "crispy_bootstrap4-2024.10-py3-none-any.whl", hash = "sha256:138a97884044ae4c4799c80595b36c42066e4e933431e2e971611e251c84f96c"},
-]
-
-[package.dependencies]
-django = ">=4.2"
-django-crispy-forms = ">=2.3"
-
-[[package]]
 name = "crispy-bootstrap5"
 version = "2026.3"
 description = "Bootstrap5 template pack for django-crispy-forms"
@@ -4673,4 +4656,4 @@ testing = ["coverage[toml]", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.14"
-content-hash = "01b89b56738363c4bceb6171aac42d4559eb26d3f0ae509644644d18e6575a35"
+content-hash = "3eaddc371ae8617e556e69eb972086caa737f105949aa6c9ef1ab5a89a5e5c96"

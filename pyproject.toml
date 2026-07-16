@@ -17,7 +17,6 @@ dependencies = [
     "tomtoolkit>=3.0.0,<4.0.0",
     "tom-hermes>=0.1.10",
     "whitenoise==6.11.0",
-    "crispy-bootstrap4>=2024.10",
     "tom-alertstreams>=1.3.0",
     "psycopg2-binary>=2.9.11",
     "django-cors-headers>=4.9.0",
