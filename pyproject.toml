@@ -1,6 +1,6 @@
 [project]
 name = "tom-demo"
-version = "1.0.7"
+version = "2.0.0"
 description = "A Demonstration TOM hosted at http://tom-demo.lco.global"
 authors = [{name="Tom Toolkit Authors", email="tomtoolkit@lco.global"}]
 maintainers = [{name="Joey Chatelain", email="jchate6@gmail.com"},
@@ -12,21 +12,25 @@ license = "GPL-3.0-only"
 homepage = "http://tom-demo.lco.global"
 repository = "https://github.com/LCOGT/tom-demo"
 packages = [{include = "tom_demo"}]
-requires-python = ">=3.10,<3.12"
+requires-python = ">=3.10,<3.14"
 dependencies = [
-    "tomtoolkit>=2.30.0a0",
+    "tomtoolkit>=3.0.0,<4.0.0",
     "tom-hermes>=0.1.10",
     "whitenoise==6.11.0",
     "crispy-bootstrap4>=2024.10",
-    "tom-alertstreams>=1.1.0",
-    "tom-nonlocalizedevents>=0.9.0",
+    "tom-alertstreams>=1.3.0",
     "psycopg2-binary>=2.9.11",
     "django-cors-headers>=4.9.0",
     "django-webpack-loader>=3.2.3",
-    "tom-swift>=0.3.1",
-    "tom-tns>=0.3.4",
-    "tom-fink>=0.7.6",
-    "tom-registration>=1.0.2",
+    "tom-antares>=3.0.1",
+    "tom-swift>=0.4.1",
+    "tom-tns>=0.5.0",
+    "tom-eso>=0.3.1",
+    "tom-hermes>=0.2.1",
+    "tom-jpl>=0.2.0",
+    "tom-fink>=2.0.1",
+    "tom-lt>=0.5.1",
+    "tom-registration>=2.0.1",
     "gunicorn>=23.0.0",
     "gevent>=25.9.1",
 ]
