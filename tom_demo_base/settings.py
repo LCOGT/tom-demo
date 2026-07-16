@@ -64,13 +64,16 @@ INSTALLED_APPS = [
     'tom_swift',
     'tom_hermes',
     'tom_fink',
+    'tom_eso',
+    'tom_jpl',
+    'tom_lt',
+    'tom_antares',
     'tom_dataservices',
     'tom_tns',
     'tom_registration',
     'tom_demo',
     'tom_alertstreams',
     'webpack_loader',
-    'tom_nonlocalizedevents',
 ]
 
 # TODO: please explain why this is necessary. what error does it prevent?
