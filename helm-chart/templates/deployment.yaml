@@ -111,16 +111,16 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          # livenessProbe:
-          #   timeoutSeconds: 10
-          #   httpGet:
-          #     path: /
-          #     port: http
-          # readinessProbe:
-          #   timeoutSeconds: 10
-          #   httpGet:
-          #     path: /
-          #     port: http
+          livenessProbe:
+            timeoutSeconds: 10
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            timeoutSeconds: 10
+            httpGet:
+              path: /
+              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
