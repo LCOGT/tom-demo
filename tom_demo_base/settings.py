@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import ast
 import tempfile
+from tom_common.default_settings import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,31 +35,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 TOM_NAME = 'TOM Demo'
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'django_extensions',
-    'django_tasks',
-    'django_tasks.backends.database',
-    'guardian',
-    'tom_common',
-    'django_comments',
-    'crispy_forms',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'django_filters',
-    'django_gravatar',
-    'django_htmx',
-    'tom_targets',
-    'tom_alerts',
-    'tom_catalogs',
-    'tom_observations',
-    'tom_dataproducts',
+INSTALLED_APPS = TOMTOOKIT_INSTALLED_APPS + [
     'tom_swift',
     'tom_hermes',
     'tom_fink',
@@ -66,7 +43,6 @@ INSTALLED_APPS = [
     'tom_jpl',
     'tom_lt',
     'tom_antares',
-    'tom_dataservices',
     'tom_tns',
     'tom_registration',
     'tom_demo',
@@ -77,20 +53,9 @@ INSTALLED_APPS = [
 # TODO: please explain why this is necessary. what error does it prevent?
 SITE_ID = 1
 
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+MIDDLEWARE = TOMTOOKIT_MIDDLEWARE + [
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_htmx.middleware.HtmxMiddleware',
-    'tom_common.middleware.Raise403Middleware',
-    'tom_common.middleware.ExternalServiceMiddleware',
-    'tom_common.middleware.AuthStrategyMiddleware',
     'tom_registration.middleware.RedirectAuthenticatedUsersFromRegisterMiddleware',
 ]
 
@@ -275,9 +240,10 @@ TOM_FACILITY_CLASSES = [
     'tom_observations.facilities.lco.LCOFacility',
     'tom_observations.facilities.gemini.GEMFacility',
     'tom_observations.facilities.soar.SOARFacility',
-    'tom_observations.facilities.lt.LTFacility',
+    'tom_lt.lt.LTFacility',
     'tom_observations.facilities.lco_redirect.LCORedirectFacility',
     'tom_swift.swift.SwiftFacility',
+    'tom_eso.eso.ESOFacility',
 ]
 
 # This is the configuration dictionary (of dictionaries) for the facilities
@@ -308,6 +274,11 @@ FACILITIES = {
             },
         },
     },
+    'ESO': {
+            'environment': os.getenv('ESO_ENVIRONMENT', 'demo'),
+            'username': os.getenv('ESO_USERNAME', '52052'),
+            'password': os.getenv('ESO_PASSWORD', 'tutorial'),
+    },
     'SWIFT': {
         'SWIFT_USERNAME': os.getenv('SWIFT_USERNAME', 'anonymous'),
         'SWIFT_SHARED_SECRET': os.getenv('SWIFT_SHARED_SECRET', 'anonymous'),
@@ -329,17 +300,6 @@ DATA_PROCESSORS = {
     'spectroscopy': 'tom_dataproducts.processors.spectroscopy_processor.SpectroscopyProcessor',
     'panstarrs_photometry': 'tom_dataproducts.processors.panstarrs_processor.PanstarrsProcessor',
 }
-
-# DATA_SHARING = {
-#     'hermes': {
-#         'DISPLAY_NAME': os.getenv('HERMES_DISPLAY_NAME', 'Hermes'),
-#         'BASE_URL': os.getenv('HERMES_BASE_URL', 'https://hermes.lco.global/'),
-#         'SCIMMA_AUTH_USERNAME': os.getenv('SCIMMA_AUTH_USERNAME', None),
-#         'CREDENTIAL_USERNAME': os.getenv('SCIMMA_CREDENTIAL_USERNAME', None),
-#         'CREDENTIAL_PASSWORD': os.getenv('SCIMMA_CREDENTIAL_PASSWORD', None),
-#         'USER_TOPICS': ['hermes.test', 'tomtoolkit.test']
-#     },
-# }
 
 SINGLE_TARGET_DATA_SERVICES = {
     'PANSTARRS': {
@@ -392,45 +352,19 @@ ALERT_STREAMS = [
     }
 ]
 
-# TOM_ALERT_CLASSES = [
-#     'tom_alerts.brokers.alerce.ALeRCEBroker',
-#     # 'tom_alerts.brokers.antares.ANTARESBroker',
-#     'tom_alerts.brokers.gaia.GaiaBroker',
-#     'tom_hermes.hermes.HermesBroker',
-#     'tom_alerts.brokers.gaia.GaiaBroker',
-#     'tom_alerts.brokers.lasair.LasairBroker',
-#     'tom_alerts.brokers.scout.ScoutBroker',
-#     'tom_alerts.brokers.tns.TNSBroker',
-#     'tom_fink.fink.FinkBroker',
-#     'tom_dataservices.data_services.lsst.RSPMultiTargetDataService'
-# ]
-
-TOM_ALERT_DASH_CLASSES = [
-    #'tom_alerts_dash.brokers.mars.MARSDashBroker',
-    # 'tom_alerts_dash.brokers.alerce.ALeRCEDashBroker',
-    #'tom_alerts_dash.brokers.scimma.SCIMMADashBroker'
-]
-
-# TOM_HARVESTER_CLASSES = [
-#     'tom_catalogs.harvesters.simbad.SimbadHarvester',
-#     'tom_catalogs.harvesters.ned.NEDHarvester',
-#     'tom_catalogs.harvesters.jplhorizons.JPLHorizonsHarvester',
-#     'tom_catalogs.harvesters.tns.TNSHarvester',
-# ]
-
-# BROKERS = {
-#     'LASAIR': {
-#         'api_key': os.getenv('LASAIR_API_KEY', ''),
-#     },
-#     'TNS': {
-#         'api_key': os.getenv('TNS_API_KEY', ''),
-#         'bot_id': os.getenv('TNS_BOT_ID', '165852'),
-#         'bot_name': os.getenv('TNS_BOT_NAME', 'TOM_BOT'),
-#         'tns_base_url': 'https://sandbox.wis-tns.org/api',  # Note this is the Sandbox URL
-#         'group_name': os.getenv('TNS_GROUP_NAME', 'Hermes_group'),
-#         'default_authors': 'Foo Bar <foo@bar.com>, Rando Calrissian, et al.',
-#     },
-# }
+DATA_SERVICES = {
+    'LASAIR': {
+        'api_key': os.getenv('LASAIR_API_KEY', ''),
+    },
+    'TNS': {
+        'api_key': os.getenv('TNS_API_KEY', ''),
+        'bot_id': os.getenv('TNS_BOT_ID', '165852'),
+        'bot_name': os.getenv('TNS_BOT_NAME', 'TOM_BOT'),
+        'tns_base_url': 'https://sandbox.wis-tns.org/api',  # Note this is the Sandbox URL
+        'group_name': os.getenv('TNS_GROUP_NAME', 'Hermes_group'),
+        'default_authors': 'Foo Bar <foo@bar.com>, Rando Calrissian, et al.',
+    },
+}
 
 TOM_REGISTRATION = {
     'REGISTRATION_AUTHENTICATION_BACKEND': 'django.contrib.auth.backends.ModelBackend',
