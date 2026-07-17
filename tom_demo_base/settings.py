@@ -48,8 +48,6 @@ INSTALLED_APPS = [
     'guardian',
     'tom_common',
     'django_comments',
-    'bootstrap4',
-    'crispy_bootstrap4',
     'crispy_forms',
     'rest_framework',
     'rest_framework.authtoken',
@@ -64,13 +62,16 @@ INSTALLED_APPS = [
     'tom_swift',
     'tom_hermes',
     'tom_fink',
+    'tom_eso',
+    'tom_jpl',
+    'tom_lt',
+    'tom_antares',
     'tom_dataservices',
     'tom_tns',
     'tom_registration',
     'tom_demo',
     'tom_alertstreams',
     'webpack_loader',
-    'tom_nonlocalizedevents',
 ]
 
 # TODO: please explain why this is necessary. what error does it prevent?
@@ -111,8 +112,8 @@ TEMPLATES = [
     },
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 WSGI_APPLICATION = 'tom_demo_base.wsgi.application'
 
@@ -329,16 +330,16 @@ DATA_PROCESSORS = {
     'panstarrs_photometry': 'tom_dataproducts.processors.panstarrs_processor.PanstarrsProcessor',
 }
 
-DATA_SHARING = {
-    'hermes': {
-        'DISPLAY_NAME': os.getenv('HERMES_DISPLAY_NAME', 'Hermes'),
-        'BASE_URL': os.getenv('HERMES_BASE_URL', 'https://hermes.lco.global/'),
-        'SCIMMA_AUTH_USERNAME': os.getenv('SCIMMA_AUTH_USERNAME', None),
-        'CREDENTIAL_USERNAME': os.getenv('SCIMMA_CREDENTIAL_USERNAME', None),
-        'CREDENTIAL_PASSWORD': os.getenv('SCIMMA_CREDENTIAL_PASSWORD', None),
-        'USER_TOPICS': ['hermes.test', 'tomtoolkit.test']
-    },
-}
+# DATA_SHARING = {
+#     'hermes': {
+#         'DISPLAY_NAME': os.getenv('HERMES_DISPLAY_NAME', 'Hermes'),
+#         'BASE_URL': os.getenv('HERMES_BASE_URL', 'https://hermes.lco.global/'),
+#         'SCIMMA_AUTH_USERNAME': os.getenv('SCIMMA_AUTH_USERNAME', None),
+#         'CREDENTIAL_USERNAME': os.getenv('SCIMMA_CREDENTIAL_USERNAME', None),
+#         'CREDENTIAL_PASSWORD': os.getenv('SCIMMA_CREDENTIAL_PASSWORD', None),
+#         'USER_TOPICS': ['hermes.test', 'tomtoolkit.test']
+#     },
+# }
 
 SINGLE_TARGET_DATA_SERVICES = {
     'PANSTARRS': {
@@ -391,18 +392,18 @@ ALERT_STREAMS = [
     }
 ]
 
-TOM_ALERT_CLASSES = [
-    'tom_alerts.brokers.alerce.ALeRCEBroker',
-    # 'tom_alerts.brokers.antares.ANTARESBroker',
-    'tom_alerts.brokers.gaia.GaiaBroker',
-    'tom_hermes.hermes.HermesBroker',
-    'tom_alerts.brokers.gaia.GaiaBroker',
-    'tom_alerts.brokers.lasair.LasairBroker',
-    'tom_alerts.brokers.scout.ScoutBroker',
-    'tom_alerts.brokers.tns.TNSBroker',
-    'tom_fink.fink.FinkBroker',
-    'tom_dataservices.data_services.lsst.RSPMultiTargetDataService'
-]
+# TOM_ALERT_CLASSES = [
+#     'tom_alerts.brokers.alerce.ALeRCEBroker',
+#     # 'tom_alerts.brokers.antares.ANTARESBroker',
+#     'tom_alerts.brokers.gaia.GaiaBroker',
+#     'tom_hermes.hermes.HermesBroker',
+#     'tom_alerts.brokers.gaia.GaiaBroker',
+#     'tom_alerts.brokers.lasair.LasairBroker',
+#     'tom_alerts.brokers.scout.ScoutBroker',
+#     'tom_alerts.brokers.tns.TNSBroker',
+#     'tom_fink.fink.FinkBroker',
+#     'tom_dataservices.data_services.lsst.RSPMultiTargetDataService'
+# ]
 
 TOM_ALERT_DASH_CLASSES = [
     #'tom_alerts_dash.brokers.mars.MARSDashBroker',
@@ -410,26 +411,26 @@ TOM_ALERT_DASH_CLASSES = [
     #'tom_alerts_dash.brokers.scimma.SCIMMADashBroker'
 ]
 
-TOM_HARVESTER_CLASSES = [
-    'tom_catalogs.harvesters.simbad.SimbadHarvester',
-    'tom_catalogs.harvesters.ned.NEDHarvester',
-    'tom_catalogs.harvesters.jplhorizons.JPLHorizonsHarvester',
-    'tom_catalogs.harvesters.tns.TNSHarvester',
-]
+# TOM_HARVESTER_CLASSES = [
+#     'tom_catalogs.harvesters.simbad.SimbadHarvester',
+#     'tom_catalogs.harvesters.ned.NEDHarvester',
+#     'tom_catalogs.harvesters.jplhorizons.JPLHorizonsHarvester',
+#     'tom_catalogs.harvesters.tns.TNSHarvester',
+# ]
 
-BROKERS = {
-    'LASAIR': {
-        'api_key': os.getenv('LASAIR_API_KEY', ''),
-    },
-    'TNS': {
-        'api_key': os.getenv('TNS_API_KEY', ''),
-        'bot_id': os.getenv('TNS_BOT_ID', '165852'),
-        'bot_name': os.getenv('TNS_BOT_NAME', 'TOM_BOT'),
-        'tns_base_url': 'https://sandbox.wis-tns.org/api',  # Note this is the Sandbox URL
-        'group_name': os.getenv('TNS_GROUP_NAME', 'Hermes_group'),
-        'default_authors': 'Foo Bar <foo@bar.com>, Rando Calrissian, et al.',
-    },
-}
+# BROKERS = {
+#     'LASAIR': {
+#         'api_key': os.getenv('LASAIR_API_KEY', ''),
+#     },
+#     'TNS': {
+#         'api_key': os.getenv('TNS_API_KEY', ''),
+#         'bot_id': os.getenv('TNS_BOT_ID', '165852'),
+#         'bot_name': os.getenv('TNS_BOT_NAME', 'TOM_BOT'),
+#         'tns_base_url': 'https://sandbox.wis-tns.org/api',  # Note this is the Sandbox URL
+#         'group_name': os.getenv('TNS_GROUP_NAME', 'Hermes_group'),
+#         'default_authors': 'Foo Bar <foo@bar.com>, Rando Calrissian, et al.',
+#     },
+# }
 
 TOM_REGISTRATION = {
     'REGISTRATION_AUTHENTICATION_BACKEND': 'django.contrib.auth.backends.ModelBackend',
