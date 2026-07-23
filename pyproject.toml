@@ -31,7 +31,7 @@ dependencies = [
     "tom-lt>=0.5.1",
     "tom-registration>=2.0.1",
     "gunicorn>=23.0.0",
-    "gevent>=25.9.1",
+    "gevent>=26.7.0",
 ]
 
 [build-system]
