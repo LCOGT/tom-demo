@@ -14,7 +14,7 @@ repository = "https://github.com/LCOGT/tom-demo"
 packages = [{include = "tom_demo"}]
 requires-python = ">=3.10,<3.14"
 dependencies = [
-    "tomtoolkit>=3.0.0,<4.0.0",
+    "tomtoolkit>=3.0.1,<4.0.0",
     "tom-hermes>=0.1.10",
     "whitenoise==6.11.0",
     "tom-alertstreams>=1.3.0",
