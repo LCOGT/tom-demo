@@ -44,7 +44,6 @@ INSTALLED_APPS = TOMTOOKIT_INSTALLED_APPS + [
     'tom_lt',
     'tom_antares',
     'tom_tns',
-    'tom_registration',
     'tom_demo',
     'tom_alertstreams',
     'webpack_loader',
@@ -56,7 +55,6 @@ SITE_ID = 1
 MIDDLEWARE = TOMTOOKIT_MIDDLEWARE + [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'tom_registration.middleware.RedirectAuthenticatedUsersFromRegisterMiddleware',
 ]
 
 ROOT_URLCONF = 'tom_demo_base.urls'
@@ -366,14 +364,8 @@ DATA_SERVICES = {
     },
 }
 
-TOM_REGISTRATION = {
-    'REGISTRATION_AUTHENTICATION_BACKEND': 'django.contrib.auth.backends.ModelBackend',
-    'REGISTRATION_REDIRECT_PATTERN': 'home',
-    'REGISTRATION_STRATEGY': 'open',  # ['open', 'approval_required']
-    'SEND_APPROVAL_EMAILS': True,  # Optional email behavior if `REGISTRATION_STRATEGY = 'approval_required'`, default is False
-    'APPROVAL_SUBJECT': f'Your {TOM_NAME} registration has been approved!',  # Optional subject line of approval email, (Default Shown)
-    'APPROVAL_MESSAGE': f'Your {TOM_NAME} registration has been approved. You can log in <a href="mytom.com/login">here</a>.'  # Optional html-enabled body for approval email, (Default Shown)
-}
+TOM_REGISTRATION_STRATEGY = 'open'
+ACCOUNT_SIGNUP_REDIRECT_URL = 'home'
 
 # Define extra target fields here. Types can be any of "number", "string", "boolean" or "datetime"
 # See https://tomtoolkit.github.io/docs/target_fields for documentation on this feature

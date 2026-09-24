@@ -1,6 +1,6 @@
 [project]
 name = "tom-demo"
-version = "2.0.0"
+version = "2.1.0"
 description = "A Demonstration TOM hosted at http://tom-demo.lco.global"
 authors = [{name="Tom Toolkit Authors", email="tomtoolkit@lco.global"}]
 maintainers = [{name="Joey Chatelain", email="jchate6@gmail.com"},
@@ -29,7 +29,6 @@ dependencies = [
     "tom-jpl>=0.2.0",
     "tom-fink>=2.0.1",
     "tom-lt>=0.5.1",
-    "tom-registration>=2.0.1",
     "gunicorn>=23.0.0",
     "gevent>=25.9.1",
 ]
