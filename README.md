@@ -13,7 +13,11 @@ The current version of TOM-Demo includes the following apps:
 * [tom_hermes](https://github.com/TOMToolkit/tom_hermes)
 * [tom_fink](https://github.com/TOMToolkit/tom_fink)
 * [tom_tns](https://github.com/TOMToolkit/tom_tns)
-* [tom_registration](https://github.com/TOMToolkit/tom_registration)
+* [tom_eso](https://github.com/TOMToolkit/tom_eso)
+* [tom_jpl](https://github.com/TOMToolkit/tom_jpl)
+* [tom_lt](https://github.com/TOMToolkit/tom_lt)
+* [tom_antares](https://github.com/TOMToolkit/tom_antares)
+* [tom_alertstreams](https://github.com/TOMToolkit/tom_alertstreams)
 
 Register with a username with the demonstration TOM to see the full suite of features.
 
