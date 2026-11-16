@@ -29,7 +29,7 @@ dependencies = [
     "tom-jpl>=0.2.0",
     "tom-fink>=2.0.1",
     "tom-lt>=0.5.1",
-    "gunicorn>=23.0.0",
+    "gunicorn>=27.0.1",
     "gevent>=25.9.1",
 ]
 
